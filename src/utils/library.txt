@@ -1,0 +1,130 @@
+const oldObj = [
+    {
+        "id": 31,
+        "shift_id": 22575,
+        "name": false,
+        "model_name": "hr.apec.attendance.report",
+        "user_id": [
+            2,
+            "admin"
+        ],
+        "method": "write",
+        "old_value_text": "14A",
+        "new_value_text": "12B",
+        "create_date": "2023-07-10",
+        "__last_update": "2023-07-10 00:00:00",
+        "display_name": "",
+        "create_uid": false,
+        "write_uid": false,
+        "write_date": false
+    },
+    {
+        "id": 37,
+        "shift_id": 22575,
+        "name": false,
+        "model_name": "hr.apec.attendance.report",
+        "user_id": [
+            2,
+            "admin"
+        ],
+        "method": "write",
+        "old_value_text": "12B",
+        "new_value_text": "10A",
+        "create_date": "2023-07-10",
+        "__last_update": "2023-07-10 00:00:00",
+        "display_name": "",
+        "create_uid": false,
+        "write_uid": false,
+        "write_date": false
+    },
+    {
+        "id": 31,
+        "shift_id": 22575,
+        "name": false,
+        "model_name": "hr.apec.attendance.report",
+        "user_id": [
+            2,
+            "Mitchell Admin"
+        ],
+        "method": "write",
+        "old_value_text": "14A",
+        "new_value_text": "12B",
+        "create_date": "2023-07-11",
+        "__last_update": "2023-07-11 00:00:00",
+        "display_name": "",
+        "create_uid": false,
+        "write_uid": false,
+        "write_date": false
+    },
+    {
+        "id": 37,
+        "shift_id": 22575,
+        "name": false,
+        "model_name": "hr.apec.attendance.report",
+        "user_id": [
+            2,
+            "Mitchell Admin"
+        ],
+        "method": "write",
+        "old_value_text": "12B",
+        "new_value_text": "10A",
+        "create_date": "2023-07-11",
+        "__last_update": "2023-07-11 00:00:00",
+        "display_name": "",
+        "create_uid": false,
+        "write_uid": false,
+        "write_date": false
+    }
+];
+function groupByCreateAndUserName(objects){
+    const groupedObj = [];
+    for (const obj of objects){
+        var tempGroupedObj = {};
+        const createDate = obj.create_date;
+        const user = Object.values(obj.user_id)[1]
+        console.log(user);
+         // Kiểm tra nếu createDate chưa tồn tại trong groupedObj, thì tạo mới
+        if (!tempGroupedObj['create_date']) {
+            tempGroupedObj['create_date'] = '';
+        }
+        if (!tempGroupedObj['user']) {
+            tempGroupedObj['user'] = []
+        }
+        tempGroupedObj['create_date'] = obj.create_date;
+        const tempValue = {
+            old_value: obj.old_value_text,
+            new_value: obj.new_value_text
+        };
+        var tempObj = {
+            name: '',
+            value: []
+        };
+        tempObj.name = obj.user_id[1]
+        tempObj.value[0] = tempValue;
+        tempGroupedObj['user'][0] = tempObj;
+        if(groupedObj.length > 0){
+            const objCreatedDateIndex  = groupedObj.findIndex(item => item.create_date ===createDate);
+            if(objCreatedDateIndex < 0){
+                groupedObj.push(tempGroupedObj);
+            }
+            else{
+                const objeUserIndex = groupedObj[objCreatedDateIndex]['user'].findIndex(item => item.name ===user);
+                if(objeUserIndex < 0){
+
+                    groupedObj[objCreatedDateIndex]['user'].push(tempObj);
+                }
+                else{
+                    
+                    groupedObj[objCreatedDateIndex]['user'][objeUserIndex]['value'].push(tempObj.value[0]);
+                }
+            }
+        }
+        else{
+            groupedObj.push(tempGroupedObj);
+        }   
+    }
+    return groupedObj;
+}
+
+const formatedObject = groupByCreateAndUserName(oldObj);
+console.log(JSON.stringify(formatedObject,null,2));

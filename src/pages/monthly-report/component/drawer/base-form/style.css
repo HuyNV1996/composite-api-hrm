@@ -1,0 +1,44 @@
+/* .base-form .ant-modal-content, .ant-modal-header{
+    background:#F7F1EE;
+    border-radius:10px!important;
+}
+.base-form .ant-modal-header .ant-modal-title{
+    text-align:center !important;
+    font-size: 24px;
+    line-height:32px;
+    font-weight: 500;
+    color: #694730;
+}
+.header-form{
+    color: #462F20;
+    font-size: 14px;
+    font-family: Roboto;
+    font-weight: 500;
+    line-height: 20px;
+} */
+.base-form .ant-form-item-label > label {
+  color: #462f20;
+  /* Text/xs/Regular */
+  font-size: 12px;
+  font-family: Roboto;
+  line-height: 18px;
+}
+.base-form .ant-modal-body {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+.ant-typography.date-moment {
+  display: flex !important;
+  justify-content: flex-end !important;
+}
+.form-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+.form-footer > button {
+  margin-left: 8px;
+}
+.ant-form-item.form-footer{
+  margin: 0!important;
+}

@@ -1,0 +1,16 @@
+export const viVN_merchant = {
+  list_merchant: 'Danh sách đối tác',
+  username: 'Tên tài khoản',
+  partnerCode: 'Mã đối tác',
+  partnerName: 'Tên đối tác',
+  password: 'Mật khẩu',
+  phone: 'Số điện thoại',
+  email: 'Email',
+  publicKeyFile: 'PublicKey File',
+  refreshToken: 'Refresh Token',
+  callbackUrl: 'Callback Url',
+  status: 'Trạng thái',
+  balance: 'Số dư',
+  holdBalance: 'Số dư bị giữ lại',
+  pendingBalance: 'Số dư đang chờ xử lý',
+};

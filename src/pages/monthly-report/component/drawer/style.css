@@ -1,0 +1,36 @@
+.drawer-container {
+  flex: 0 0 310px;
+  min-width: 300px;
+  background-color: #fff;
+  height: 100%;
+  /* padding: 10px; */
+  position: relative;
+  transition: all 0.2s;
+}
+.drawer-close-btn {
+  float: right;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3;
+  cursor: pointer;
+  /* background:red; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.drawer-close-btn:hover {
+  opacity: 1;
+}
+.drawer-title {
+  display: 'flex';
+  align-items: center;
+  line-height: 32px;
+  opacity:0
+}
+.drawer-content{
+  width:100%;
+  padding:5px;
+}
+.ant-space-item{
+  width:100%;
+}

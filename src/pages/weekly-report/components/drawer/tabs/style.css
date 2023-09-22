@@ -1,0 +1,6 @@
+.tabs-wrapper {
+  height: calc(100vh - 100px);
+}
+.ant-tabs-tab-btn span {
+  font-size: 12px !important;
+}

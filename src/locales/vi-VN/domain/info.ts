@@ -1,0 +1,21 @@
+export default {
+  dia_chi: 'Địa chỉ',
+  ho_va_ten: 'Họ và tên',
+  ngay_sinh: 'Ngày sinh',
+  quoc_tich: 'Quốc tịch',
+  noi_o_hien_tai: 'Nơi ở hiện tại',
+  ngay_cap: 'Ngày cấp',
+  noi_cap: 'Nơi cấp',
+  nghe_nghiep: 'Nghề nghiệp',
+  so_cmnd_cccd: 'Số CMND/CCCD',
+  sdt: 'Số điện thoại',
+  email: 'Email',
+  ten: 'Tên',
+  dia_chi_chi_tiet: 'Địa chỉ chi tiết',
+  gioi_tinh: {
+    ten: 'Giới tính',
+    nu: 'Nữ',
+    nam: 'Nam',
+    khac: 'Khác',
+  },
+};

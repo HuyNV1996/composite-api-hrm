@@ -1,0 +1,6 @@
+.git
+.vscode
+e2e/*
+# src/*
+nswag/*
+node_modules/*

@@ -1,0 +1,9 @@
+.weekly-content-container{
+    display: flex !important;
+    flexWrap: nowrap;
+    height:100%;
+}
+.col-left{
+    overflow-x: auto;
+    width: 100%;
+}

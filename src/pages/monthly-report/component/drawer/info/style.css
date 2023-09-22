@@ -1,0 +1,33 @@
+.weekly-info{
+    padding:5px;
+    width:100%;
+    height: calc(100vh - 200px);
+    overflow: auto;
+}
+.weekly-info span{
+    color:#8B5F41 !important; 
+}
+.weekly-info-row{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    width:100%;
+}
+.weekly-info .label{
+    text-align: left;
+}
+.weekly-info .content{
+    text-align: right;
+}
+.weekly-info .ant-divider{
+    margin:5px 0;
+}
+ /* .history-edit{
+    max-height:150px;
+    overflow:auto;
+    padding: 5px;
+} */
+.weekly-info::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }

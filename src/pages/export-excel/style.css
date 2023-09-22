@@ -1,0 +1,28 @@
+.section{
+    margin: 20px;
+}
+
+.date-space {
+  display: flex;
+  max-width: 180px;
+  justify-content: space-between;
+  padding: 0;
+}
+
+.date-space:nth-child(1) {
+  margin-bottom: 20px;
+}
+
+.date-space > :nth-child(1) {
+  font-weight: 500;
+  color: #B98868;
+}
+
+.date-space > :nth-child(2) {
+  width: 100px;
+  color: #B98868;
+}
+
+p{
+    color: #B98868;
+}

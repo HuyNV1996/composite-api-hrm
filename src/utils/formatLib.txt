@@ -1,0 +1,69 @@
+// const oldObj = [
+//     {
+//         "user_id": {
+//             "id": 2,
+//             "name": "Mitchell Admin"
+//         },
+//         "old_value_text": "13B",
+//         "new_value_text": "7B",
+//         "shift_id": 0,
+//         "create_date": "2023-07-10"
+//     },
+//     {
+//         "user_id": {
+//             "id": 2,
+//             "name": "Mitchell Admin"
+//         },
+//         "old_value_text": "8A",
+//         "new_value_text": "7B",
+//         "shift_id": 0,
+//         "create_date": "2023-07-10"
+//     },
+//     {
+//         "user_id": {
+//             "id": 2,
+//             "name": "Mitchell Admin"
+//         },
+//         "old_value_text": "8A",
+//         "new_value_text": "7B",
+//         "shift_id": 0,
+//         "create_date": "2023-07-11"
+//     },
+//     {
+//         "user_id": {
+//             "id": 2,
+//             "name": "Mitchell Admin"
+//         },
+//         "old_value_text": "8A",
+//         "new_value_text": "7B",
+//         "shift_id": 0,
+//         "create_date": "2023-07-11"
+//     }
+// ];
+
+// Group theo create_date và user_id.name
+function groupByCreateDateAndUserName(objects:any) {
+    const groupedObj:any = {};
+
+    for (const obj of objects) {
+        const createDate:any = obj.create_date;
+        const userName:any = obj.user_id.name;
+        // Kiểm tra nếu createDate chưa tồn tại trong groupedObj, thì tạo mới
+        if (!groupedObj[createDate]) {
+            groupedObj[createDate] = {};
+        }
+        // Kiểm tra nếu userName chưa tồn tại trong groupedObj[createDate], thì tạo mới
+        if (!groupedObj[createDate][userName]) {
+            groupedObj[createDate][userName] = [];
+        }
+
+        groupedObj[createDate][userName].push(obj);
+    }
+
+    return groupedObj;
+}
+
+// const result = groupByCreateDateAndUserName(oldObj);
+
+
+// console.log(JSON.stringify(result,null,2));

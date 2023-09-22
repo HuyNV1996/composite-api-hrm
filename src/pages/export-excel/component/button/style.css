@@ -1,0 +1,16 @@
+.section {
+    margin: 20px;
+}
+
+td {
+    padding: 6px;
+}
+
+p {
+    padding-top: 5px;
+}
+
+.download-btn{
+    width: 100px;
+    margin: 10px;
+}

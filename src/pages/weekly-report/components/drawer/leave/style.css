@@ -1,0 +1,76 @@
+.explaintation {
+  padding: 15px;
+  width: 100%;
+  /* overflow-y:auto; */
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  height: calc(100vh - 200px);
+  margin-bottom: 26px;
+}
+.explaintation .ant-divider {
+  margin: 5px 0;
+}
+.explaintation span.ant-typography {
+  color: #8b5f41 !important;
+}
+.explaintation .tag {
+  border: 1px solid #8b5f41;
+  box-shadow: 0px 1px 3px rgba(32, 34, 35, 0.1),
+    0px 1px 2px rgba(32, 34, 35, 0.06);
+  border-radius: 20px;
+  padding: 2px 4px;
+  margin-left: 8px;
+  width: 70px;
+  display: flex;
+  justify-content: center;
+  align: center;
+}
+.explaintation-row {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+.explaintation .deny {
+  color: #fff !important;
+  border: 1px solid #cc0000;
+}
+.explaintation .approved {
+  border: 1px solid #27a56c;
+  color: #fff !important;
+}
+.explaintation-wrapper-btn {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top: 1px solid #d9d9d9;
+  padding: 2px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ant-space-item:last-child {
+  margin-bottom: 0px;
+}
+.refuse {
+  border-radius: 20px !important;
+  border: 1px solid var(--red-600, #c00) !important;
+  background: var(--red-300, #f66) !important;
+  /* Shadow/Sm */
+  box-shadow: 0px 1px 2px 0px rgba(32, 34, 35, 0.06),
+    0px 1px 3px 0px rgba(32, 34, 35, 0.1) !important;
+}
+.validate {
+  border-radius: 20px;
+  border: 1px solid var(--green-600, #27a56c) !important;
+  background: var(--green-500, #2dbf7d) !important;
+  color: #fff !important;
+  /* Shadow/Sm */
+  box-shadow: 0px 1px 2px 0px rgba(32, 34, 35, 0.06),
+    0px 1px 3px 0px rgba(32, 34, 35, 0.1) !important;
+}
+.confirm{
+  color: #8b5f41 !important;
+}

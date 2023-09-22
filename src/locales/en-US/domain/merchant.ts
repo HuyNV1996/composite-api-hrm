@@ -1,0 +1,16 @@
+export const enUS_merchant = {
+  list_merchant: 'List merchant',
+  username: 'Username',
+  partnerCode: 'Partner Code',
+  partnerName: 'Partner Name',
+  password: 'Password',
+  phone: 'Phone number',
+  email: 'Email',
+  publicKeyFile: 'PublicKey File',
+  refreshToken: 'Refresh Token',
+  callbackUrl: 'Callback Url',
+  status: 'Status',
+  balance: 'Balance',
+  holdBalance: 'Hold Balance',
+  pendingBalance: 'Pending Balance',
+};

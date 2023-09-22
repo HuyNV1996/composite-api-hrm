@@ -1,0 +1,75 @@
+{
+    "jsonrpc": "2.0",
+    "id": null,
+    "result": [
+        {
+            "name": "Đi muộn về sớm",
+            "id": 6,
+            "type": false,
+            "data": []
+        },
+        {
+            "name": "Ngày tăng ca",
+            "id": 7,
+            "type": "TC",
+            "data": [
+                {
+                    "name": "Tăng ca ngày thường giờ thường",
+                    "id": 1,
+                    "coefficient": 150.0
+                },
+                {
+                    "name": "Tăng ca ngày thường giờ đêm",
+                    "id": 2,
+                    "coefficient": 210.0
+                },
+                {
+                    "name": "Tăng ca ngày lễ giờ thường",
+                    "id": 3,
+                    "coefficient": 300.0
+                },
+                {
+                    "name": "Tăng ca ngày lễ giờ đêm",
+                    "id": 4,
+                    "coefficient": 390.0
+                }
+            ]
+        },
+        {
+            "name": "Paid Time Off",
+            "id": 1,
+            "type": "P",
+            "data": [
+                {
+                    "name": "Quỹ phép",
+                    "id": 0,
+                    "coefficient": -15.0
+                }
+            ]
+        },
+        {
+            "name": "Compensatory Days",
+            "id": 3,
+            "type": "B",
+            "data": [
+                {
+                    "name": "Quỹ phép",
+                    "id": 0,
+                    "coefficient": 0.0
+                }
+            ]
+        },
+        {
+            "name": "Sick Time Off",
+            "id": 2,
+            "type": false,
+            "data": []
+        },
+        {
+            "name": "Unpaid",
+            "id": 4,
+            "type": false,
+            "data": []
+        }
+    ]
+}

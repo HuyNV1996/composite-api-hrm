@@ -1,0 +1,10 @@
+.ant-typography{
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+.label-input{
+    display: flex;
+    gap:5px;
+    margin: 0 10px;
+}

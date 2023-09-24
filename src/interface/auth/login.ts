@@ -57,3 +57,9 @@ export interface ILoginData {
   createdAt: number
   updatedAt: number
 }
+
+export interface IRegisterParams{
+  username: string
+  password: string
+  email: string
+}

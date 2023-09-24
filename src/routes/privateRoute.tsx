@@ -7,8 +7,7 @@ import useLocalStorage from '@/hooks/useLocalStorage';
 const PrivateRoute: FC<RouteProps> = props => {
   const { storedValue: token } = useLocalStorage('token');
   const location = useLocation();
-
-  return token ? (
+  return token && location.pathname !== 'register' ? (
     (props.element as React.ReactElement)
   ) : (
     <Navigate

@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { Button, Checkbox, Col, Form, Input, Row, Typography } from 'antd';
+import { Button, Checkbox, Col, Form, Input, Row, Typography, message } from 'antd';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -11,35 +11,33 @@ import useLocalStorage from '@/hooks/useLocalStorage';
 
 import './index.less';
 import { useLocale } from '@/locales';
+import { IRegisterParams } from '@/interface/register/types';
+import { apiRegister } from '@/api/auth/api';
 
-const initialValues: LoginParams = {
+const initialValues: IRegisterParams = {
   username: '',
   password: '',
-  // remember: true
+  email:''
 };
 
-const LoginForm = () => {
+const RegisterForm = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const { t } = useLocale();
-  const { storedValue: token } = useLocalStorage('token');
   const {Text, Link} = Typography;
-  const onFinished = async (form: LoginParams) => {
+  const onFinished = async (form: IRegisterParams) => {
     setLoading(true);
-    const res = await dispatch(await loginAsync(form));
+    const res = await apiRegister(form);
     if (!!res) {
-      const search = formatSearch(location.search);
-      const from = search.from || { pathname: '/' };
-      setLoading(false);
-      // navigate(from);
-      navigate('/');
+      message.info('Đăng ký thành công!')
+      navigate('/login');
+    }
+    else {
+      message.error('Đăng ký không thành công!');
     }
   };
   const styleInput = { borderRadius: '10px', height: '45px' };
 
-  
   return (
     <div className="login-page">
       {/* <img
@@ -47,7 +45,7 @@ const LoginForm = () => {
         alt=""
         style={{ width: 300, marginBottom: 50, zIndex: 1 }}
       /> */}
-      <Form<LoginParams>
+      <Form<IRegisterParams>
         onFinish={onFinished}
         className="login-page-form"
         initialValues={initialValues}
@@ -58,12 +56,12 @@ const LoginForm = () => {
             'rgb(50 50 93 / 25%) 0px 13px 27px -5px, rgb(0 0 0 / 30%) 0px 8px 16px -8px',
         }}
         layout="vertical">
-        <h2>{t({ id: 'login' })}</h2>
+        <h2>Đăng ký</h2>
         <Row>
           <Col span={24}>
             <Form.Item
               name="username"
-              label={t({ id: 'login_name' })}
+              label={'Tên đăng nhập'}
               rules={[
                 {
                   required: true,
@@ -85,7 +83,7 @@ const LoginForm = () => {
           <Col span={24}>
             <Form.Item
               name="password"
-              label={t({ id: 'login_password' })}
+              label={'Mật khẩu'}
               rules={[
                 {
                   required: true,
@@ -105,10 +103,30 @@ const LoginForm = () => {
               />
             </Form.Item>
           </Col>
+          <Col span={24}>
+            <Form.Item
+              name="email"
+              label={'Email'}
+              rules={[
+                {
+                  required: true,
+                  message: t(
+                    { id: 'placeholder_input' },
+                    { msg: 'email' }
+                  ),
+                },
+              ]}>
+              <Input
+                placeholder={t(
+                  { id: 'placeholder_input' },
+                  { msg: 'email' }
+                )}
+                type="email"
+                style={styleInput}
+              />
+            </Form.Item>
+          </Col>
         </Row>
-        <Form.Item name="remember" valuePropName="checked">
-          <Checkbox>Lưu </Checkbox>
-        </Form.Item>
         <Form.Item>
           <Button
             htmlType="submit"
@@ -117,15 +135,12 @@ const LoginForm = () => {
             style={styleInput}
             // loading={loading}
             >
-            Đăng nhập
+            Đăng ký
           </Button>
-          <p style={{marginTop: 15}}>
-            Hoặc <Link href="/register" > đăng ký ngay!</Link>
-          </p>
         </Form.Item>
       </Form>
     </div>
   );
 };
 
-export default LoginForm;
+export default RegisterForm;

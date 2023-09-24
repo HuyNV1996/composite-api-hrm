@@ -9,7 +9,7 @@ import UserListPage from '@/pages/users/list';
 import PostsListPage from '@/pages/posts/list';
 import RoomsListPage from '@/pages/rooms/list';
 import CommentsListPage from '@/pages/comments/list';
-
+import Register from '@/pages/register';
 import WrapperRouteComponent from './config';
 
 const NotFound = lazy(
@@ -67,6 +67,12 @@ const routeList: RouteObject[] = [
     path: '/login',
     element: (
       <WrapperRouteComponent element={<LoginPage />} titleId="title.login" />
+    ),
+  },
+  {
+    path: '/register',
+    element: (
+      <WrapperRouteComponent element={<Register />} titleId="title.register" />
     ),
   },
   {

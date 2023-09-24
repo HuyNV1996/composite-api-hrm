@@ -4,6 +4,7 @@ export const enUS_title = {
   'title.users': 'Danh sách người dùng',
   'title.posts': 'Danh sách bài viết',
   'title.comments': 'Danh sách bình luận',
+  'title.register': 'Đăng ký',
   'title.rooms': 'Danh sách nhóm',
   'title.documentation': 'Documentation',
   'title.guide': 'Guide',

@@ -186,7 +186,7 @@ const ListUsers: FC = () => {
       align: 'center',
     },
     {
-      title: 'Gửi tin nhắn',
+      title: 'Hành động',
       key: 'action',
       fixed: 'right',
       width: 120,

@@ -1,0 +1,94 @@
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: url('../../assets/header/background.jpeg') no-repeat center center;
+  background-size: cover;
+  position: relative;
+
+  h1 {
+    color: #fff;
+    font-size: 48px;
+  }
+
+  &-form {
+    width: 500px;
+    padding: 50px 40px 10px;
+    border-radius: 10px;
+    z-index: 1;
+
+    h2 {
+      text-align: center;
+      text-transform: uppercase;
+
+    }
+
+    &_button {
+      width: 100%;
+    }
+  }
+
+  .img-bg {
+    width: 100%;
+    position: absolute;
+    padding: 0 100px;
+
+    .box {
+      align-self: flex-end;
+      animation-duration: 2.5s;
+      animation-iteration-count: infinite;
+      margin: 0 auto 0 auto;
+      transform-origin: bottom;
+      max-width: 360px;
+    }
+
+    .bounce {
+      animation-name: bounce;
+      animation-timing-function: cubic-bezier(0.280, 0.840, 0.420, 1);
+    }
+
+    @keyframes bounce {
+      0% {
+        transform: scale(1, 1) translateY(0);
+      }
+
+      10% {
+        transform: scale(1.1, .9) translateY(0);
+      }
+
+      30% {
+        transform: scale(.9, 1.1) translateY(-100px);
+      }
+
+      50% {
+        transform: scale(1.05, .95) translateY(0);
+      }
+
+      57% {
+        transform: scale(1, 1) translateY(-7px);
+      }
+
+      64% {
+        transform: scale(1, 1) translateY(0);
+      }
+
+      100% {
+        transform: scale(1, 1) translateY(0);
+      }
+    }
+  }
+  @media screen and (max-width: 576px) {
+    &-form {
+      max-width: 350px;
+    }
+  
+    .img-bg {
+      padding: 0;
+  
+      .box {
+        width: 100%;
+      }
+    }
+  }
+}

@@ -4,7 +4,7 @@ import { Role } from '@/interface/permission/role.interface';
 const roles: Role[] = [
   {
     name: {
-      vi_VN: 'Khách',
+      zh_CN: '访客',
       en_US: 'Guest',
     },
     code: 'role_guest',
@@ -13,7 +13,7 @@ const roles: Role[] = [
   },
   {
     name: {
-      vi_VN: 'Admin',
+      zh_CN: '管理员',
       en_US: 'Admin',
     },
     code: 'role_admin',

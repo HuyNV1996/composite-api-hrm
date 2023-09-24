@@ -4,6 +4,7 @@ import { enUS_tagsViewDropMenu } from './user/tagsViewDropMenu';
 import { enUS_title } from './user/title';
 import { enUS_globalTips } from './global/tips';
 import { enUS_permissionRole } from './permission/role';
+import { viVN_dashboard } from './dashboard';
 import { enUS_guide } from './guide';
 import { en_US_documentation } from './documentation';
 import { viVN_cuaHang } from './domain/cuaHang';
@@ -32,6 +33,7 @@ const vi_VN = {
   ...enUS_title,
   ...enUS_globalTips,
   ...enUS_permissionRole,
+  ...viVN_dashboard,
   ...enUS_guide,
   ...en_US_documentation,
   ...viVN_banner,

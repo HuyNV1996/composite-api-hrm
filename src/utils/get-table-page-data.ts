@@ -6,7 +6,7 @@ export const getTableData = <T extends any[]>(pageNum = 1, pageSize = 10, totalD
     data: [],
     pageNum,
     pageSize,
-    total,
+    total
   };
 
   if (pageSize >= total) {

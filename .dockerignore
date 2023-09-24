@@ -1,6 +1,6 @@
 .git
 .vscode
 e2e/*
-# src/*
+src/*
 nswag/*
 node_modules/*

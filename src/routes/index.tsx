@@ -2,22 +2,15 @@ import { FC, lazy } from 'react';
 import { useRoutes } from 'react-router-dom';
 import { Navigate, RouteObject } from 'react-router';
 
+import Dashboard from '@/pages/dashboard';
 import LoginPage from '@/pages/login';
 import LayoutPage from '@/pages/layout';
-import EmployeeList from '@/pages/employee-list/list';
-import WeeklyReport from '@/pages/weekly-report';
-import MonthlyReport from '@/pages/monthly-report';
-import TimeKeepingList from '@/pages/timekeeping-list/list';
-import ShiftsList from '@/pages/shifts-list/list';
-import ExplanationRequest from '@/pages/explanation-request/list';
+import UserListPage from '@/pages/users/list';
+import PostsListPage from '@/pages/posts/list';
+import RoomsListPage from '@/pages/rooms/list';
+import CommentsListPage from '@/pages/comments/list';
+
 import WrapperRouteComponent from './config';
-import ExportExcel from '@/pages/export-excel';
-import ApplicationList from '@/pages/application-list/list';
-import LeaveManagement from '@/pages/leave-management/list';
-import EmployeeByLeave from '@/pages/employeeByLeaveList/list';
-import ContractList from '@/pages/contract-list/list';
-import DepartmentList from '@/pages/department-list/list';
-import { IdcardOutlined } from '@ant-design/icons';
 
 const NotFound = lazy(
   () => import(/* webpackChunkName: "404'"*/ '@/pages/404')
@@ -82,114 +75,50 @@ const routeList: RouteObject[] = [
     children: [
       {
         path: '',
-        element: <Navigate to="weeklyreport" />,
+        element: <Navigate to="users" />,
       },
       {
-        path: 'leavemanagement',
+        path: 'dashboard',
         element: (
           <WrapperRouteComponent
-            element={<LeaveManagement />}
-            titleId="title.leavemanagement"
+            element={<Dashboard />}
+            titleId="title.dashboard"
           />
         ),
       },
       {
-        path: "employeebyleave",
+        path: 'users',
         element: (
           <WrapperRouteComponent
-            element={<EmployeeByLeave />}
-            titleId="title.employeebyleave"
-          />
-        ),
-
-      },
-      {
-        path: 'contract',
-        element: (
-          <WrapperRouteComponent
-            element={<ContractList />}
-            titleId="title.contract"
-          />
-        )
-      },
-      {
-        path: 'employeelist',
-        element: (
-          <WrapperRouteComponent
-            element={<EmployeeList />}
-            titleId="title.employeelist"
+            element={<UserListPage />}
+            titleId="title.users"
           />
         ),
       },
       {
-        path: 'departmentlist',
-        element: (
-          <WrapperRouteComponent 
-            element={<DepartmentList />}
-            titleId="title.department"
-          />
-        )
-      },
-      {
-        path: 'weeklyreport',
+        path: 'posts',
         element: (
           <WrapperRouteComponent
-            element={<WeeklyReport />}
-            titleId="title.weeklyreport"
+            element={<PostsListPage />}
+            titleId="title.posts"
           />
         ),
       },
       {
-        path: 'monthlyreport',
+        path: 'rooms',
         element: (
           <WrapperRouteComponent
-            element={<MonthlyReport />}
-            titleId="title.monthlyreport"
+            element={<RoomsListPage />}
+            titleId="title.rooms"
           />
         ),
       },
       {
-        path: 'shiftslist',
+        path: 'comments',
         element: (
           <WrapperRouteComponent
-            element={<ShiftsList />}
-            titleId="title.shiftslist"
-          />
-        ),
-      },
-      {
-        path: 'timekeepinglist',
-        element: (
-          <WrapperRouteComponent
-            element={<TimeKeepingList />}
-            titleId="title.timekeepinglist"
-          />
-        ),
-      },
-      {
-        path: 'explanationrequest',
-        element: (
-          <WrapperRouteComponent
-            element={<ExplanationRequest />}
-            titleId="title.explanationrequest"
-          />
-        ),
-      },
-      {
-        path: 'exportexcel',
-        element: (
-          <WrapperRouteComponent
-            element={<ExportExcel />}
-            titleId="title.exportexcel"
-          />
-        ),
-      },
-      {
-        path: 'applicationlist',
-        element: (
-          <WrapperRouteComponent
-            element={<ApplicationList />}
-            titleId="title.applicationlist"
+            element={<CommentsListPage />}
+            titleId="title.comments"
           />
         ),
       },
@@ -290,6 +219,7 @@ const routeList: RouteObject[] = [
           />
         ),
       },
+
       {
         path: '*',
         element: (

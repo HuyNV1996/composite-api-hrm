@@ -9,41 +9,30 @@ import {
   Checkbox,
   Radio,
   Select,
-  TimePicker
 } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
 
 export type ControlTypes =
   | 'input'
   | 'input-number'
-  | 'input-search'
   | 'switch'
   | 'date-picker'
   | 'checkbox'
   | 'radio'
   | 'select'
-  | 'input-textarea'
-  | 'date-picker-range'
-  | 'time-picker-range'
-  | 'time-picker';
+  | 'input-textarea';
 
 type GetRCPropsType<T> = T extends (props: infer R) => any
   ? R
   : T extends React.ComponentClass<infer R>
   ? R
   : any;
-  const { TextArea  } = Input;
-  const { RangePicker } = DatePicker;
+  const { TextArea } = Input;
 type InnerProps = {
   input: GetRCPropsType<typeof Input>;
   'input-number': GetRCPropsType<typeof InputNumber>;
   'input-textarea': GetRCPropsType<typeof TextArea>;
-  'input-search': GetRCPropsType<typeof Input>;
   switch: GetRCPropsType<typeof Switch>;
   'date-picker': GetRCPropsType<typeof DatePicker>;
-  'date-picker-range': GetRCPropsType<typeof RangePicker>;
-  'time-picker-range': GetRCPropsType<typeof TimePicker.RangePicker>;
-  'time-picker': GetRCPropsType<typeof TimePicker>;
   checkbox: GetRCPropsType<typeof Checkbox>;
   radio: GetRCPropsType<typeof Radio>;
   select: GetRCPropsType<typeof Select>;
@@ -79,18 +68,10 @@ export class ControlMap {
   }
 
   'input-number'() {
-    return <InputNumber {...this.innerProps} style={{ width: '100%' }}/>;
+    return <InputNumber {...this.innerProps} />;
   }
   'input-textarea'() {
     return <TextArea {...this.innerProps} />;
-  }
-  'input-search'() {
-    return <Input
-    size='large'
-    allowClear
-    style={{borderRadius:'100px'}}
-    prefix={<SearchOutlined />}
-    {...this.innerProps} />;
   }
   switch() {
     return <Switch {...this.innerProps} />;
@@ -99,16 +80,8 @@ export class ControlMap {
   'date-picker'() {
     return <DatePicker {...this.innerProps} style={{ width: '100%' }} />;
   }
-  'date-picker-range'() {
-    return <RangePicker  {...this.innerProps} style={{ width: '100%' }} />;
-  }
-  'time-picker-range'() {
-    return <TimePicker.RangePicker  {...this.innerProps} style={{ width: '100%' }} />;
-  }
-  'time-picker'() {
-    return <TimePicker {...this.innerProps} style={{ width: '100%' }} />;
-  }
-  checkbox () {
+
+  checkbox() {
     // highlight-next-line
     return (
       <Checkbox.Group
@@ -137,9 +110,7 @@ export class ControlMap {
         children={this.props.children}
         options={this.props.options}
         {...this.innerProps}
-        filterOption={(input, option) =>
-      (option?.label?.toString() ?? '').toLowerCase().includes(input.toLowerCase())
-    }
+        allowClear
         showSearch
       />
     );

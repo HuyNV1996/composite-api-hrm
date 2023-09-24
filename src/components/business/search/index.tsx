@@ -4,8 +4,6 @@ import { css } from '@emotion/react';
 
 import { Col, Row } from 'antd';
 import { useLocale } from '@/locales';
-import { isNil } from 'lodash';
-import { isObjectDefined } from '@/utils/common';
 
 interface SearchProps<T> extends MyFormProps<T> {
   onSearch: (values: T) => void;
@@ -20,39 +18,19 @@ const BaseSearch = <T extends object>(props: SearchProps<T>) => {
 
   const onSubmit = async () => {
     const values = await form.validateFields();
+
     if (values) {
       onSearch(values);
     }
   };
-  const handleFieldChange = async () => {
-    const values = await form.validateFields();
-    console.log(values)
-    if (!isObjectDefined(values) || values === null ) {
-      await onSubmit();
-    }
-  };
-  const resetFields = async () => {
-    form.resetFields();
-    const values = await form.validateFields();
-    if (!isObjectDefined(values)) {
-      await onSubmit();
-    }
-  };
-  const handleKeyEnter = (e: React.KeyboardEvent<HTMLFormElement>) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      onSubmit();
-    }
-  };
+
   return (
     <div css={styles}>
       <MyForm
         {...rest}
         form={form}
-        onValuesChange={handleFieldChange}
         name="advanced_search"
-        className="ant-advanced-search-form"
-        onKeyDown={handleKeyEnter}>
+        className="ant-advanced-search-form">
         <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>{children}</Row>
         {/* {children} */}
         <Row>
@@ -62,7 +40,7 @@ const BaseSearch = <T extends object>(props: SearchProps<T>) => {
               {t({ id: 'search' })}
             </MyButton>
 
-            <MyButton onClick={() => resetFields()}>
+            <MyButton onClick={() => form.resetFields()}>
               {t({ id: 'reset' })}
             </MyButton>
             {/* </MyForm.Item> */}

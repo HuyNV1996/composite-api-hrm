@@ -4,9 +4,9 @@ import { localeConfig, LocaleFormatter } from './locales';
 import { ConfigProvider, Spin } from 'antd';
 import { ThemeSwitcherProvider } from 'react-css-theme-switcher';
 import enUS from 'antd/es/locale/en_US';
-import viVN from 'antd/es/locale/vi_VN';
+import zhCN from 'antd/es/locale/zh_CN';
 import moment from 'moment';
-import 'moment/locale/vi';
+import 'moment/locale/zh-cn';
 import RenderRouter from './routes';
 import { useDispatch, useSelector } from 'react-redux';
 import { history, HistoryRouter } from '@/routes/history';
@@ -27,6 +27,7 @@ const App: React.FC = () => {
   const { locale } = useSelector(state => state.user);
   const { theme } = useSelector(state => state.global);
   const dispatch = useDispatch();
+
   const setTheme = (dark = true) => {
     dispatch(
       setGlobalState({
@@ -37,16 +38,16 @@ const App: React.FC = () => {
 
   /** initial theme */
   useEffect(() => {
-    // setTheme(theme === 'light');
+    setTheme(theme === 'dark');
     // watch system theme change
     if (!localStorage.getItem('theme')) {
-      // const mql = window.matchMedia('(prefers-color-scheme: dark)');
+      const mql = window.matchMedia('(prefers-color-scheme: dark)');
 
-      // function matchMode(e: MediaQueryListEvent) {
-      //   setTheme(e.matches);
-      // }
+      function matchMode(e: MediaQueryListEvent) {
+        setTheme(e.matches);
+      }
 
-      // mql.addEventListener('change', matchMode);
+      mql.addEventListener('change', matchMode);
     }
   }, []);
 
@@ -55,8 +56,8 @@ const App: React.FC = () => {
   useEffect(() => {
     if (locale === 'en_US') {
       moment.locale('en');
-    } else if (locale === 'vi_VN') {
-      moment.locale('vi');
+    } else if (locale === 'zh_CN') {
+      moment.locale('zh-cn');
     }
   }, [locale]);
 
@@ -68,8 +69,8 @@ const App: React.FC = () => {
   const getAntdLocale = () => {
     if (locale === 'en_US') {
       return enUS;
-    } else if (locale === 'vi_VN') {
-      return viVN;
+    } else if (locale === 'zh_CN') {
+      return zhCN;
     }
   };
 

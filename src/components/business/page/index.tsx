@@ -1,6 +1,5 @@
-import { Col } from 'antd';
 import { css } from '@emotion/react';
-import { ColumnsType } from 'antd/lib/table/interface';
+import { ColumnsType, TablePaginationConfig } from 'antd/lib/table/interface';
 import { MyResponse } from '@/api/request';
 import MyTable from '@/components/core/table';
 import { PageData } from '@/interface';
@@ -11,12 +10,10 @@ import {
   useImperativeHandle,
   useState,
 } from 'react';
-import { useLocale } from '@/locales';
 import { useStates } from '@/utils/use-states';
 import MyAside, { MyAsideProps } from '../aside';
 import MyRadioCards, { MyRadioCardssOption } from '../radio-cards';
 import MySearch from '../search';
-import SearchBar from '../search-bar';
 import MyTabs, { MyTabsOption } from '../tabs';
 import { Card } from 'antd';
 
@@ -36,7 +33,6 @@ export interface PageProps<S> {
   pageApi?: any;
   pageParams?: object;
   tableOptions?: MyPageTableOptions<ParseDataType<S>>;
-  multipleSelection?: boolean;
   tableRender?: (
     data: MyPageTableOptions<ParseDataType<S>>[]
   ) => React.ReactNode;
@@ -53,18 +49,11 @@ export interface PageProps<S> {
   forceUpdate?: boolean;
   setDataExport?: React.Dispatch<React.SetStateAction<never[]>>;
   labelWidth?: number;
-  setSelectedRowData?: React.Dispatch<React.SetStateAction<any[]>>;
-  forceClearSelection?: boolean;
 }
 
 export interface RefPageProps {
   setAsideCheckedKey: (key?: string) => void;
   load: (data?: object) => Promise<void>;
-}
-
-interface SelectedOptions {
-  fieldNames: string[];
-  inputValues: string[];
 }
 
 const BasePage = <S extends SearchApi>(
@@ -78,7 +67,6 @@ const BasePage = <S extends SearchApi>(
     slot,
     title,
     tableOptions,
-    multipleSelection,
     tableRender,
     asideKey,
     asideData,
@@ -91,16 +79,17 @@ const BasePage = <S extends SearchApi>(
     forceUpdate,
     setDataExport,
     labelWidth,
-    setSelectedRowData,
-    forceClearSelection,
   } = props;
   const [pageData, setPageData] = useStates<PageData<ParseDataType<S>>>({
     pageSize: 10,
     pageNum: 1,
     total: 0,
     data: [],
+    sort:'totalLikes',
+    sortOrder:'desc'
   });
   const [loading, setLoading] = useState(false);
+
   const [asideCheckedKey, setAsideCheckedKey] = useState(asideValue);
 
   useEffect(() => {
@@ -108,24 +97,24 @@ const BasePage = <S extends SearchApi>(
       setAsideCheckedKey(asideData[0].key);
     }
   }, [asideData]);
-  const [paramsData, setparamsData] = useState<Record<string, any>>({});
+
   const getPageData = useCallback(
     async (params: Record<string, any> = {}) => {
       if (asideKey && !asideCheckedKey) return;
       if (pageApi) {
         setLoading(true);
-        params = { ...paramsData };
         const obj = {
           ...params,
           ...pageParams,
-          page_size: pageData.pageSize,
-          page_number: pageData.pageNum,
+          pageSize: pageData.pageSize,
+          pageNumber: pageData.pageNum,
+          maxResultCount: pageData.pageSize,
+          skipCount: pageData.pageNum,
+          sort: pageData.sort,
+          sortOrder: pageData.sortOrder,
           [asideKey!]: asideCheckedKey,
         };
-        console.log(obj);
-
         const res = await pageApi(obj);
-        console.log(res);
 
         if (res) {
           setPageData({ total: res.results.total, data: res.results.data });
@@ -135,35 +124,23 @@ const BasePage = <S extends SearchApi>(
       }
     },
     [
-      // pageApi,
+      pageApi,
       pageParams,
       pageData.pageSize,
       pageData.pageNum,
+      pageData.sortOrder,
+      pageData.sort,
       asideKey,
       asideCheckedKey,
-      paramsData,
     ]
   );
-  const [isMounted, setIsMounted] = useState(false);
 
-  useEffect(() => {
-    setIsMounted(true);
-    return () => setIsMounted(false);
-  }, []);
-  useEffect(() => {
-    setTimeout(() => {
-      if (isMounted) {
-        setSelectedRowKeys([]);
-        setLoading(false);
-      }
-    }, 1000);
-  }, [forceClearSelection, isMounted]);
   useEffect(() => {
     getPageData();
   }, [getPageData, forceUpdate]);
 
   const onSearch = (searchParams: Record<string, any>) => {
-    setparamsData(searchParams);
+    getPageData(searchParams);
   };
 
   const onSelectAsideTree: MyAsideProps['onSelect'] = ([key]) => {
@@ -181,64 +158,13 @@ const BasePage = <S extends SearchApi>(
     setAsideCheckedKey,
     load: (data?: object) => getPageData(data),
   }));
-
-  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
-  const onSelectChange = (
-    newSelectedRowKeys: React.Key[],
-    selectedRows: any
-  ) => {
-    setSelectedRowData && setSelectedRowData(selectedRows);
-    setSelectedRowKeys(newSelectedRowKeys);
-  };
-  const rowSelection = {
-    selectedRowKeys,
-    onChange: onSelectChange,
-  };
-
-  ////
-  const [selectedOptions, setSelectedOptions] = useState<SelectedOptions>({
-    fieldNames: [],
-    inputValues: [],
-  });
-  const [results, setResults] = useState<any[]>([]);
-
-  const handleSelectedOptions = (options: SelectedOptions) => {
-    setSelectedOptions(options);
-    console.log(selectedOptions);
-  };
-
-  const combinedUrl = selectedOptions.fieldNames
-    .map((fieldName, index) => {
-      const inputValue = selectedOptions.inputValues[index];
-      return `${fieldName}_like=${inputValue}`;
+  const handleTableChange = (pagination: any, _ :any,sorter:any) => {
+    // console.log(sorter)
+    setPageData({
+      sort: sorter.columnKey,
+      sortOrder: sorter.order
     })
-    .join('&');
-
-  const fullUrl = `http://localhost:3000/employees?${combinedUrl}`;
-
-  const fetchData = () => {
-    fetch(fullUrl)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`Network response was not ok: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(json => {
-        setResults(json);
-      })
-      .catch(error => {
-        console.error('Fetch error:', error);
-      });
   };
-
-  useEffect(() => {
-    fetchData();
-  }, [selectedOptions]);
-  useEffect(() => {
-    console.log(results);
-  }, [results]);
-
   return (
     <div css={styles}>
       {tabsData && (
@@ -260,19 +186,14 @@ const BasePage = <S extends SearchApi>(
         <div className="aside-main">
           {searchRender && (
             <Card size="small" style={{ marginBottom: 16 }}>
-              {/* {searchRender} */}
-              {/* <SearchBar
-                onSelectedOptionsChange={handleSelectedOptions}
-                tableOptions={tableOptions}
-              /> */}
-              {/* <MyTable
+              <MySearch
                 loading={loading}
-                rowKey={'id'}
-                size="middle"
-                height="100%"
-                dataSource={results}
-                columns={tableOptions}
-                rowSelection={rowSelection}></MyTable> */}
+                className="search"
+                onSearch={onSearch}
+                labelCol={{ style: { width: labelWidth } }}
+                labelAlign="right">
+                {searchRender}
+              </MySearch>
             </Card>
           )}
           {radioCardsData && (
@@ -284,40 +205,22 @@ const BasePage = <S extends SearchApi>(
           {tableOptions && (
             <div className="table">
               <Card size="small" title={title} extra={slot}>
-                {multipleSelection ? (
-                  <MyTable
-                    loading={loading}
-                    rowKey={'id'}
-                    size="middle"
-                    height="100%"
-                    dataSource={loading ? [] : pageData.data}
-                    columns={tableOptions}
-                    rowSelection={rowSelection}
-                    pagination={{
-                      current: pageData.pageNum,
-                      pageSize: pageData.pageSize,
-                      total: pageData.total,
-                      onChange: onPageChange,
-                    }}>
-                    {tableRender?.(pageData.data)}
-                  </MyTable>
-                ) : (
-                  <MyTable
-                    loading={loading}
-                    rowKey={'id'}
-                    size="middle"
-                    height="100%"
-                    dataSource={loading ? [] : pageData.data}
-                    columns={tableOptions}
-                    pagination={{
-                      current: pageData.pageNum,
-                      pageSize: pageData.pageSize,
-                      total: pageData.total,
-                      onChange: onPageChange,
-                    }}>
-                    {tableRender?.(pageData.data)}
-                  </MyTable>
-                )}
+                <MyTable
+                  loading={loading}
+                  rowKey={'id'}
+                  size="middle"
+                  height="100%"
+                  dataSource={pageData.data}
+                  columns={tableOptions}
+                  onChange={handleTableChange}
+                  pagination={{
+                    current: pageData.pageNum,
+                    pageSize: pageData.pageSize,
+                    total: pageData.total,
+                    onChange: onPageChange,
+                  }}>
+                  {tableRender?.(pageData.data)}
+                </MyTable>
               </Card>
             </div>
           )}

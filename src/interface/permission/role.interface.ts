@@ -1,7 +1,7 @@
 export type RoleStatus = 'enabled' | 'disabled';
 export interface Role {
   name: {
-    vi_VN: string;
+    zh_CN: string;
     en_US: string;
   };
   code: string;

@@ -14,7 +14,7 @@ const HeaderNoticeComponent: FC = () => {
   const [visible, setVisible] = useState(false);
   const [noticeList, setNoticeList] = useState<Notice[]>([]);
   const [loading, setLoading] = useState(false);
-  // const { noticeCount } = useSelector(state => state.user);
+  const { noticeCount } = useSelector(state => state.user);
 
   const noticeListFilter = <T extends Notice['type']>(type: T) => {
     return noticeList.filter(notice => notice.type === type) as Notice<T>[];
@@ -118,13 +118,13 @@ const HeaderNoticeComponent: FC = () => {
         padding: 8,
         borderRadius: 4,
       }}>
-      {/* <Tooltip title="Thông báo">
+      <Tooltip title="Thông báo">
         <Badge count={noticeCount} overflowCount={999}>
           <span className="notice" id="notice-center">
             <NoticeSvg className="anticon" />
           </span>
         </Badge>
-      </Tooltip> */}
+      </Tooltip>
     </Dropdown>
   );
 };

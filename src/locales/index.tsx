@@ -1,11 +1,13 @@
 import { FC } from 'react';
 import en_US from './en-US';
+import zh_CN from './zh-CN';
 import vi_VN from './vi-VN';
 import { FormattedMessage, MessageDescriptor, useIntl } from 'react-intl';
 
 export const localeConfig = {
-  vi_VN: vi_VN,
+  zh_CN: zh_CN,
   en_US: en_US,
+  vi_VN: vi_VN,
 };
 
 type Id = keyof typeof vi_VN;

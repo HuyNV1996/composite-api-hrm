@@ -19,7 +19,7 @@ export const useGuide = () => {
       prevBtnText: t({ id: 'app.guide.driverjs.prevBtnText' }),
       nextBtnText: t({ id: 'app.guide.driverjs.nextBtnText' }),
       doneBtnText: t({ id: 'app.guide.driverjs.doneBtnText' }),
-    })
+    }),
   );
 
   const driverStart = () => {
@@ -29,9 +29,7 @@ export const useGuide = () => {
           element: '#sidebar-trigger',
           popover: {
             title: t({ id: 'app.guide.driverStep.sidebarTrigger.title' }),
-            description: t({
-              id: 'app.guide.driverStep.sidebarTrigger.description',
-            }),
+            description: t({ id: 'app.guide.driverStep.sidebarTrigger.description' }),
             position: 'bottom',
             offset: 10,
             isFirst: true,
@@ -50,9 +48,7 @@ export const useGuide = () => {
           element: '#language-change',
           popover: {
             title: t({ id: 'app.guide.driverStep.switchLanguages.title' }),
-            description: t({
-              id: 'app.guide.driverStep.switchLanguages.description',
-            }),
+            description: t({ id: 'app.guide.driverStep.switchLanguages.description' }),
             position: 'bottom',
             offset: -170,
           },
@@ -70,9 +66,7 @@ export const useGuide = () => {
           element: '#pageTabs-actions svg',
           popover: {
             title: t({ id: 'app.guide.driverStep.pageTabsActions.title' }),
-            description: t({
-              id: 'app.guide.driverStep.pageTabsActions.description',
-            }),
+            description: t({ id: 'app.guide.driverStep.pageTabsActions.description' }),
             position: 'left',
           },
         },
@@ -80,9 +74,7 @@ export const useGuide = () => {
           element: '#switchTheme span',
           popover: {
             title: t({ id: 'app.guide.driverStep.switchTheme.title' }),
-            description: t({
-              id: 'app.guide.driverStep.switchTheme.description',
-            }),
+            description: t({ id: 'app.guide.driverStep.switchTheme.description' }),
             position: 'left',
             isLast: true,
           },
@@ -93,7 +85,7 @@ export const useGuide = () => {
       dispatch(
         setUserItem({
           newUser: false,
-        })
+        }),
       );
       driver.current.start();
       console.log('guide started');

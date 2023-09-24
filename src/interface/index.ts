@@ -1,6 +1,6 @@
 export interface Locales<T = any> {
-  /** Việt Nam */
-  vi_VN: T;
+  /** Chinese */
+  zh_CN: T;
   /** English */
   en_US: T;
 }
@@ -11,6 +11,8 @@ export interface PageData<T> {
   pageNum: number;
   pageSize: number;
   total: number;
+  sort?: string;
+  sortOrder?: string;
   data: T[];
 }
 export interface PageDataDto<T> {

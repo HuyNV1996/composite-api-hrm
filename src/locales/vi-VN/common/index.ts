@@ -52,6 +52,7 @@ export const viVN_common = {
   user_info: 'Thông tin người dùng',
   user_roles:"Danh sách vai trò",
   roleLabel:'Vai trò',
-  beneficiary: 'Người hưởng thụ',
-  voucher:'Danh sách voucher',
+  fireAnt: 'FireAnt',
+  facebook:'Facebook',
+  twitter:'Twitter'
 };

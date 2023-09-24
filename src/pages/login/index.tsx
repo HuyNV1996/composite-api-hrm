@@ -1,56 +1,59 @@
 import { FC, useEffect, useState } from 'react';
 import { Button, Checkbox, Col, Form, Input, Row } from 'antd';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-import { ILoginForm, ILoginParams } from '@/interface/user/login';
-import { loginAsync } from '@/stores/user.store';
-import Union from '@/assets/logo/Union.svg';
+import { LoginParams} from '@/interface/auth/login';
+import { loginAsync, setUserItem } from '@/stores/user.store';
+import { formatSearch } from '@/utils/formatSearch';
+import Union from '@/assets/logo/logo.png';
 import AvatarAccount from '@/assets/header/higod.png';
 import useLocalStorage from '@/hooks/useLocalStorage';
 
 import './index.less';
 import { useLocale } from '@/locales';
 
-const initialValues: ILoginForm = {
-  login: '',
-  password: ''
+const initialValues: LoginParams = {
+  username: '',
+  password: '',
+  // remember: true
 };
 
 const LoginForm = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const { t } = useLocale();
   const { storedValue: token } = useLocalStorage('token');
 
-  const onFinished = async (form: ILoginForm) => {
+  const onFinished = async (form: LoginParams) => {
     setLoading(true);
-    const res = await dispatch(await loginAsync(form)) as any;
-    console.log(res);
+    const res = await dispatch(await loginAsync(form));
     if (!!res) {
-      console.log(res)
-      localStorage.setItem('username', res?.display_name);
-      localStorage.setItem('company_id', res?.company_id);
+      const search = formatSearch(location.search);
+      const from = search.from || { pathname: '/' };
       setLoading(false);
+      // navigate(from);
       navigate('/');
     }
-
   };
   const styleInput = { borderRadius: '10px', height: '45px' };
 
   useEffect(() => {
     if (!token) navigate('/login');
   }, [token]);
-
+  useEffect(() => {
+    localStorage.clear();
+  },[])
   return (
     <div className="login-page">
-      {/* <img
+      <img
         src={Union}
         alt=""
         style={{ width: 300, marginBottom: 50, zIndex: 1 }}
-      /> */}
-      <Form<ILoginForm>
+      />
+      <Form<LoginParams>
         onFinish={onFinished}
         className="login-page-form"
         initialValues={initialValues}
@@ -65,7 +68,7 @@ const LoginForm = () => {
         <Row>
           <Col span={24}>
             <Form.Item
-              name="login"
+              name="username"
               label={t({ id: 'login_name' })}
               rules={[
                 {
@@ -109,6 +112,9 @@ const LoginForm = () => {
             </Form.Item>
           </Col>
         </Row>
+        <Form.Item name="remember" valuePropName="checked">
+          <Checkbox>Lưu </Checkbox>
+        </Form.Item>
         <Form.Item>
           <Button
             htmlType="submit"

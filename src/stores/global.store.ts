@@ -9,9 +9,8 @@ const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 
 const userTheme = localStorage.getItem('theme') as State['theme'];
 
 const initialState: State = {
-  // theme: userTheme || systemTheme,
-  theme: 'light',
-  loading: false
+  theme: userTheme || systemTheme,
+  loading: false,
 };
 
 const globalSlice = createSlice({

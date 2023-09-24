@@ -84,6 +84,10 @@ const LayoutPage: FC = () => {
     };
   }, [dispatch]);
 
+  // useEffect(() => {
+  //   newUser && driverStart();
+  // }, [newUser]);
+
   useEffect(() => {
     const code = getFirstPathCode(location.pathname);
     setSelectedKey(location.pathname);
@@ -112,7 +116,7 @@ const LayoutPage: FC = () => {
           </Sider>
         ) : (
           <Drawer
-            width="256"
+            width="200"
             placement="left"
             bodyStyle={{ padding: 0, height: '100%' }}
             closable={false}
@@ -127,14 +131,13 @@ const LayoutPage: FC = () => {
             />
           </Drawer>
         )}
-        <Content className="layout-page-content" style={{ overflowY: 'auto' }}>
-          {/* <TagsView onChangeSelectedKey={k => setSelectedKey(k)} /> */}
+        <Content className="layout-page-content">
+          <TagsView onChangeSelectedKey={k => setSelectedKey(k)} />
           <Suspense fallback={null}>
             {/* <Spin
               spinning={loading}
               className="app-loading-wrapper"
-              tip={<LocaleFormatter id="gloabal.tips.loading" />}>
-            </Spin> */}
+              tip={<LocaleFormatter id="gloabal.tips.loading" />}></Spin> */}
             <Outlet />
           </Suspense>
         </Content>

@@ -8,10 +8,12 @@ const PrivateRoute: FC<RouteProps> = props => {
   const { storedValue: token } = useLocalStorage('token');
   const location = useLocation();
 
-  return token && true ? (
+  return token ? (
     (props.element as React.ReactElement)
   ) : (
-    <Navigate to={`/login`} />
+    <Navigate
+      to={`/login${'?from=' + encodeURIComponent(location.pathname)}`}
+    />
   );
 };
 

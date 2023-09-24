@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-type IKeyLocalStorage = 'token' | 'username';
+type IKeyLocalStorage = 'token' | 'user';
 
 const useLocalStorage = (keyName: IKeyLocalStorage, defaultValue?: string) => {
   const [storedValue, setStoredValue] = useState(() => {

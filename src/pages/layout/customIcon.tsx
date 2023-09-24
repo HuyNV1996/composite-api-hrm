@@ -8,14 +8,7 @@ import { ReactComponent as SystemSvg } from '@/assets/menu/system.svg';
 import { ReactComponent as MerchantSvg } from '@/assets/menu/merchant.svg';
 import { ReactComponent as TransactionSvg } from '@/assets/menu/transaction.svg';
 import { ReactComponent as SysvarSvg } from '@/assets/menu/sysvar.svg';
-import { ReactComponent as VoucherSvg } from '@/assets/menu/voucher.svg';
-import { ReactComponent as BeneficiarySvg } from '@/assets/menu/beneficiary.svg';
-import { ReactComponent as EmployeeeSvg } from '@/assets/menu/ic_employee.svg';
-import { ReactComponent as ShiftSvg } from '@/assets/menu/ic_shift.svg';
-import { ReactComponent as TimeKeepingSvg } from '@/assets/menu/ic_timekeeping.svg';
-import { ReactComponent as MonthltReportSvg } from '@/assets/menu/ic_month_report.svg';
-import { ReactComponent as WeeklyReportSvg } from '@/assets/menu/ic_weeklyreport.svg';
-import { ExportOutlined, OrderedListOutlined, CalendarOutlined, CalendarFilled, FormOutlined, TeamOutlined, IdcardOutlined } from '@ant-design/icons';
+import { ReactComponent as FireAntSvg } from '@/assets/icons/fireant.svg';
 interface CustomIconProps {
   type: string;
 }
@@ -36,47 +29,15 @@ export const CustomIcon: FC<CustomIconProps> = props => {
     com = <DocumentationSvg />;
   } else if (type === 'system') {
     com = <SystemSvg />;
+  } else if (type === 'merchant') {
+    com = <MerchantSvg />;
   } else if (type === 'transaction') {
     com = <TransactionSvg />;
   } else if (type === 'sysvar') {
     com = <SysvarSvg />;
-  } else if (type === 'employee') {
-    com = <EmployeeeSvg />
-  }
-  else if (type === 'shift') {
-    com = <ShiftSvg />
-  }
-  else if (type === 'timekeeping') {
-    com = <TimeKeepingSvg />
-  }
-  else if (type === 'monthlyreport') {
-    com = <MonthltReportSvg />
-  }
-  else if (type === 'weeklyreport') {
-    com = <WeeklyReportSvg />
-  }
-  else if (type === 'export') {
-    com = <ExportOutlined />
-  }
-  else if (type === 'applicationlist') {
-    com = <OrderedListOutlined />
-  }
-  else if (type == "leavemanagement") {
-    com = <CalendarOutlined />
-  }
-  else if (type === "employeebyleave") {
-    com = <CalendarFilled />
-  }
-  else if (type === "contract") {
-    com = <FormOutlined />
-  }
-  else if (type === "department") {
-    com = <TeamOutlined />
-  }
-  else if (type === "job") {
-    com = <IdcardOutlined />
-  }
-  else {
+  } else if (type === 'fireant') {
+    com = <FireAntSvg />;
+  } else {
     com = <GuideSvg />;
   }
 

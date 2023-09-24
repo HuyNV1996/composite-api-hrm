@@ -23,12 +23,7 @@ const MyTable = <T extends object = object>(props: MyTableProps<T>) => {
   return (
     <div>
       <div style={{ height }} css={styles}>
-        <Table<T>
-          {...rest}
-          bordered
-          scroll={{ x: '1300px', y: '300px' }}
-          pagination={combinedPagination}
-        />
+        <Table<T> {...rest} scroll={{ x: '1300px', y: '65vh'  }} pagination={combinedPagination} />
       </div>
     </div>
   );

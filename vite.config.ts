@@ -12,7 +12,7 @@ export default defineConfig({
     },
   },
   server: {
-    port: 3001,
+    port: 4200,
     proxy: {
       '/api': {
         target: `http://localhost:${process.env.PORT}/api`,
@@ -25,7 +25,7 @@ export default defineConfig({
     preprocessorOptions: {
       less: {
         javascriptEnabled: true,
-        modifyVars: { 'primary-color': '#B98868' },
+        modifyVars: { 'primary-color': '#845310' },
       },
       // ....
     },

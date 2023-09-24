@@ -1,5 +1,5 @@
 import { mock, intercepter } from '../config';
-import { Role } from '@/interface/user/login';
+import { Role } from '@/interface/auth/login';
 
 mock.mock('/user/login', 'post', (config: any) => {
   const body: any = JSON.parse(config?.body);

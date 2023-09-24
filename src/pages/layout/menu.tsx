@@ -17,13 +17,7 @@ interface MenuProps {
 }
 
 const MenuComponent: FC<MenuProps> = props => {
-  const {
-    menuList,
-    openKey,
-    onChangeOpenKey,
-    selectedKey,
-    onChangeSelectedKey,
-  } = props;
+  const { menuList, openKey, onChangeOpenKey, selectedKey, onChangeSelectedKey } = props;
   const { device, locale } = useSelector(state => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -59,7 +53,8 @@ const MenuComponent: FC<MenuProps> = props => {
       openKeys={openKey ? [openKey] : []}
       onOpenChange={onOpenChange}
       onSelect={k => onMenuClick(k.key)}
-      className="layout-page-sider-menu text-2">
+      className="layout-page-sider-menu text-2"
+    >
       {menuList.map(menu =>
         menu.children ? (
           <SubMenu key={menu.code} title={getTitie(menu)}>
@@ -69,7 +64,7 @@ const MenuComponent: FC<MenuProps> = props => {
           </SubMenu>
         ) : (
           <Item key={menu.path}>{getTitie(menu)}</Item>
-        )
+        ),
       )}
     </Menu>
   );

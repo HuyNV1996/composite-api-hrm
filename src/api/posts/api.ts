@@ -16,7 +16,7 @@ export const apiGeListPosts = async (params: IGetListPostParams) =>
   }
   const url = `${POST.GETLIST}/paging`;
   let data = new FormData();
-  data.append('pageNumber', params.pageNumber);
+  data.append('pageNumber', String(Number(params.pageNumber)-1));
   data.append('pageSize', params.pageSize);
   data.append('sort', params.sort);
   data.append('sortOrder', sortord);

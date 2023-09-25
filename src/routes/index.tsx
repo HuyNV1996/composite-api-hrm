@@ -10,7 +10,9 @@ import PostsListPage from '@/pages/posts/list';
 import RoomsListPage from '@/pages/rooms/list';
 import CommentsListPage from '@/pages/comments/list';
 import Register from '@/pages/register';
+import UserSeeding from '@/pages/users_seeding/list'
 import WrapperRouteComponent from './config';
+import CampaignPage from '@/pages/campaign/list'
 
 const NotFound = lazy(
   () => import(/* webpackChunkName: "404'"*/ '@/pages/404')
@@ -102,6 +104,15 @@ const routeList: RouteObject[] = [
         ),
       },
       {
+        path: 'users-seeding',
+        element: (
+          <WrapperRouteComponent
+            element={<UserSeeding />}
+            titleId="title.users-seeding"
+          />
+        ),
+      },
+      {
         path: 'posts',
         element: (
           <WrapperRouteComponent
@@ -125,6 +136,15 @@ const routeList: RouteObject[] = [
           <WrapperRouteComponent
             element={<CommentsListPage />}
             titleId="title.comments"
+          />
+        ),
+      },
+      {
+        path: 'campaign',
+        element: (
+          <WrapperRouteComponent
+            element={<CampaignPage />}
+            titleId="title.campaign"
           />
         ),
       },

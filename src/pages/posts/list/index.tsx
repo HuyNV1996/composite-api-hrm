@@ -79,7 +79,8 @@ const ListUsers: FC = () => {
       dataIndex: 'sentiment',
       key: 'sentiment',
       width: 120,
-      align: 'left',
+      align: 'center',
+      sorter: true,
       render: (item) => {
         if(item){
           return (

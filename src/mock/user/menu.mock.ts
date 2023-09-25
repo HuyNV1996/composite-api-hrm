@@ -23,6 +23,16 @@ const mockMenuList: MenuList = [
         path: '/users',
       },
       {
+        code: 'user-seeding',
+        label: {
+          zh_CN: 'Users seeding',
+          en_US: 'Users seeding',
+          vi_VN: 'Users seeding',
+        },
+        icon: 'system',
+        path: '/users-seeding',
+      },
+      {
         code: 'post',
         label: {
           zh_CN: 'Danh sách post',
@@ -52,9 +62,18 @@ const mockMenuList: MenuList = [
         icon: 'system',
         path: '/rooms',
       },
+      {
+        code: 'campaign',
+        label: {
+          zh_CN: 'Chiến dịch tin nhắn',
+          en_US: 'Chiến dịch tin nhắn',
+          vi_VN: 'Chiến dịch tin nhắn',
+        },
+        icon: 'system',
+        path: '/campaign',
+      },
     ],
-  }
-  
+  },
 ];
 
 mock.mock('/user/menu', 'get', intercepter(mockMenuList));

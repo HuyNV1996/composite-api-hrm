@@ -64,11 +64,11 @@ export class ControlMap {
   }
 
   input() {
-    return <Input {...this.innerProps} />;
+    return <Input style={{width: '100%'}} {...this.innerProps} />;
   }
 
   'input-number'() {
-    return <InputNumber {...this.innerProps} />;
+    return <InputNumber style={{width: '100%'}} {...this.innerProps} />;
   }
   'input-textarea'() {
     return <TextArea {...this.innerProps} />;
@@ -81,7 +81,7 @@ export class ControlMap {
     return <DatePicker {...this.innerProps} style={{ width: '100%' }} />;
   }
 
-  checkbox() {
+  'checkbox'() {
     // highlight-next-line
     return (
       <Checkbox.Group

@@ -59,13 +59,14 @@ const ListUsers: FC = () => {
     //   width: 120,
     //   align: 'left',
     // },
-    // {
-    //   title: 'Sentiment',
-    //   dataIndex: 'sentiment',
-    //   key: 'sentiment',
-    //   width: 120,
-    //   align: 'left',
-    // },
+    {
+      title: 'Bình luận tốt',
+      dataIndex: 'sentiment',
+      key: 'sentiment',
+      width: 120,
+      align: 'center',
+      sorter: true
+    },
     // {
     //   title: 'Nội dung',
     //   dataIndex: 'content',

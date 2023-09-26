@@ -1,5 +1,50 @@
-import { TRANG_THAI_KET_NOI, LOAI_KHU_VUC, LOAI_MAN_HINH, LOAI_TRANG_THAI, LOAI_CAU_HOI, TRANG_THAI, LOAI_TRANSACTION, CUSTOMER_TYPE, HAS_CONTRACT, GENDER, NATIONALTYPE } from './consts';
+import {
+  TRANG_THAI_KET_NOI,
+  LOAI_KHU_VUC,
+  LOAI_MAN_HINH,
+  LOAI_TRANG_THAI,
+  LOAI_CAU_HOI,
+  TRANG_THAI,
+  LOAI_TRANSACTION,
+  CUSTOMER_TYPE,
+  HAS_CONTRACT,
+  GENDER,
+  NATIONALTYPE,
+} from './consts';
 
+export const ruleOperator = [
+  {
+    label: '>',
+    value: '>',
+  },
+  {
+    label: '<',
+    value: '<',
+  },
+  {
+    label: '=',
+    value: '=',
+  },
+];
+
+export const ruleName = [
+  {
+    label: 'totalLikes',
+    value: 'totalLikes',
+  },
+  {
+    label: 'totalPosts',
+    value: 'totalPosts',
+  },
+  {
+    label: 'followings',
+    value: 'followings',
+  },
+  {
+    label: 'followers',
+    value: 'followers',
+  },
+];
 export const loaiCuaHangOptions = [
   {
     label: 'Offline',

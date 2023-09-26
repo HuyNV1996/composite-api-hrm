@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { Menu } from 'antd';
 import { MenuList } from '../../interface/layout/menu.interface';
 import { useNavigate } from 'react-router-dom';
@@ -17,7 +17,13 @@ interface MenuProps {
 }
 
 const MenuComponent: FC<MenuProps> = props => {
-  const { menuList, openKey, onChangeOpenKey, selectedKey, onChangeSelectedKey } = props;
+  const {
+    menuList,
+    openKey,
+    onChangeOpenKey,
+    selectedKey,
+    onChangeSelectedKey,
+  } = props;
   const { device, locale } = useSelector(state => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -31,17 +37,20 @@ const MenuComponent: FC<MenuProps> = props => {
     );
   };
 
+  useEffect(() => {
+    if (device !== 'DESKTOP') {
+      dispatch(setUserItem({ collapsed: false }));
+    }
+  }, [device, dispatch]);
+
   const onMenuClick = (path: string) => {
     onChangeSelectedKey(path);
     navigate(path);
-    if (device !== 'DESKTOP') {
-      dispatch(setUserItem({ collapsed: true }));
-    }
+    setUserItem({ collapsed: false });
   };
 
   const onOpenChange = (keys: string[]) => {
     const key = keys.pop();
-
     onChangeOpenKey(key);
   };
 
@@ -53,8 +62,7 @@ const MenuComponent: FC<MenuProps> = props => {
       openKeys={openKey ? [openKey] : []}
       onOpenChange={onOpenChange}
       onSelect={k => onMenuClick(k.key)}
-      className="layout-page-sider-menu text-2"
-    >
+      className="layout-page-sider-menu text-2">
       {menuList.map(menu =>
         menu.children ? (
           <SubMenu key={menu.code} title={getTitie(menu)}>
@@ -64,7 +72,7 @@ const MenuComponent: FC<MenuProps> = props => {
           </SubMenu>
         ) : (
           <Item key={menu.path}>{getTitie(menu)}</Item>
-        ),
+        )
       )}
     </Menu>
   );

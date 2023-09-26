@@ -2,8 +2,8 @@
 import XlsExport from 'xlsexport';
 import { Button, Divider, Form, Popconfirm, Space, Tag, message } from 'antd';
 import { FC, useState } from 'react';
-import FeaturedIcon from '@/assets/icons/correct.png'
-import NotFeaturedIcon from '@/assets/icons/remove.png'
+import FeaturedIcon from '@/assets/icons/correct.png';
+import NotFeaturedIcon from '@/assets/icons/remove.png';
 import MyPage, { MyPageTableOptions } from '@/components/business/page';
 import { useLocale } from '@/locales';
 import {
@@ -92,25 +92,20 @@ const ListUsers: FC = () => {
       key: 'active',
       width: 50,
       align: 'center',
-      render: (item) => {
-        if(item){
-          return (
-            <img src={FeaturedIcon} alt='image'/>
-          )
+      render: item => {
+        if (item) {
+          return <img src={FeaturedIcon} alt="image" />;
+        } else {
+          return <img src={NotFeaturedIcon} alt="image" />;
         }
-        else{
-          return(
-            <img src={NotFeaturedIcon} alt='image'/>
-          )
-        }
-      }  
+      },
     },
     {
       title: 'Tổng users',
       dataIndex: 'totalUser',
       key: 'totalUser',
       width: 80,
-      align: 'center', 
+      align: 'center',
     },
     {
       title: 'Đã gửi',
@@ -125,8 +120,9 @@ const ListUsers: FC = () => {
       key: 'createdAt',
       width: 100,
       align: 'left',
-      render: (item, record) =>
-        (<span>{item && convertTimestampToFormattedDate(Number(item))}</span>)
+      render: (item, record) => (
+        <span>{item && convertTimestampToFormattedDate(Number(item))}</span>
+      ),
     },
     {
       title: 'Ngày sửa',
@@ -134,8 +130,9 @@ const ListUsers: FC = () => {
       key: 'updatedAt',
       width: 100,
       align: 'left',
-      render: (item, record) =>
-        (<span>{item && convertTimestampToFormattedDate(Number(item))}</span>)
+      render: (item, record) => (
+        <span>{item && convertTimestampToFormattedDate(Number(item))}</span>
+      ),
     },
     {
       title: 'Hành động',

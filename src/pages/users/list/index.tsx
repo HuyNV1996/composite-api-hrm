@@ -2,14 +2,17 @@
 import XlsExport from 'xlsexport';
 import { Button, Divider, Form, Popconfirm, Space, Tag } from 'antd';
 import { FC, useState } from 'react';
-import FeaturedIcon from '@/assets/icons/correct.png'
-import NotFeaturedIcon from '@/assets/icons/remove.png'
+import FeaturedIcon from '@/assets/icons/correct.png';
+import NotFeaturedIcon from '@/assets/icons/remove.png';
 import MyPage, { MyPageTableOptions } from '@/components/business/page';
 import { useLocale } from '@/locales';
 import {
+  AppstoreAddOutlined,
+  CommentOutlined,
   DeleteOutlined,
   DownloadOutlined,
   FormOutlined,
+  PlusCircleOutlined,
   SendOutlined,
 } from '@ant-design/icons';
 
@@ -18,25 +21,41 @@ import { formatDate } from '@/utils/formatDate';
 import { apiGeListUsers } from '@/api/users/api';
 import TruncateText from '../components/truncate-text';
 import FormSend from '../handle/form';
+import FormAdd from '../handle/formAddCompaigns';
 const ListUsers: FC = () => {
   const { t } = useLocale();
   const [foceUpdate, setFoceUpdate] = useState(false);
   const [open, setOpen] = useState(false);
+  const [openAddComp, setOpenAddComp] = useState(false);
   const [dataExport, setDataExport] = useState([]);
   const [form] = Form.useForm();
   const [idUser, setIdUsers] = useState<any>(null);
   const showDrawer = () => {
     setOpen(true);
   };
+  const showDrawerAddComp = () => {
+    setOpenAddComp(true);
+  };
 
   const onClose = () => {
     setOpen(false);
     setTimeout(() => setIdUsers(null), 1000);
   };
+  const onCloseAddComp = () => {
+    setOpenAddComp(false);
+    setTimeout(() => setIdUsers(null), 1000);
+  };
 
   const handleSend = (id: string) => {
+    console.log(id);
+
     setIdUsers(id);
     showDrawer();
+  };
+  const handleAdd = (id: string) => {
+    console.log(id);
+    setIdUsers(id);
+    showDrawerAddComp();
   };
   const tableColums: MyPageTableOptions<any> = [
     {
@@ -60,22 +79,14 @@ const ListUsers: FC = () => {
       width: 100,
       align: 'left',
     },
-    // {
-    //   title: 'Mật khẩu',
-    //   dataIndex: 'password',
-    //   key: 'password',
-    //   width: 80,
-    //   align: 'center',
-    // },   
     {
       title: 'Tiểu sử (Bio)',
       dataIndex: 'bio',
       key: 'bio',
       width: 300,
       align: 'left',
-      render: (item, record) => (
-        item && <TruncateText maxLength={180} text={item} />
-      )
+      render: (item, record) =>
+        item && <TruncateText maxLength={180} text={item} />,
     },
     {
       title: 'Email',
@@ -104,18 +115,13 @@ const ListUsers: FC = () => {
       key: 'isExpert',
       width: 100,
       align: 'center',
-      render: (item) => {
-        if(item){
-          return (
-            <img src={FeaturedIcon} alt='image'/>
-          )
+      render: item => {
+        if (item) {
+          return <img src={FeaturedIcon} alt="image" />;
+        } else {
+          return <img src={NotFeaturedIcon} alt="image" />;
         }
-        else{
-          return(
-            <img src={NotFeaturedIcon} alt='image'/>
-          )
-        }
-      }    
+      },
     },
     {
       title: 'Giáo viên',
@@ -123,18 +129,13 @@ const ListUsers: FC = () => {
       key: 'isTeacher',
       width: 100,
       align: 'center',
-      render: (item) => {
-        if(item){
-          return (
-            <img src={FeaturedIcon} alt='image'/>
-          )
+      render: item => {
+        if (item) {
+          return <img src={FeaturedIcon} alt="image" />;
+        } else {
+          return <img src={NotFeaturedIcon} alt="image" />;
         }
-        else{
-          return(
-            <img src={NotFeaturedIcon} alt='image'/>
-          )
-        }
-      }    
+      },
     },
     {
       title: 'Blocked',
@@ -142,18 +143,13 @@ const ListUsers: FC = () => {
       key: 'blocked',
       width: 100,
       align: 'center',
-      render: (item) => {
-        if(item){
-          return (
-            <img src={FeaturedIcon} alt='image'/>
-          )
+      render: item => {
+        if (item) {
+          return <img src={FeaturedIcon} alt="image" />;
+        } else {
+          return <img src={NotFeaturedIcon} alt="image" />;
         }
-        else{
-          return(
-            <img src={NotFeaturedIcon} alt='image'/>
-          )
-        }
-      }    
+      },
     },
     {
       title: 'Bài viết',
@@ -168,7 +164,7 @@ const ListUsers: FC = () => {
       key: 'totalLikes',
       width: 150,
       align: 'center',
-      sorter: true
+      sorter: true,
     },
     {
       title: 'Người theo dõi',
@@ -176,7 +172,7 @@ const ListUsers: FC = () => {
       key: 'followers',
       width: 150,
       align: 'center',
-      sorter: true
+      sorter: true,
     },
     {
       title: 'Đang theo dõi',
@@ -193,9 +189,13 @@ const ListUsers: FC = () => {
       align: 'center',
       render: (_, record) => (
         <Space size="middle">
-          <SendOutlined
+          <CommentOutlined
             style={{ fontSize: '14px', color: '#0960bd' }}
             onClick={() => handleSend(String(record.id))}
+          />
+          <AppstoreAddOutlined
+            style={{ fontSize: '14px', color: '#0960bd' }}
+            onClick={() => handleAdd(String(record.id))}
           />
         </Space>
       ),
@@ -210,7 +210,6 @@ const ListUsers: FC = () => {
         // searchRender={<SearchUser />}
         forceUpdate={foceUpdate}
         setDataExport={setDataExport}
-        
         tableOptions={tableColums}
       />
       <FormSend
@@ -221,6 +220,15 @@ const ListUsers: FC = () => {
         open={open}
         showDrawer={showDrawer}
         onClose={onClose}
+      />
+      <FormAdd
+        form={form}
+        setFoceUpdate={setFoceUpdate}
+        foceUpdate={foceUpdate}
+        idUser={idUser}
+        open={openAddComp}
+        showDrawer={showDrawerAddComp}
+        onClose={onCloseAddComp}
       />
     </>
   );

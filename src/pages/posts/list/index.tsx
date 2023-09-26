@@ -18,6 +18,7 @@ import { apiGeListUsers } from '@/api/users/api';
 import TruncateText from '../components/truncate-text';
 import { apiGeListPosts } from '@/api/posts/api';
 import { convertTimestampToFormattedDate } from '@/pages/rooms/list/utils';
+import { Link } from 'react-router-dom';
 const ListUsers: FC = () => {
   const { t } = useLocale();
   const [foceUpdate, setFoceUpdate] = useState(false);
@@ -227,7 +228,7 @@ const ListUsers: FC = () => {
       <MyPage
         pageApi={apiGeListPosts}
         title={'Danh sách bài viết'}
-        // searchRender={<SearchUser />}
+        searchRender={<SearchUser />}
         forceUpdate={foceUpdate}
         // setDataExport={setDataExport}
         

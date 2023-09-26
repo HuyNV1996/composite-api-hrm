@@ -19,3 +19,5 @@ export type IHAS_CONTRACT = 'TRUE' | 'FALSE';
 export type IGENDER = 'MALE' | 'FEMALE';
 
 export type INATIONALTYPE = 'IDCARD' | 'PASSPORT';
+
+export type ISOCIAL = 'FACEBOOK' | 'TWITTER' | 'FIREANT'

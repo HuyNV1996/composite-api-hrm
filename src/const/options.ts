@@ -3,13 +3,7 @@ import {
   LOAI_KHU_VUC,
   LOAI_MAN_HINH,
   LOAI_TRANG_THAI,
-  LOAI_CAU_HOI,
-  TRANG_THAI,
-  LOAI_TRANSACTION,
-  CUSTOMER_TYPE,
-  HAS_CONTRACT,
-  GENDER,
-  NATIONALTYPE,
+  SOCIAL,
 } from './consts';
 
 export const ruleOperator = [
@@ -97,107 +91,17 @@ export const loaiManHinhOptions = [
   },
 ];
 
-export const loaiCauHoiOptions = [
+export const socialOptions = [
   {
-    label: 'Về Vietnamobile',
-    value: LOAI_CAU_HOI.VIETNAMOBILE,
+    label: 'Fireant',
+    value: SOCIAL.FIREANT
   },
   {
-    label: 'SIM',
-    value: LOAI_CAU_HOI.SIM,
+    label: 'Facebook',
+    value: SOCIAL.FACEBOOK
   },
   {
-    label: 'Mua hàng',
-    value: LOAI_CAU_HOI.MUA_HANG,
-  },
-  {
-    label: 'Giao hàng',
-    value: LOAI_CAU_HOI.GIAO_HANG,
-  },
-  {
-    label: 'Thanh toán',
-    value: LOAI_CAU_HOI.THANH_TOAN,
-  },
-  {
-    label: 'Xử lý sự cố',
-    value: LOAI_CAU_HOI.XU_LY_SU_CO,
-  },
-];
-
-export const TrangThaiOptions = [
-  {
-    label: 'Kích hoạt',
-    value: TRANG_THAI.ACTIVE,
-  },
-  {
-    label: 'Không kích hoạt',
-    value: TRANG_THAI.INACTIVE,
-  },
-  {
-    label: 'Khoá',
-    value: TRANG_THAI.LOCK,
-  },
-];
-
-export const TransactionOptions = [
-  {
-    label: 'NEW',
-    value: LOAI_TRANSACTION.NEW,
-  },
-  {
-    label: 'APPROVED',
-    value: LOAI_TRANSACTION.APPROVED,
-  },
-  {
-    label: 'REJECTED',
-    value: LOAI_TRANSACTION.REJECTED,
-  },
-  {
-    label: 'CANCELLED',
-    value: LOAI_TRANSACTION.CANCELLED,
-  },
-];
-
-export const CustomerTypeOptions = [
-  {
-    label: 'Cá nhân',
-    value: CUSTOMER_TYPE.INDIVIDUAL,
-  },
-  {
-    label: 'Doanh nghiệp',
-    value: CUSTOMER_TYPE.CORPORATE,
-  },
-];
-
-export const HasContractOptions = [
-  {
-    label: 'Đã có hợp đồng',
-    value: HAS_CONTRACT.TRUE,
-  },
-  {
-    label: 'Chưa có hợp đồng',
-    value: HAS_CONTRACT.FALSE,
-  },
-];
-
-export const GenderOptions = [
-  {
-    label: 'Nam',
-    value: GENDER.MALE,
-  },
-  {
-    label: 'Nữ',
-    value: GENDER.FEMALE,
-  },
-];
-
-export const NationalTypeOptions = [
-  {
-    label: 'Chứng minh nhân dân',
-    value: NATIONALTYPE.IDCARD,
-  },
-  {
-    label: 'Hộ chiếu',
-    value: NATIONALTYPE.PASSPORT,
-  },
-];
+    label: 'Twitter',
+    value: SOCIAL.TWITTER
+  }
+]

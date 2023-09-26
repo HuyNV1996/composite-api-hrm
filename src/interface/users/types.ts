@@ -30,6 +30,7 @@ export interface IUserListParams{
     pageSize: string;
     sort: string;
     sortOrder: string;
+    search: string;
 }
 export interface IDecoded {
     id: string;

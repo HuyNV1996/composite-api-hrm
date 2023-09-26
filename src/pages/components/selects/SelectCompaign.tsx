@@ -45,7 +45,7 @@ const SelectCompaign = ({ ...props }) => {
         options={listCamp}
         label="Tên chiến dịch"
         {...props}
-        name="tenChienDich"
+        name="id_campaign"
         type="select"
       />
     </>

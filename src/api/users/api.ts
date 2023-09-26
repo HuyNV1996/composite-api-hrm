@@ -18,6 +18,7 @@ export const apiGeListUsers = async (params: IUserListParams) =>
   data.append('pageSize', params.pageSize);
   data.append('sort', params.sort);
   data.append('sortOrder', sortord);
+  data.append('search', params.search || '');
   const res = await request<IUserListResponse>('post', url, data) as IUserListResponse;
   return {
     results: {

@@ -109,7 +109,7 @@ const HeaderComponent: FC<HeaderProps> = ({ collapsed, toggle }) => {
             <h1>Tool</h1>
           ) : (
             // <img src={Union} alt="" style={{ width: 150 }} />
-            <h1>FireAnt Tool</h1>
+            <h1>Social Tools</h1>
           )}
         </div>
       )}

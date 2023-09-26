@@ -10,52 +10,13 @@ const SearchUser = () => {
     <>
       <Col span={7}>
         <SearchItem
-          label={t({ id: 'code' })}
-          name="filter"
+          label={'Filter'}
+          name="search"
           type="input"
           innerProps={{
             placeholder: t(
               { id: 'placeholder_input' },
-              { msg: t({ id: 'searchCustomer' }) }
-            ),
-          }}
-        />
-      </Col>
-      <Col span={7}>
-        <SearchItem
-          label={t({ id: 'phone' })}
-          name="phoneNumber"
-          type="input"
-          innerProps={{
-            placeholder: t(
-              { id: 'placeholder_input' },
-              { msg: t({ id: 'phone' }) }
-            ),
-          }}
-        />
-      </Col>
-      <Col span={8}>
-        <SearchItem
-          label={t({ id: 'email' })}
-          name="email"
-          type="input"
-          innerProps={{
-            placeholder: t(
-              { id: 'placeholder_input' },
-              { msg: t({ id: 'email' }) }
-            ),
-          }}
-        />
-      </Col>
-      <Col span={8}>
-        <SearchItem
-          label={t({ id: 'nationalId' })}
-          name="nationalId"
-          type="input"
-          innerProps={{
-            placeholder: t(
-              { id: 'placeholder_input' },
-              { msg: t({ id: 'search_nationalId' }) }
+              { msg: 'keyword' }
             ),
           }}
         />

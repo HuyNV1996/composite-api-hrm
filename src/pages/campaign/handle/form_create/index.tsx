@@ -25,6 +25,7 @@ import {
   apiCreateCampaign,
   apiUpdateCampaign,
 } from '@/api/campaigns/api';
+import SelectSocial from '@/pages/components/selects/SelectSocial';
 interface Props {
   onClose?: () => void;
   showDrawer?: () => void;
@@ -63,6 +64,7 @@ const FormCreate: FC<Props> = ({
       operator: data.ruleOperator,
       value: data.ruleValue,
     };
+    console.log(isActive);
     data = idCampaign
       ? {
           ...data,
@@ -120,8 +122,6 @@ const FormCreate: FC<Props> = ({
   };
 
   useEffect(() => {
-    console.log(idCampaign);
-
     _apiCampaignById(idCampaign!);
   }, [idCampaign]);
 
@@ -157,18 +157,7 @@ const FormCreate: FC<Props> = ({
               <Col span={24}>
                 <Row gutter={24}>
                   <Col span={12}>
-                    <MyForm.Item
-                      innerProps={{
-                        placeholder: t(
-                          { id: 'placeholder_input' },
-                          { msg: 'site' }
-                        ),
-                      }}
-                      label={'site'}
-                      required
-                      name="site"
-                      type="input"
-                    />
+                    <SelectSocial/>
                   </Col>
                   <Col span={12}>
                     <MyForm.Item

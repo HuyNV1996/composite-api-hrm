@@ -74,3 +74,11 @@ export interface ICampaignListResponse {
     updatedAt: number
   }
   
+  export interface IAddUser2Campaign{
+    id_campaign: string,
+    id_users: string
+  }
+
+  export interface IFormCampaign{
+    id_campaign: string
+  }

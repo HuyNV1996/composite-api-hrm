@@ -9,6 +9,7 @@ import { useLocale } from '@/locales';
 import TruncateText from '../components/truncate-text';
 import { apiGeListComments } from '@/api/comments/api';
 import { convertTimestampToFormattedDate } from '@/pages/rooms/list/utils';
+import SearchUser from '../components/search';
 const ListUsers: FC = () => {
   const { t } = useLocale();
   const [foceUpdate, setFoceUpdate] = useState(false);
@@ -65,7 +66,19 @@ const ListUsers: FC = () => {
       key: 'sentiment',
       width: 120,
       align: 'center',
-      sorter: true
+      sorter: true,
+      render: (item) => {
+        if(item){
+          return (
+            <img src={FeaturedIcon} alt='image'/>
+          )
+        }
+        else{
+          return(
+            <img src={NotFeaturedIcon} alt='image'/>
+          )
+        }
+      }  
     },
     // {
     //   title: 'Nội dung',
@@ -204,7 +217,7 @@ const ListUsers: FC = () => {
       <MyPage
         pageApi={apiGeListComments}
         title={'Danh sách bình luận'}
-        // searchRender={<SearchUser />}
+        searchRender={<SearchUser />}
         forceUpdate={foceUpdate}
         // setDataExport={setDataExport}
         tableOptions={tableColums}

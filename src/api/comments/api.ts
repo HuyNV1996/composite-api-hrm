@@ -19,6 +19,7 @@ export const apiGeListComments = async (params: IGetListCommentParams) =>
   data.append('pageSize', params.pageSize);
   data.append('sort', params.sort);
   data.append('sortOrder', sortord);
+  data.append('search', params.search || '');
   const res = await request<IGetListCommentResponse>('post', url, data) as IGetListCommentResponse;
   return {
     results: {

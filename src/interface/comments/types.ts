@@ -3,6 +3,7 @@ export interface IGetListCommentParams{
     pageNumber: string;
     sort: string;
     sortOrder: string;
+    search: string;
 }
 
 export interface IGetListCommentResponse {

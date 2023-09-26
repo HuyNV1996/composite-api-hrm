@@ -36,17 +36,22 @@ import { IFormMessage } from '@/interface/message/api';
     const onFinish = async () => {
       await form?.validateFields();
       const data = await form?.getFieldsValue();
-      setLoading(true)
-      const res = await apiSendMessage({
-        user_id: idUser!,
-        message: data.message
-      })
-      if(res.status === 'OK'){
-        message.info('Gửi tin nhắn thành công!');
-        setLoading(false);
-        onClose && onClose();
+      try{
+        setLoading(true)
+        const res = await apiSendMessage({
+          user_id: idUser!,
+          message: data.message
+        })
+        if(res.status === 'OK'){
+          message.info('Gửi tin nhắn thành công!');
+          setLoading(false);
+          onClose && onClose();
+        }
+        else{
+          setLoading(false)
+        }
       }
-      else{
+      catch{
         setLoading(false)
       }
     };

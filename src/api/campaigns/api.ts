@@ -1,4 +1,5 @@
 import {
+  IAddUser2Campaign,
   ICampaignCreateResponse,
   ICampaignListParams,
   ICampaignListResponse,
@@ -16,8 +17,6 @@ export const apiGeListCampaign = async (params: ICampaignListParams) => {
     'get',
     url
   )) as ICampaignListResponse;
-  console.log(res);
-
   return {
     results: {
       data: mapView(res.data),
@@ -47,5 +46,9 @@ export const apiUpdateCampaign = async (params: ICreateCampaignParams) => {
 };
 
 export const apiCampaignById = async (id: String) => {
-  return request<ICampaignCreateResponse>('get', `/campaign/detail/${id}`);
+  return await request<ICampaignCreateResponse>('get', `/campaign/detail/${id}`);
+};
+
+export const apiUserToCampaign = async (params: IAddUser2Campaign) => {
+  return await request<ICampaignCreateResponse>('post', `/campaign/add-user-to-campaign?id_campaign=${params.id_campaign}&id_users=${params.id_users}`);
 };

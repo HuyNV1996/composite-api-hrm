@@ -28,7 +28,8 @@ const ListUsers: FC = () => {
   const [open, setOpen] = useState(false);
   const [openAddComp, setOpenAddComp] = useState(false);
   const [dataExport, setDataExport] = useState([]);
-  const [form] = Form.useForm();
+  const [formSend] = Form.useForm();
+  const [formAdd] = Form.useForm();
   const [idUser, setIdUsers] = useState<any>(null);
   const showDrawer = () => {
     setOpen(true);
@@ -47,13 +48,13 @@ const ListUsers: FC = () => {
   };
 
   const handleSend = (id: string) => {
-    console.log(id);
-
+    formSend.resetFields();
     setIdUsers(id);
     showDrawer();
   };
   const handleAdd = (id: string) => {
-    console.log(id);
+    formAdd.resetFields();
+    setIdUsers(id);
     setIdUsers(id);
     showDrawerAddComp();
   };
@@ -207,13 +208,13 @@ const ListUsers: FC = () => {
       <MyPage
         pageApi={apiGeListUsers}
         title={'Danh sách người dùng'}
-        // searchRender={<SearchUser />}
+        searchRender={<SearchUser />}
         forceUpdate={foceUpdate}
         setDataExport={setDataExport}
         tableOptions={tableColums}
       />
       <FormSend
-        form={form}
+        form={formSend}
         setFoceUpdate={setFoceUpdate}
         foceUpdate={foceUpdate}
         idUser={idUser}
@@ -222,7 +223,7 @@ const ListUsers: FC = () => {
         onClose={onClose}
       />
       <FormAdd
-        form={form}
+        form={formAdd}
         setFoceUpdate={setFoceUpdate}
         foceUpdate={foceUpdate}
         idUser={idUser}

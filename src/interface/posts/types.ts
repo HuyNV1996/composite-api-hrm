@@ -3,6 +3,7 @@ export interface IGetListPostParams{
     pageNumber: string;
     sort: string;
     sortOrder: string;
+    search: string;
 }
 
 export interface IGetListPostResponse {

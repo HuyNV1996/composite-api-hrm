@@ -58,7 +58,7 @@ axiosInstance.interceptors.response.use(
       })
     );
     // if needs to navigate to login page when request exception
-    history.replace('/login');
+    // history.replace('/login');
     let errorMessage = '';
 
     if (error?.message?.includes('Network Error')) {

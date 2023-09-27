@@ -67,37 +67,6 @@ const ListUsers: FC = () => {
     setIdCampaign(id);
     showDrawer();
   };
-  const onFinish = async () => {
-    await form?.validateFields();
-    var data = await form?.getFieldsValue();
-    const rule: IRule = {
-      name: data.ruleName,
-      operator: data.ruleOperator,
-      value: data.ruleValue,
-    };
-    console.log(isActive);
-    data = idCampaign
-      ? {
-          ...data,
-          id: idCampaign,
-          active: isActive,
-          rule: rule,
-        }
-      : {
-          ...data,
-          active: isActive,
-          rule: rule,
-        };
-    const res = idCampaign
-      ? await apiUpdateCampaign(data)
-      : await apiCreateCampaign(data);
-    if (res) {
-      message.info('Tạo chiến thành công!');
-      setFoceUpdate && setFoceUpdate(!foceUpdate);
-      onClose && onClose();
-    } else {
-    }
-  };
 
   const handleSwitch = async (id: string) => {
     if (!id) {
@@ -105,15 +74,31 @@ const ListUsers: FC = () => {
     }
     try {
       const res = (await apiCampaignById(id)) as any;
-      console.log(res.data.active);
-
-      if (res) {
-        setIsActive(res.data.active);
+      if(res){
+        const data:any ={
+              id: id,    
+              site: res.data.site,
+              name: res.data.name,
+              description: res.data.description,
+              active: !res.data.active,
+              rule:{
+                name: res.data.rule.name,
+                operator: res.data.rule.operator,
+                value: res.data.rule.value
+              },
+            }
+        const resUp = await apiUpdateCampaign(data);
+        if (resUp) {
+          setIsActive(!isActive)
+          message.info('Active thành công!');
+          setFoceUpdate && setFoceUpdate(!foceUpdate);
+        }
       }
     } catch (error) {
       console.log(error);
     }
-    onFinish();
+    
+    
   };
 
   const tableColums: MyPageTableOptions<any> = [
@@ -152,21 +137,7 @@ const ListUsers: FC = () => {
       width: 250,
       align: 'left',
     },
-    {
-      title: 'Active',
-      dataIndex: 'active',
-      key: 'active',
-      width: 50,
-      align: 'center',
-      render: (item, record) => {
-        return (
-          <Switch
-            checked={item}
-            onChange={() => handleSwitch(String(record.id))}
-          />
-        );
-      },
-    },
+    
     {
       title: 'Tổng users',
       dataIndex: 'totalUser',
@@ -200,6 +171,22 @@ const ListUsers: FC = () => {
       render: (item, record) => (
         <span>{item && convertTimestampToFormattedDate(Number(item))}</span>
       ),
+    },
+    {
+      title: 'Active',
+      dataIndex: 'active',
+      key: 'active',
+      width: 50,
+      fixed: 'right',
+      align: 'center',
+      render: (item, record) => {
+        return (
+          <Switch
+            checked={item}
+            onChange={() => handleSwitch(String(record.id))}
+          />
+        );
+      },
     },
     {
       title: 'Hành động',

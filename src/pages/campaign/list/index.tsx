@@ -1,7 +1,16 @@
 //@ts-ignore
 import XlsExport from 'xlsexport';
-import { Button, Divider, Form, Popconfirm, Space, Tag, message } from 'antd';
-import { FC, useState } from 'react';
+import {
+  Button,
+  Divider,
+  Form,
+  Popconfirm,
+  Space,
+  Switch,
+  Tag,
+  message,
+} from 'antd';
+import { FC, useEffect, useState } from 'react';
 import FeaturedIcon from '@/assets/icons/correct.png';
 import NotFeaturedIcon from '@/assets/icons/remove.png';
 import MyPage, { MyPageTableOptions } from '@/components/business/page';
@@ -18,8 +27,15 @@ import { apiGeListUsers } from '@/api/users/api';
 import TruncateText from '../components/truncate-text';
 import { apiGeListRooms } from '@/api/rooms/api';
 import { convertTimestampToFormattedDate } from './utils';
-import { apiDeleteCampaign, apiGeListCampaign } from '@/api/campaigns/api';
+import {
+  apiCampaignById,
+  apiCreateCampaign,
+  apiDeleteCampaign,
+  apiGeListCampaign,
+  apiUpdateCampaign,
+} from '@/api/campaigns/api';
 import FormCreate from '../handle/form_create';
+import { IRule } from '../handle/form_create/types';
 const ListUsers: FC = () => {
   const { t } = useLocale();
   const [foceUpdate, setFoceUpdate] = useState(false);
@@ -27,6 +43,7 @@ const ListUsers: FC = () => {
   const [idCampaign, setIdCampaign] = useState<any>(null);
   const [dataExport, setDataExport] = useState([]);
   const [form] = Form.useForm();
+  const [isActive, setIsActive] = useState(false);
 
   const showDrawer = () => {
     setOpen(true);
@@ -50,6 +67,55 @@ const ListUsers: FC = () => {
     setIdCampaign(id);
     showDrawer();
   };
+  const onFinish = async () => {
+    await form?.validateFields();
+    var data = await form?.getFieldsValue();
+    const rule: IRule = {
+      name: data.ruleName,
+      operator: data.ruleOperator,
+      value: data.ruleValue,
+    };
+    console.log(isActive);
+    data = idCampaign
+      ? {
+          ...data,
+          id: idCampaign,
+          active: isActive,
+          rule: rule,
+        }
+      : {
+          ...data,
+          active: isActive,
+          rule: rule,
+        };
+    const res = idCampaign
+      ? await apiUpdateCampaign(data)
+      : await apiCreateCampaign(data);
+    if (res) {
+      message.info('Tạo chiến thành công!');
+      setFoceUpdate && setFoceUpdate(!foceUpdate);
+      onClose && onClose();
+    } else {
+    }
+  };
+
+  const handleSwitch = async (id: string) => {
+    if (!id) {
+      return;
+    }
+    try {
+      const res = (await apiCampaignById(id)) as any;
+      console.log(res.data.active);
+
+      if (res) {
+        setIsActive(res.data.active);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    onFinish();
+  };
+
   const tableColums: MyPageTableOptions<any> = [
     {
       title: '#',
@@ -92,12 +158,13 @@ const ListUsers: FC = () => {
       key: 'active',
       width: 50,
       align: 'center',
-      render: item => {
-        if (item) {
-          return <img src={FeaturedIcon} alt="image" />;
-        } else {
-          return <img src={NotFeaturedIcon} alt="image" />;
-        }
+      render: (item, record) => {
+        return (
+          <Switch
+            checked={item}
+            onChange={() => handleSwitch(String(record.id))}
+          />
+        );
       },
     },
     {

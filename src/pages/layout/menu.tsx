@@ -59,8 +59,8 @@ const MenuComponent: FC<MenuProps> = props => {
       mode="inline"
       theme="light"
       selectedKeys={[selectedKey]}
-      openKeys={openKey ? [openKey] : []}
-      onOpenChange={onOpenChange}
+      // openKeys={openKey ? [openKey] : []}
+      // onOpenChange={onOpenChange}
       onSelect={k => onMenuClick(k.key)}
       className="layout-page-sider-menu text-2">
       {menuList.map(menu =>

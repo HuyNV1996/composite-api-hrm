@@ -13,6 +13,7 @@ import Register from '@/pages/register';
 import UserSeeding from '@/pages/users_seeding/list'
 import WrapperRouteComponent from './config';
 import CampaignPage from '@/pages/campaign/list'
+import CampaignCreate from '@/pages/campaign/handle/create'
 
 const NotFound = lazy(
   () => import(/* webpackChunkName: "404'"*/ '@/pages/404')
@@ -64,7 +65,7 @@ const BusinessWithTabsPage = lazy(
   () => import(/* webpackChunkName: "with-tabs" */ '@/pages/business/with-tabs')
 );
 
-const routeList: RouteObject[] = [
+export const routeList: RouteObject[] = [
   {
     path: '/login',
     element: (
@@ -144,6 +145,24 @@ const routeList: RouteObject[] = [
         element: (
           <WrapperRouteComponent
             element={<CampaignPage />}
+            titleId="title.campaign"
+          />
+        ),
+      },
+      {
+        path: 'campaign/create',
+        element: (
+          <WrapperRouteComponent
+            element={<CampaignCreate />}
+            titleId="title.campaign"
+          />
+        ),
+      },
+      {
+        path: '/campaign/update/:id',
+        element: (
+          <WrapperRouteComponent
+            element={<CampaignCreate />}
             titleId="title.campaign"
           />
         ),

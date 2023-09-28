@@ -36,6 +36,7 @@ import {
 } from '@/api/campaigns/api';
 import FormCreate from '../handle/form_create';
 import { IRule } from '../handle/form_create/types';
+import { useNavigate } from 'react-router-dom';
 const ListUsers: FC = () => {
   const { t } = useLocale();
   const [foceUpdate, setFoceUpdate] = useState(false);
@@ -44,7 +45,7 @@ const ListUsers: FC = () => {
   const [dataExport, setDataExport] = useState([]);
   const [form] = Form.useForm();
   const [isActive, setIsActive] = useState(false);
-
+  const navigate = useNavigate();
   const showDrawer = () => {
     setOpen(true);
   };
@@ -64,8 +65,9 @@ const ListUsers: FC = () => {
   };
 
   const handleUpdate = (id: string) => {
-    setIdCampaign(id);
-    showDrawer();
+    // setIdCampaign(id);
+    // showDrawer();
+    navigate(`/campaign/update/${id}`, { replace: true });
   };
 
   const handleSwitch = async (id: string) => {
@@ -214,8 +216,9 @@ const ListUsers: FC = () => {
     },
   ];
   const handleCreate = async () => {
-    await form.resetFields();
-    showDrawer();
+    // await form.resetFields();
+    // showDrawer();
+    navigate('/campaign/create', { replace: true });
   };
   return (
     <>

@@ -10,10 +10,11 @@ import PostsListPage from '@/pages/posts/list';
 import RoomsListPage from '@/pages/rooms/list';
 import CommentsListPage from '@/pages/comments/list';
 import Register from '@/pages/register';
-import UserSeeding from '@/pages/users_seeding/list'
+import UserSeeding from '@/pages/users_seeding/list';
 import WrapperRouteComponent from './config';
-import CampaignPage from '@/pages/campaign/list'
-import CampaignCreate from '@/pages/campaign/handle/create'
+import CampaignPage from '@/pages/campaign/list';
+import CampaignCreate from '@/pages/campaign/handle/create';
+import FormView from '@/pages/posts/handle/form_view';
 
 const NotFound = lazy(
   () => import(/* webpackChunkName: "404'"*/ '@/pages/404')
@@ -165,6 +166,12 @@ export const routeList: RouteObject[] = [
             element={<CampaignCreate />}
             titleId="title.campaign"
           />
+        ),
+      },
+      {
+        path: '/post/detail/:id',
+        element: (
+          <WrapperRouteComponent element={<FormView />} titleId="title.posts" />
         ),
       },
       {

@@ -2,13 +2,14 @@
 import XlsExport from 'xlsexport';
 import { Button, Divider, Form, Popconfirm, Space, Tag } from 'antd';
 import { FC, useState } from 'react';
-import FeaturedIcon from '@/assets/icons/correct.png'
-import NotFeaturedIcon from '@/assets/icons/remove.png'
+import FeaturedIcon from '@/assets/icons/correct.png';
+import NotFeaturedIcon from '@/assets/icons/remove.png';
 import MyPage, { MyPageTableOptions } from '@/components/business/page';
 import { useLocale } from '@/locales';
 import {
   DeleteOutlined,
   DownloadOutlined,
+  EyeOutlined,
   FormOutlined,
 } from '@ant-design/icons';
 
@@ -18,7 +19,8 @@ import { apiGeListUsers } from '@/api/users/api';
 import TruncateText from '../components/truncate-text';
 import { apiGeListPosts } from '@/api/posts/api';
 import { convertTimestampToFormattedDate } from '@/pages/rooms/list/utils';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import FormView from '../handle/form';
 const ListUsers: FC = () => {
   const { t } = useLocale();
   const [foceUpdate, setFoceUpdate] = useState(false);
@@ -26,6 +28,9 @@ const ListUsers: FC = () => {
   const [idCustomer, setIdCustomer] = useState<any>(null);
   const [dataExport, setDataExport] = useState([]);
   const [form] = Form.useForm();
+  const [formView] = Form.useForm();
+  const [postID, setPostID] = useState<any>(null);
+  const navigate = useNavigate();
 
   const showDrawer = () => {
     setOpen(true);
@@ -34,6 +39,12 @@ const ListUsers: FC = () => {
   const onClose = () => {
     setOpen(false);
     setTimeout(() => setIdCustomer(null), 1000);
+  };
+
+  const handleView = (postID: string) => {
+    formView.resetFields();
+    setPostID(postID);
+    showDrawer();
   };
 
   const tableColums: MyPageTableOptions<any> = [
@@ -64,9 +75,8 @@ const ListUsers: FC = () => {
       key: 'description',
       width: 220,
       align: 'left',
-      render: (item, record) => (
-        item && <TruncateText maxLength={180} text={item} />
-      )
+      render: (item, record) =>
+        item && <TruncateText maxLength={180} text={item} />,
     },
     // {
     //   title: 'Kiểu',
@@ -82,18 +92,13 @@ const ListUsers: FC = () => {
       width: 120,
       align: 'center',
       sorter: true,
-      render: (item) => {
-        if(item){
-          return (
-            <img src={FeaturedIcon} alt='image'/>
-          )
+      render: item => {
+        if (item) {
+          return <img src={FeaturedIcon} alt="image" />;
+        } else {
+          return <img src={NotFeaturedIcon} alt="image" />;
         }
-        else{
-          return(
-            <img src={NotFeaturedIcon} alt='image'/>
-          )
-        }
-      }  
+      },
     },
     // {
     //   title: 'Nội dung',
@@ -111,9 +116,8 @@ const ListUsers: FC = () => {
       key: 'originalContent',
       width: 220,
       align: 'left',
-      render: (item, record) => (
-        item && <TruncateText maxLength={180} text={item} />
-      )
+      render: (item, record) =>
+        item && <TruncateText maxLength={180} text={item} />,
     },
     {
       title: 'Ngôn ngữ',
@@ -156,7 +160,7 @@ const ListUsers: FC = () => {
       key: 'totalLikes',
       width: 120,
       align: 'center',
-      sorter: true
+      sorter: true,
     },
     {
       title: 'Phản hồi',
@@ -164,7 +168,7 @@ const ListUsers: FC = () => {
       key: 'totalReplies',
       width: 120,
       align: 'center',
-      sorter: true
+      sorter: true,
     },
     {
       title: 'Chia sẻ',
@@ -172,7 +176,7 @@ const ListUsers: FC = () => {
       key: 'totalShares',
       width: 120,
       align: 'center',
-      sorter: true
+      sorter: true,
     },
     {
       title: 'Top',
@@ -180,18 +184,13 @@ const ListUsers: FC = () => {
       key: 'isTop',
       width: 120,
       align: 'center',
-      render: (item) => {
-        if(item){
-          return (
-            <img src={FeaturedIcon} alt='image'/>
-          )
+      render: item => {
+        if (item) {
+          return <img src={FeaturedIcon} alt="image" />;
+        } else {
+          return <img src={NotFeaturedIcon} alt="image" />;
         }
-        else{
-          return(
-            <img src={NotFeaturedIcon} alt='image'/>
-          )
-        }
-      }  
+      },
     },
     {
       title: 'Chuyên gia',
@@ -199,18 +198,13 @@ const ListUsers: FC = () => {
       key: 'isExpertIdea',
       width: 120,
       align: 'center',
-      render: (item) => {
-        if(item){
-          return (
-            <img src={FeaturedIcon} alt='image'/>
-          )
+      render: item => {
+        if (item) {
+          return <img src={FeaturedIcon} alt="image" />;
+        } else {
+          return <img src={NotFeaturedIcon} alt="image" />;
         }
-        else{
-          return(
-            <img src={NotFeaturedIcon} alt='image'/>
-          )
-        }
-      }  
+      },
     },
     {
       title: 'Ngày tạo',
@@ -218,8 +212,24 @@ const ListUsers: FC = () => {
       key: 'date',
       width: 120,
       align: 'left',
-      render: (item, record) =>
-        (<span>{item && convertTimestampToFormattedDate(Number(item))}</span>)
+      render: (item, record) => (
+        <span>{item && convertTimestampToFormattedDate(Number(item))}</span>
+      ),
+    },
+    {
+      title: 'Hành động',
+      key: 'action',
+      fixed: 'right',
+      width: 120,
+      align: 'center',
+      render: (_, record) => (
+        <Space size="middle">
+          <EyeOutlined
+            style={{ fontSize: '14px', color: '#0960bd' }}
+            onClick={() => handleView(String(record.postID))}
+          />
+        </Space>
+      ),
     },
   ];
 
@@ -231,18 +241,18 @@ const ListUsers: FC = () => {
         searchRender={<SearchUser />}
         forceUpdate={foceUpdate}
         // setDataExport={setDataExport}
-        
+
         tableOptions={tableColums}
       />
-      {/* <FormCustomer
-        form={form}
+      <FormView
+        form={formView}
         setFoceUpdate={setFoceUpdate}
         foceUpdate={foceUpdate}
-        idCustomer={idCustomer}
+        postID={postID}
         open={open}
         showDrawer={showDrawer}
         onClose={onClose}
-      /> */}
+      />
     </>
   );
 };

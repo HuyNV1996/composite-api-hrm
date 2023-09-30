@@ -3,6 +3,28 @@ import { mock, intercepter } from '../config';
 
 const mockMenuList: MenuList = [
   {
+    code: 'common',
+    label: {
+      vi_VN: 'Chung',
+      en_US: 'Chung',
+      zh_CN: 'Chung',
+    },
+    icon: 'system',
+    path: '',
+    children: [
+      {
+        code: 'campaign',
+        label: {
+          zh_CN: 'Chiến dịch tin nhắn',
+          en_US: 'Chiến dịch tin nhắn',
+          vi_VN: 'Chiến dịch tin nhắn',
+        },
+        icon: 'system',
+        path: '/campaign',
+      },
+    ],
+  },
+  {
     code: 'FireAnt',
     label: {
       vi_VN: 'FireAnt.vn',
@@ -10,7 +32,7 @@ const mockMenuList: MenuList = [
       zh_CN: 'FireAnt.vn',
     },
     icon: 'fireant',
-    path: '/applicationlist1',
+    path: '',
     children: [
       {
         code: 'user',
@@ -20,7 +42,7 @@ const mockMenuList: MenuList = [
           vi_VN: 'Danh sách users',
         },
         icon: 'system',
-        path: '/users',
+        path: '/users_fa',
       },
       {
         code: 'user-seeding',
@@ -40,7 +62,7 @@ const mockMenuList: MenuList = [
           vi_VN: 'Danh sách post',
         },
         icon: 'system',
-        path: '/posts',
+        path: '/posts_fa',
       },
       {
         code: 'comments',
@@ -50,27 +72,59 @@ const mockMenuList: MenuList = [
           vi_VN: 'Danh sách comments',
         },
         icon: 'system',
-        path: '/comments',
+        path: '/comments_fa',
       },
       {
-        code: 'rooms',
+        code: 'rooms_fa',
         label: {
           zh_CN: 'Danh sách nhóm',
           en_US: 'Danh sách nhóm',
           vi_VN: 'Danh sách nhóm',
         },
         icon: 'system',
-        path: '/rooms',
+        path: '/rooms_fa',
       },
+    ],
+  },
+  {
+    code: 'Facebook',
+    label: {
+      vi_VN: 'Facebook',
+      en_US: 'Facebook',
+      zh_CN: 'Facebook',
+    },
+    icon: 'facebook',
+    path: '',
+    children: [
       {
-        code: 'campaign',
+        code: 'user_fb',
         label: {
-          zh_CN: 'Chiến dịch tin nhắn',
-          en_US: 'Chiến dịch tin nhắn',
-          vi_VN: 'Chiến dịch tin nhắn',
+          zh_CN: 'Danh sách users',
+          en_US: 'Danh sách users',
+          vi_VN: 'Danh sách users',
         },
         icon: 'system',
-        path: '/campaign',
+        path: '/users_fb',
+      },
+      {
+        code: 'posts_fb',
+        label: {
+          zh_CN: 'Danh sách post',
+          en_US: 'Danh sách post',
+          vi_VN: 'Danh sách post',
+        },
+        icon: 'system',
+        path: '/posts_fb',
+      },
+      {
+        code: 'comments_fb',
+        label: {
+          zh_CN: 'Danh sách comments',
+          en_US: 'Danh sách comments',
+          vi_VN: 'Danh sách comments',
+        },
+        icon: 'system',
+        path: '/comments_fb',
       },
     ],
   },

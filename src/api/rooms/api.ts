@@ -1,4 +1,4 @@
-import { ROOM, USER } from "../constApi";
+import { ROOM } from "../constApi";
 import { request } from "../request";
 import { mapView } from "./utils";
 import { IRoomsListParams, RoomsListResponse } from "@/interface/rooms/types";

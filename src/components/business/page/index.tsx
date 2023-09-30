@@ -81,15 +81,15 @@ const BasePage = <S extends SearchApi>(
     labelWidth,
   } = props;
   const [pageData, setPageData] = useStates<PageData<ParseDataType<S>>>({
-    pageSize: 10,
+    pageSize: 20,
     pageNum: 1,
     total: 0,
     data: [],
-    sort:'totalLikes',
+    sort:'',
     sortOrder:'desc'
   });
   const [loading, setLoading] = useState(false);
-
+  const [paramsData, setparamsData] = useState<Record<string, any>>({});
   const [asideCheckedKey, setAsideCheckedKey] = useState(asideValue);
 
   useEffect(() => {
@@ -97,11 +97,11 @@ const BasePage = <S extends SearchApi>(
       setAsideCheckedKey(asideData[0].key);
     }
   }, [asideData]);
-
-  const getPageData = useCallback(
+ const getPageData = useCallback(
     async (params: Record<string, any> = {}) => {
       if (asideKey && !asideCheckedKey) return;
       if (pageApi) {
+        params = { ...paramsData }
         setLoading(true);
         const obj = {
           ...params,
@@ -132,6 +132,7 @@ const BasePage = <S extends SearchApi>(
       pageData.sort,
       asideKey,
       asideCheckedKey,
+      paramsData
     ]
   );
 
@@ -140,7 +141,8 @@ const BasePage = <S extends SearchApi>(
   }, [getPageData, forceUpdate]);
 
   const onSearch = (searchParams: Record<string, any>) => {
-    getPageData(searchParams);
+    // getPageData(searchParams);
+    setparamsData(searchParams)
   };
 
   const onSelectAsideTree: MyAsideProps['onSelect'] = ([key]) => {

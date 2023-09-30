@@ -5,15 +5,21 @@ import { Navigate, RouteObject } from 'react-router';
 import Dashboard from '@/pages/dashboard';
 import LoginPage from '@/pages/login';
 import LayoutPage from '@/pages/layout';
-import UserListPage from '@/pages/users/list';
-import PostsListPage from '@/pages/posts/list';
-import RoomsListPage from '@/pages/rooms/list';
-import CommentsListPage from '@/pages/comments/list';
+
+import UserListPage_FA from '@/pages/fireant/users/list';
+import PostsListPage_FA from '@/pages/fireant/posts/list';
+import RoomsListPage_FA from '@/pages/fireant/rooms/list';
+import CommentsListPage_FA from '@/pages/fireant/comments/list';
+
+import UserListPage_FB from '@/pages/facebook/users/list';
+import PostsListPage_FB from '@/pages/facebook/posts/list';
+import CommentsListPage_FB from '@/pages/facebook/comments/list';
+
 import Register from '@/pages/register';
-import UserSeeding from '@/pages/users_seeding/list'
+import UserSeeding from '@/pages/fireant/users_seeding/list'
 import WrapperRouteComponent from './config';
-import CampaignPage from '@/pages/campaign/list'
-import CampaignCreate from '@/pages/campaign/handle/create'
+import CampaignPage_CM from '@/pages/common/campaign/list'
+import CampaignCreate_CM from '@/pages/common/campaign/handle/create'
 
 const NotFound = lazy(
   () => import(/* webpackChunkName: "404'"*/ '@/pages/404')
@@ -84,7 +90,7 @@ export const routeList: RouteObject[] = [
     children: [
       {
         path: '',
-        element: <Navigate to="users" />,
+        element: <Navigate to="users_fa" />,
       },
       {
         path: 'dashboard',
@@ -96,10 +102,19 @@ export const routeList: RouteObject[] = [
         ),
       },
       {
-        path: 'users',
+        path: 'users_fa',
         element: (
           <WrapperRouteComponent
-            element={<UserListPage />}
+            element={<UserListPage_FA />}
+            titleId="title.users"
+          />
+        ),
+      },
+      {
+        path: 'users_fb',
+        element: (
+          <WrapperRouteComponent
+            element={<UserListPage_FB />}
             titleId="title.users"
           />
         ),
@@ -114,28 +129,46 @@ export const routeList: RouteObject[] = [
         ),
       },
       {
-        path: 'posts',
+        path: 'posts_fa',
         element: (
           <WrapperRouteComponent
-            element={<PostsListPage />}
+            element={<PostsListPage_FA />}
             titleId="title.posts"
           />
         ),
       },
       {
-        path: 'rooms',
+        path: 'posts_fb',
         element: (
           <WrapperRouteComponent
-            element={<RoomsListPage />}
+            element={<PostsListPage_FB />}
+            titleId="title.posts"
+          />
+        ),
+      },
+      {
+        path: 'rooms_fa',
+        element: (
+          <WrapperRouteComponent
+            element={<RoomsListPage_FA />}
             titleId="title.rooms"
           />
         ),
       },
       {
-        path: 'comments',
+        path: 'comments_fa',
         element: (
           <WrapperRouteComponent
-            element={<CommentsListPage />}
+            element={<CommentsListPage_FA />}
+            titleId="title.comments"
+          />
+        ),
+      },
+      {
+        path: 'comments_fb',
+        element: (
+          <WrapperRouteComponent
+            element={<CommentsListPage_FB />}
             titleId="title.comments"
           />
         ),
@@ -144,7 +177,7 @@ export const routeList: RouteObject[] = [
         path: 'campaign',
         element: (
           <WrapperRouteComponent
-            element={<CampaignPage />}
+            element={<CampaignPage_CM />}
             titleId="title.campaign"
           />
         ),
@@ -153,7 +186,7 @@ export const routeList: RouteObject[] = [
         path: 'campaign/create',
         element: (
           <WrapperRouteComponent
-            element={<CampaignCreate />}
+            element={<CampaignCreate_CM />}
             titleId="title.campaign"
           />
         ),
@@ -162,7 +195,7 @@ export const routeList: RouteObject[] = [
         path: '/campaign/update/:id',
         element: (
           <WrapperRouteComponent
-            element={<CampaignCreate />}
+            element={<CampaignCreate_CM />}
             titleId="title.campaign"
           />
         ),

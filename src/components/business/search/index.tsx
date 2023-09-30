@@ -4,7 +4,7 @@ import { css } from '@emotion/react';
 
 import { Col, Row } from 'antd';
 import { useLocale } from '@/locales';
-
+import { isObjectDefined } from '@/utils/common';
 interface SearchProps<T> extends MyFormProps<T> {
   onSearch: (values: T) => void;
   loading: boolean;
@@ -18,19 +18,33 @@ const BaseSearch = <T extends object>(props: SearchProps<T>) => {
 
   const onSubmit = async () => {
     const values = await form.validateFields();
-
+    //console.log(values);
     if (values) {
       onSearch(values);
     }
   };
-
+  
+  const handleFieldChange = async () => {
+    const values = await form.validateFields();
+    if (!isObjectDefined(values) || values === null ) {
+      await onSubmit();
+    }
+  };
+  const handleKeyEnter = (e: React.KeyboardEvent<HTMLFormElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      onSubmit();
+    }
+  };
   return (
     <div css={styles}>
       <MyForm
         {...rest}
         form={form}
         name="advanced_search"
-        className="ant-advanced-search-form">
+        className="ant-advanced-search-form"
+        onValuesChange={handleFieldChange}
+        onKeyDown={handleKeyEnter}>
         <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>{children}</Row>
         {/* {children} */}
         <Row>

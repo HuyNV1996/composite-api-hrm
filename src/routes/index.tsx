@@ -15,8 +15,12 @@ import UserListPage_FB from '@/pages/facebook/users/list';
 import PostsListPage_FB from '@/pages/facebook/posts/list';
 import CommentsListPage_FB from '@/pages/facebook/comments/list';
 
+import UserListPage_TW from '@/pages/twitter/users/list';
+import PostsListPage_TW from '@/pages/twitter/posts/list';
+import CommentsListPage_TW from '@/pages/twitter/comments/list';
+
 import Register from '@/pages/register';
-import UserSeeding from '@/pages/fireant/users_seeding/list'
+import UserSeeding from '@/pages/common/users_seeding/list'
 import WrapperRouteComponent from './config';
 import CampaignPage_CM from '@/pages/common/campaign/list'
 import CampaignCreate_CM from '@/pages/common/campaign/handle/create'
@@ -120,6 +124,15 @@ export const routeList: RouteObject[] = [
         ),
       },
       {
+        path: 'users_tw',
+        element: (
+          <WrapperRouteComponent
+            element={<UserListPage_TW />}
+            titleId="title.users"
+          />
+        ),
+      },
+      {
         path: 'users-seeding',
         element: (
           <WrapperRouteComponent
@@ -147,6 +160,15 @@ export const routeList: RouteObject[] = [
         ),
       },
       {
+        path: 'posts_tw',
+        element: (
+          <WrapperRouteComponent
+            element={<PostsListPage_TW />}
+            titleId="title.posts"
+          />
+        ),
+      },
+      {
         path: 'rooms_fa',
         element: (
           <WrapperRouteComponent
@@ -169,6 +191,15 @@ export const routeList: RouteObject[] = [
         element: (
           <WrapperRouteComponent
             element={<CommentsListPage_FB />}
+            titleId="title.comments"
+          />
+        ),
+      },
+      {
+        path: 'comments_tw',
+        element: (
+          <WrapperRouteComponent
+            element={<CommentsListPage_TW />}
             titleId="title.comments"
           />
         ),

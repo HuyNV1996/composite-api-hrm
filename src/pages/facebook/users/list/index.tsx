@@ -56,14 +56,14 @@ const ListUsers: FC = () => {
       title: 'STT',
       dataIndex: 'no',
       key: 'no',
-      width: 50,
+      width: 10,
       align: 'center',
     },
     {
       title: 'User Id',
       dataIndex: 'userId',
       key: 'userId',
-      width: 100,
+      width: 40,
       align: 'left',
     },
     {

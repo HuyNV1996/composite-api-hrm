@@ -15,4 +15,5 @@ export interface IFormCreateUser {
     followers: number
     following: number
     userLucky: boolean
+    site: string
   }

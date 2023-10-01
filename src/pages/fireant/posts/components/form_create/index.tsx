@@ -1,31 +1,19 @@
 import {
-  Button,
   Col,
   FormInstance,
   Row,
   Spin,
   Modal,
   message,
-  Form,
-  Checkbox,
 } from 'antd';
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
-import SelectRuleOperator from '@/pages/components/selects/SelectRuleOperator';
-import SelectRuleName from '@/pages/components/selects/SelectRuleName';
 import MyForm from '@/components/core/form';
 import { useLocale } from '@/locales';
-import { apiSendMessage } from '@/api/messages/api';
-import { IFormMessage } from '@/interface/message/api';
 import { IFormCreateCampaign, IRule } from './types';
-import MyCheckbox from '@/components/basic/input-checkbox';
-import moment, { Moment } from 'moment';
-import { apiCreateSeedingUser_FA } from '@/api/users/api';
 import {
-  apiCampaignById,
   apiCreateCampaign,
   apiUpdateCampaign,
 } from '@/api/campaigns/api';
-import SelectSocial from '@/pages/components/selects/SelectSocial';
 import { apiGetPostById_FA } from '@/api/posts/api';
 interface Props {
   onClose?: () => void;

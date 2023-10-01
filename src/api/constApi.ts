@@ -38,3 +38,18 @@ export const COMMENT_FB = {
   GETLIST: `${DOMAIN_COMMENT}/fb`,
   DETAIL:`${DOMAIN_COMMENT}/fb/detail`,
 };
+
+//Twitter
+export const USER_TW = {
+  GETLIST: `${DOMAIN_USER}/tw`,
+};
+
+export const POST_TW = {
+  GETLIST: `${DOMAIN_POST}/tw`,
+  DETAIL:`${DOMAIN_POST}/tw/detail`,
+};
+
+export const COMMENT_TW = {
+  GETLIST: `${DOMAIN_COMMENT}/tw`,
+  DETAIL:`${DOMAIN_COMMENT}/tw/detail`
+}

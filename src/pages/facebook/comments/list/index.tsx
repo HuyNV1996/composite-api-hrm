@@ -37,21 +37,52 @@ const ListUsers: FC = () => {
       width: 50,
     },
     {
-      title: 'User Id',
-      dataIndex: 'userId',
-      key: 'userId',
-      width: 80,
-      align: 'left',
-    },
-    {
       title: 'Comment Id',
       dataIndex: 'commentId',
       key: 'commentId',
-      width: 80,
+      width: 180,
       align: 'left',
     },
     {
-      title: 'Nội dung',
+      title: 'Tác giả bình luận',
+      dataIndex: 'facebookUser',
+      key: 'facebookUser',
+      width: 300,
+      align: 'left',
+      render: (item, record) => {
+        return (
+          <>
+            <ul>
+              <li>{`Id: ${item.userId}`}</li>
+              <li>{`Username: ${item.userName}`}</li>
+              <li>Link: <a target="_blank" href={item.link}>{item.link}</a></li>
+            </ul>
+          </>
+        )
+      }
+    },
+    {
+      title: 'Bài viết gốc',
+      dataIndex: 'faceBookPosts',
+      key: 'faceBookPosts',
+      width: 300,
+      align: 'left',
+      render: (item, record) => {
+        return (
+          <>
+            <ul>
+              <li>{`Nội dung: ${item.textContent}`}</li>
+              <li>{`Thích: ${item.totalLikes}`}</li>
+              <li>{`Bình luận: ${item.totalComments}`}</li>
+              <li>{`Chia sẻ: ${item.totalShares}`}</li>
+              <li>Link: <a target="_blank" href={item.link}>{item.postUrl}</a></li>
+            </ul>
+          </>
+        )
+      }
+    },
+    {
+      title: 'Nội dung bình luận',
       dataIndex: 'commentText',
       key: 'commentText',
       width: 220,
@@ -60,11 +91,14 @@ const ListUsers: FC = () => {
         item && <TruncateText maxLength={180} text={item} />,
     },
     {
-      title: 'Comment Id',
+      title: 'Đường dẫn bình luận',
       dataIndex: 'commentUrl',
       key: 'commentUrl',
-      width: 80,
+      width: 180,
       align: 'left',
+      render: (item, record) => {
+        return (<a href={item}>{item}</a>)
+      }
     },
     {
       title: 'Link ảnh',
@@ -72,7 +106,7 @@ const ListUsers: FC = () => {
       key: 'commentImage',
       width: 120,
       align: 'left',
-      render: (item, record) => item && <img src={item} alt='no image'/>
+      render: (item, record) => item && <img src={item} alt='no image' />
     },
     {
       title: 'Link bài viết',
@@ -82,34 +116,10 @@ const ListUsers: FC = () => {
       align: 'left',
     },
     {
-      title: 'Thích',
-      dataIndex: 'totalLikes',
-      key: 'totalLikes',
-      width: 120,
-      align: 'center',
-      sorter: true,
-    },
-    {
-      title: 'Phản hồi',
-      dataIndex: 'totalComments',
-      key: 'totalComments',
-      width: 120,
-      align: 'left',
-      sorter: true,
-    },
-    {
-      title: 'Chia sẻ',
-      dataIndex: 'totalShares',
-      key: 'totalShares',
-      width: 120,
-      align: 'left',
-      sorter: true,
-    },
-    {
       title: 'Ngày tạo',
       dataIndex: 'commentTime',
       key: 'commentTime',
-      width: 120,
+      width: 150,
       align: 'left',
       render: (item, record) => (
         <span>{item && convertTimestampToFormattedDate(Number(item))}</span>
@@ -125,7 +135,7 @@ const ListUsers: FC = () => {
         <Space size="middle">
           <EyeOutlined
             style={{ fontSize: '14px', color: '#0960bd' }}
-            onClick={() => handleUpdate(String(record.postID))}
+            onClick={() => handleUpdate(String(record.commentId))}
           />
         </Space>
       ),

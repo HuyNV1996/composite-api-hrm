@@ -22,6 +22,16 @@ const mockMenuList: MenuList = [
         icon: 'system',
         path: '/campaign',
       },
+      {
+        code: 'user-seeding',
+        label: {
+          zh_CN: 'Users seeding',
+          en_US: 'Users seeding',
+          vi_VN: 'Users seeding',
+        },
+        icon: 'system',
+        path: '/users-seeding',
+      },
     ],
   },
   {
@@ -43,16 +53,6 @@ const mockMenuList: MenuList = [
         },
         icon: 'system',
         path: '/users_fa',
-      },
-      {
-        code: 'user-seeding',
-        label: {
-          zh_CN: 'Users seeding',
-          en_US: 'Users seeding',
-          vi_VN: 'Users seeding',
-        },
-        icon: 'system',
-        path: '/users-seeding',
       },
       {
         code: 'post',
@@ -125,6 +125,48 @@ const mockMenuList: MenuList = [
         },
         icon: 'system',
         path: '/comments_fb',
+      },
+    ],
+  },
+  {
+    code: 'Twitter',
+    label: {
+      vi_VN: 'Twitter',
+      en_US: 'Twitter',
+      zh_CN: 'Twitter',
+    },
+    icon: 'twitter',
+    path: '',
+    children: [
+      {
+        code: 'user_tw',
+        label: {
+          zh_CN: 'Danh sách users',
+          en_US: 'Danh sách users',
+          vi_VN: 'Danh sách users',
+        },
+        icon: 'system',
+        path: '/users_tw',
+      },
+      {
+        code: 'posts_tw',
+        label: {
+          zh_CN: 'Danh sách post',
+          en_US: 'Danh sách post',
+          vi_VN: 'Danh sách post',
+        },
+        icon: 'system',
+        path: '/posts_tw',
+      },
+      {
+        code: 'comments_tw',
+        label: {
+          zh_CN: 'Danh sách comments',
+          en_US: 'Danh sách comments',
+          vi_VN: 'Danh sách comments',
+        },
+        icon: 'system',
+        path: '/comments_tw',
       },
     ],
   },

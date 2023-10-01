@@ -38,3 +38,10 @@ export interface IGetListPostResponse {
     date: number
   }
   
+  export interface ICreateSeedingPostPrams {
+    postId?: string,
+    userId: string,
+    groupId: string,
+    site: string,
+    content: string,
+  }

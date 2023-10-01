@@ -9,7 +9,7 @@ import { ReactComponent as MerchantSvg } from '@/assets/menu/merchant.svg';
 import { ReactComponent as TransactionSvg } from '@/assets/menu/transaction.svg';
 import { ReactComponent as SysvarSvg } from '@/assets/menu/sysvar.svg';
 import { ReactComponent as FireAntSvg } from '@/assets/icons/fireant.svg';
-import { FacebookFilled } from '@ant-design/icons';
+import { FacebookFilled, TwitterOutlined } from '@ant-design/icons';
 interface CustomIconProps {
   type: string;
 }
@@ -40,6 +40,9 @@ export const CustomIcon: FC<CustomIconProps> = props => {
     com = <FireAntSvg />;
   } else if (type === 'facebook'){
     com = <FacebookFilled width={32} height={32} />
+  }
+  else if (type === 'twitter'){
+    com = <TwitterOutlined />
   }
    else {
     com = <GuideSvg />;

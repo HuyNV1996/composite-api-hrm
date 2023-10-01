@@ -52,22 +52,44 @@ const ListUsers: FC = () => {
       title: 'Post Id',
       dataIndex: 'postId',
       key: 'postId',
-      width: 80,
+      width: 150,
       align: 'left',
     },
     {
-      title: 'Group Id',
-      dataIndex: 'groupId',
-      key: 'groupId',
+      title: 'Group',
+      dataIndex: 'facebookGroup',
+      key: 'facebookGroup',
       width: 220,
       align: 'left',
+      render: (item, record) => {
+        return (
+          <>
+            <ul>
+              <li>{`Id: ${item.id}`}</li>
+              <li>{`Tên: ${item.name}`}</li>
+              <li>Link: <a target="_blank" href={item.link}>{item.link}</a></li>
+            </ul>
+          </>
+        )
+      }
     },
     {
-      title: 'User Id',
-      dataIndex: 'userId',
-      key: 'userId',
+      title: 'Tác giả',
+      dataIndex: 'facebookUser',
+      key: 'facebookUser',
       width: 220,
       align: 'left',
+      render: (item, record) => {
+        return (
+          <>
+            <ul>
+              <li>{`Id: ${item.userId}`}</li>
+              <li>{`Username: ${item.userName}`}</li>
+              <li>Link: <a target="_blank" href={item.link}>{item.link}</a></li>
+            </ul>
+          </>
+        )
+      }
     },
     {
       title: 'Nội dung',
@@ -122,7 +144,7 @@ const ListUsers: FC = () => {
       title: 'Ngày tạo',
       dataIndex: 'time',
       key: 'time',
-      width: 120,
+      width: 150,
       align: 'left',
       render: (item, record) => (
         <span>{item && convertTimestampToFormattedDate(Number(item))}</span>

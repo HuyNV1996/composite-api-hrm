@@ -1,6 +1,7 @@
 import TableColumn from '../table-column';
 import { Table, TableProps } from 'antd';
 import { css } from '@emotion/react';
+import { useEffect, useState } from 'react';
 
 interface MyTableProps<T extends object> extends TableProps<T> {
   height?: string;
@@ -19,11 +20,18 @@ const MyTable = <T extends object = object>(props: MyTableProps<T>) => {
   };
 
   const combinedPagination = typeof pagination === 'object' ? { ...defaultPagination, ...pagination } : {};
-
+  const [heightTable, setHeightTable] = useState(window.innerHeight - 350);
+  const updateDimensions = () => {
+    setHeightTable(window.innerHeight - 400);
+  };
+  useEffect(() => {
+    window.addEventListener('resize', updateDimensions);
+    return () => window.removeEventListener('resize', updateDimensions);
+  }, []);
   return (
     <div>
       <div style={{ height }} css={styles}>
-        <Table<T> {...rest} scroll={{ x: '1300px', y: '49vh'  }} pagination={combinedPagination} />
+        <Table<T> {...rest} scroll={{ x: '1300px', y: heightTable }} pagination={combinedPagination} />
       </div>
     </div>
   );

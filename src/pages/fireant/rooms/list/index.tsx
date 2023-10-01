@@ -138,7 +138,7 @@ const ListUsers: FC = () => {
       title: 'Ngày tạo',
       dataIndex: 'createdDate',
       key: 'createdDate',
-      width: 50,
+      width: 150,
       align: 'left',
       render: (item, record) => (
         <span>{item && convertTimestampToFormattedDate(Number(item))}</span>

@@ -13,11 +13,9 @@ import { Dispatch, FC, SetStateAction, useState } from 'react';
 
 import MyForm from '@/components/core/form';
 import { useLocale } from '@/locales';
-import { apiSendMessage } from '@/api/messages/api';
-import { IFormMessage } from '@/interface/message/api';
 import { IFormCreateUser } from './types';
-import MyCheckbox from '@/components/basic/input-checkbox';
 import { apiCreateSeedingUser_FA } from '@/api/users/api';
+import SelectSocial from '@/pages/components/selects/SelectSocial';
 interface Props {
   onClose?: () => void;
   showDrawer?: () => void;
@@ -58,6 +56,7 @@ const FormCreate: FC<Props> = ({
     followers: 0,
     following: 0,
     userLucky: true,
+    site:''
   };
   const onFinish = async () => {
     await form?.validateFields();
@@ -69,6 +68,7 @@ const FormCreate: FC<Props> = ({
       isTeacher: isTeacher,
     };
     setLoading(true);
+    console.log('renddd')
     const res = await apiCreateSeedingUser_FA(data);
     if (res) {
       message.info('Tạo user thành công!');
@@ -111,6 +111,9 @@ const FormCreate: FC<Props> = ({
             <Row gutter={24}>
               <Col span={24}>
                 <Row gutter={24}>
+                <Col span={12}>
+                    <SelectSocial />
+                  </Col>
                   <Col span={12}>
                     <MyForm.Item
                       innerProps={{

@@ -1,11 +1,11 @@
-import { Col, FormInstance, Row, Spin, Modal, message } from 'antd';
+import { Col, FormInstance, Row, Spin, Modal, message, Card } from 'antd';
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import MyForm from '@/components/core/form';
 import { useLocale } from '@/locales';
 import { IFormCreateCampaign, IRule } from './types';
 import { apiCreateCampaign, apiUpdateCampaign } from '@/api/campaigns/api';
 import { apiGetPostById_FA } from '@/api/posts/api';
-import { apiGetCommentById_FA } from '@/api/comments/api';
+import { apiGetCommentById_FA, apiGetCommentById_FB } from '@/api/comments/api';
 interface Props {
   onClose?: () => void;
   showDrawer?: () => void;
@@ -47,16 +47,16 @@ const FormCreate: FC<Props> = ({
     console.log(isActive);
     data = idComment
       ? {
-          ...data,
-          id: idComment,
-          active: isActive,
-          rule: rule,
-        }
+        ...data,
+        id: idComment,
+        active: isActive,
+        rule: rule,
+      }
       : {
-          ...data,
-          active: isActive,
-          rule: rule,
-        };
+        ...data,
+        active: isActive,
+        rule: rule,
+      };
     setLoading(true);
     const res = idComment
       ? await apiUpdateCampaign(data)
@@ -71,27 +71,30 @@ const FormCreate: FC<Props> = ({
     }
   };
 
-  const _apiGetCommentById_FA = async (idComment: string) => {
+  const _apiGetCommentById = async (idComment: string) => {
     if (!idComment) {
       return;
     }
 
     try {
       setLoading(true);
-      const res = (await apiGetCommentById_FA(idComment)) as any;
-      console.log(res);
+      const res = (await apiGetCommentById_FB(idComment)) as any;
+      console.log(res.data.facebookUser);
 
       if (res) {
         form &&
           form.setFieldsValue({
-            title: res.data.title,
-            description: res.data.description,
-            originalContent: res.data.originalContent,
-            link: res.data.link,
-            linkTitle: res.data.linkTitle,
-            totalLikes: res.data.totalLikes,
-            totalReplies: res.data.totalReplies,
-            totalShares: res.data.totalShares,
+            commentId: res.data.commentId,
+            userName: res.data.facebookUser.userName,
+            linkAuth: res.data.facebookUser.link,
+            textContent: res.data.faceBookPosts.textContent,
+            postUrl: res.data.postUrl,
+            linkImage: res.data.facebookUser.linkImage,
+            totalLikes: res.data.faceBookPosts.totalLikes,
+            totalComments: res.data.faceBookPosts.totalComments,
+            totalShares: res.data.faceBookPosts.totalShares,
+            commentText: res.data.commentText,
+            commentUrl: res.data.commentUrl
           });
       }
     } catch (error) {
@@ -102,7 +105,7 @@ const FormCreate: FC<Props> = ({
   };
 
   useEffect(() => {
-    _apiGetCommentById_FA(idComment!);
+    _apiGetCommentById(idComment!);
   }, [idComment]);
 
   return (
@@ -110,7 +113,8 @@ const FormCreate: FC<Props> = ({
       <Modal
         key={idComment}
         title={idComment ? 'View' : t({ id: 'create' })}
-        width={'600px'}
+        width={'800px'}
+        className='modal-comment'
         maskClosable={false}
         onCancel={onClose}
         open={open}
@@ -130,105 +134,146 @@ const FormCreate: FC<Props> = ({
               <Col span={24}>
                 <Row gutter={24}>
                   <Col span={24}>
-                    <MyForm.Item
-                      innerProps={{
-                        placeholder: t(
-                          { id: 'placeholder_input' },
-                          { msg: 'title' }
-                        ),
-                        disabled: true,
-                      }}
-                      label={'Tiêu đề'}
-                      name="title"
-                      type="input"
-                    />
+                    <Card title='Thông tin bài viết'>
+                      <Col span={24}>
+                        <MyForm.Item
+                          innerProps={{
+                            placeholder: t(
+                              { id: 'placeholder_input' },
+                              { msg: 'id' }
+                            ),
+                            disabled: true,
+                          }}
+                          label={'Id'}
+                          name="commentId"
+                          type="input"
+                        />
+                      </Col>
+                      <Col span={24}>
+                        <MyForm.Item
+                          innerProps={{
+                            placeholder: t(
+                              { id: 'placeholder_input' },
+                              { msg: 'title' }
+                            ),
+                            disabled: true,
+                          }}
+                          label={'Tác giả'}
+                          name="userName"
+                          type="input"
+                        />
+                      </Col>
+                      <Col span={24}>
+                        <MyForm.Item
+                          innerProps={{
+                            placeholder: t(
+                              { id: 'placeholder_input' },
+                              { msg: 'title' }
+                            ),
+                            disabled: true,
+                          }}
+                          label={'Link tài khoản'}
+                          name="linkAuth"
+                          type="input"
+                        />
+                      </Col>
+                      <Col span={24}>
+                        <MyForm.Item
+                          innerProps={{
+                            placeholder: t(
+                              { id: 'placeholder_input' },
+                              { msg: 'bài viết gốc' }
+                            ),
+                            disabled: true,
+                            rows: 4,
+                          }}
+                          label={'Nội dung bài viết gốc'}
+                          name="textContent"
+                          type="input-textarea"
+                        />
+                      </Col>
+                      <Row gutter={24}>
+                        <Col span={8}>
+                          <MyForm.Item
+                            innerProps={{
+                              placeholder: t(
+                                { id: 'placeholder_input' },
+                                { msg: 'like' }
+                              ),
+                              disabled: true,
+                            }}
+                            label={'Like'}
+                            name="totalLikes"
+                            type="input"
+                          />
+                        </Col>
+                        <Col span={8}>
+                          <MyForm.Item
+                            innerProps={{
+                              placeholder: t(
+                                { id: 'placeholder_input' },
+                                { msg: 'total replies' }
+                              ),
+                              disabled: true,
+                            }}
+                            label={'Comments'}
+                            name="totalComments"
+                            type="input"
+                          />
+                        </Col>
+                        <Col span={8}>
+                          <MyForm.Item
+                            innerProps={{
+                              placeholder: t(
+                                { id: 'placeholder_input' },
+                                { msg: 'total shares' }
+                              ),
+                              disabled: true,
+                            }}
+                            label={'Share'}
+                            name="totalShares"
+                            type="input"
+                          />
+                        </Col>
+                      </Row>
+                    </Card>
                   </Col>
                   <Col span={24}>
-                    <MyForm.Item
-                      innerProps={{
-                        placeholder: t(
-                          { id: 'placeholder_input' },
-                          { msg: 'mô tả' }
-                        ),
-                        disabled: true,
-                        rows: 4,
-                      }}
-                      label={'Mô tả'}
-                      name="description"
-                      type="input-textarea"
-                    />
+                    <Card title='Thông tin bình luận' style={{margin: '10px 0px'}}>
+                      <Col span={24}>
+                        <MyForm.Item
+                          innerProps={{
+                            placeholder: t(
+                              { id: 'placeholder_input' },
+                              { msg: 'Nội dung bình luận' }
+                            ),
+                            disabled: true,
+                            rows: 4,
+                          }}
+                          label={'Nội dung bình luận'}
+                          name="commentText"
+                          type="input-textarea"
+                        />
+                      </Col>
+                      <Col span={24}>
+                        <MyForm.Item
+                          innerProps={{
+                            placeholder: t(
+                              { id: 'placeholder_input' },
+                              { msg: 'commentUrl' }
+                            ),
+                            disabled: true,
+                          }}
+                          label={'Đường dẫn'}
+                          name="commentUrl"
+                          type="input"
+                        />
+                      </Col>
+                      
+                    </Card>
                   </Col>
-                  <Col span={24}>
-                    <MyForm.Item
-                      innerProps={{
-                        placeholder: t(
-                          { id: 'placeholder_input' },
-                          { msg: 'Nội dung' }
-                        ),
-                        disabled: true,
-                        rows: 7,
-                      }}
-                      label={'Nội dung'}
-                      name="originalContent"
-                      type="input-textarea"
-                    />
-                  </Col>
-                  <Col span={12}>
-                    <MyForm.Item
-                      innerProps={{
-                        placeholder: t(
-                          { id: 'placeholder_input' },
-                          { msg: 'link' }
-                        ),
-                        disabled: true,
-                      }}
-                      label={'Link'}
-                      name="link"
-                      type="input"
-                    />
-                  </Col>
-                  <Col span={12}>
-                    <MyForm.Item
-                      innerProps={{
-                        placeholder: t(
-                          { id: 'placeholder_input' },
-                          { msg: 'like' }
-                        ),
-                        disabled: true,
-                      }}
-                      label={'Like'}
-                      name="totalLikes"
-                      type="input"
-                    />
-                  </Col>
-                  <Col span={12}>
-                    <MyForm.Item
-                      innerProps={{
-                        placeholder: t(
-                          { id: 'placeholder_input' },
-                          { msg: 'total replies' }
-                        ),
-                        disabled: true,
-                      }}
-                      label={'Like'}
-                      name="totalReplies"
-                      type="input"
-                    />
-                  </Col>
-                  <Col span={12}>
-                    <MyForm.Item
-                      innerProps={{
-                        placeholder: t(
-                          { id: 'placeholder_input' },
-                          { msg: 'total shares' }
-                        ),
-                        disabled: true,
-                      }}
-                      label={'Share'}
-                      name="totalShares"
-                      type="input"
-                    />
-                  </Col>
+
+
                 </Row>
               </Col>
             </Row>

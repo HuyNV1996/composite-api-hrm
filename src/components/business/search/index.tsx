@@ -2,16 +2,18 @@ import MyForm, { MyFormProps } from '@/components/core/form';
 import MyButton from '@/components/basic/button';
 import { css } from '@emotion/react';
 
-import { Col, Row } from 'antd';
+import { Button, Col, Drawer, Row } from 'antd';
 import { useLocale } from '@/locales';
 import { isObjectDefined } from '@/utils/common';
 interface SearchProps<T> extends MyFormProps<T> {
   onSearch: (values: T) => void;
   loading: boolean;
+  open: boolean;
+  onClose: () => void;
 }
 
 const BaseSearch = <T extends object>(props: SearchProps<T>) => {
-  const { children, onSearch, loading, ...rest } = props;
+  const { children, onSearch,onClose, open, loading, ...rest } = props;
   const [form] = MyForm.useForm<T>();
 
   const { t } = useLocale();
@@ -21,6 +23,7 @@ const BaseSearch = <T extends object>(props: SearchProps<T>) => {
     //console.log(values);
     if (values) {
       onSearch(values);
+      onClose();
     }
   };
   
@@ -37,17 +40,16 @@ const BaseSearch = <T extends object>(props: SearchProps<T>) => {
     }
   };
   return (
-    <div css={styles}>
-      <MyForm
-        {...rest}
-        form={form}
-        name="advanced_search"
-        className="ant-advanced-search-form"
-        onValuesChange={handleFieldChange}
-        onKeyDown={handleKeyEnter}>
-        <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>{children}</Row>
-        {/* {children} */}
-        <Row>
+    <Drawer
+    key = 'search'
+    width={300}
+    title ='Tìm kiếm'
+    onClose={onClose}
+    open={open}
+    destroyOnClose
+    bodyStyle={{ paddingBottom: 80 }}
+    footer={
+      <Row>
           <Col span={24} style={{ textAlign: 'right' }}>
             {/* <MyForm.Item> */}
             <MyButton type="primary" onClick={onSubmit} loading={loading}>
@@ -60,8 +62,17 @@ const BaseSearch = <T extends object>(props: SearchProps<T>) => {
             {/* </MyForm.Item> */}
           </Col>
         </Row>
+}>
+      <MyForm
+        {...rest}
+        form={form}
+        name="advanced_search"
+        className="ant-advanced-search-form"
+        onValuesChange={handleFieldChange}
+        onKeyDown={handleKeyEnter}>
+        <Row gutter={24}>{children}</Row>
       </MyForm>
-    </div>
+    </Drawer>
   );
 };
 

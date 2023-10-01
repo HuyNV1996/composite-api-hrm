@@ -15,7 +15,8 @@ import MyAside, { MyAsideProps } from '../aside';
 import MyRadioCards, { MyRadioCardssOption } from '../radio-cards';
 import MySearch from '../search';
 import MyTabs, { MyTabsOption } from '../tabs';
-import { Card } from 'antd';
+import { Button, Card, Drawer } from 'antd';
+import { FilterOutlined } from '@ant-design/icons';
 
 interface SearchApi {
   (params?: any): MyResponse<PageData<any>>;
@@ -91,7 +92,7 @@ const BasePage = <S extends SearchApi>(
   const [loading, setLoading] = useState(false);
   const [paramsData, setparamsData] = useState<Record<string, any>>({});
   const [asideCheckedKey, setAsideCheckedKey] = useState(asideValue);
-
+  const [showFilterDrawer, setShowFilterDrawer] = useState(false)
   useEffect(() => {
     if (asideData) {
       setAsideCheckedKey(asideData[0].key);
@@ -135,7 +136,9 @@ const BasePage = <S extends SearchApi>(
       paramsData
     ]
   );
-
+  const onCloseFilter = () => {
+    setShowFilterDrawer(false);
+  }
   useEffect(() => {
     getPageData();
   }, [getPageData, forceUpdate]);
@@ -187,16 +190,18 @@ const BasePage = <S extends SearchApi>(
         )}
         <div className="aside-main">
           {searchRender && (
-            <Card size="small" style={{ marginBottom: 16 }}>
+            <>
               <MySearch
                 loading={loading}
+                open ={showFilterDrawer}
+                onClose={onCloseFilter}
                 className="search"
                 onSearch={onSearch}
                 labelCol={{ style: { width: labelWidth } }}
                 labelAlign="right">
                 {searchRender}
               </MySearch>
-            </Card>
+            </>
           )}
           {radioCardsData && (
             <MyRadioCards
@@ -206,7 +211,7 @@ const BasePage = <S extends SearchApi>(
           )}
           {tableOptions && (
             <div className="table">
-              <Card size="small" title={title} extra={slot}>
+              <Card size="small" title={title} extra={<>{slot} {searchRender && <Button onClick={() => setShowFilterDrawer(true)}><FilterOutlined />Filter</Button>}</>}>
                 <MyTable
                   loading={loading}
                   rowKey={'id'}

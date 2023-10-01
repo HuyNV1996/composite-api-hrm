@@ -6,7 +6,7 @@ import {
 } from '@/interface/campaign/types';
 import { request } from '../request';
 import { mapView } from './utils';
-import { ICreateCampaignParams } from '@/pages/campaign/handle/form_create/types';
+import { ICreateCampaignParams } from '@/pages/common/campaign/handle/form_create/types';
 import { useEffect } from 'react';
 
 export const apiGeListCampaign = async (params: ICampaignListParams) => {

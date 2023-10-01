@@ -8,7 +8,7 @@ const SearchUser = () => {
 
   return (
     <>
-      <Col span={7}>
+      <Col span={24}>
         <SearchItem
           label={t({ id: 'code' })}
           name="filter"
@@ -21,7 +21,7 @@ const SearchUser = () => {
           }}
         />
       </Col>
-      <Col span={7}>
+      <Col span={24}>
         <SearchItem
           label={t({ id: 'phone' })}
           name="phoneNumber"
@@ -34,7 +34,7 @@ const SearchUser = () => {
           }}
         />
       </Col>
-      <Col span={8}>
+      <Col span={24}>
         <SearchItem
           label={t({ id: 'email' })}
           name="email"
@@ -47,7 +47,7 @@ const SearchUser = () => {
           }}
         />
       </Col>
-      <Col span={8}>
+      <Col span={24}>
         <SearchItem
           label={t({ id: 'nationalId' })}
           name="nationalId"

@@ -40,16 +40,16 @@ const BaseSearch = <T extends object>(props: SearchProps<T>) => {
     }
   };
   return (
-    <Drawer
-    key = 'search'
-    width={300}
-    title ='Tìm kiếm'
-    onClose={onClose}
-    open={open}
-    destroyOnClose
-    bodyStyle={{ paddingBottom: 80 }}
-    footer={
-      <Row>
+    <div  css={styles}>
+      <MyForm
+        {...rest}
+        form={form}
+        name="advanced_search"
+        className="ant-advanced-search-form"
+        onValuesChange={handleFieldChange}
+        onKeyDown={handleKeyEnter}>
+        <Row gutter={24}>{children}</Row>
+        <Row>
           <Col span={24} style={{ textAlign: 'right' }}>
             {/* <MyForm.Item> */}
             <MyButton type="primary" onClick={onSubmit} loading={loading}>
@@ -62,17 +62,8 @@ const BaseSearch = <T extends object>(props: SearchProps<T>) => {
             {/* </MyForm.Item> */}
           </Col>
         </Row>
-}>
-      <MyForm
-        {...rest}
-        form={form}
-        name="advanced_search"
-        className="ant-advanced-search-form"
-        onValuesChange={handleFieldChange}
-        onKeyDown={handleKeyEnter}>
-        <Row gutter={24}>{children}</Row>
       </MyForm>
-    </Drawer>
+    </div>
   );
 };
 

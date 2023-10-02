@@ -8,7 +8,7 @@ const SearchUser = () => {
 
   return (
     <>
-      <Col span={24}>
+      <Col span={7}>
         <SearchItem
           label={'Filter'}
           name="search"

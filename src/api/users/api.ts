@@ -7,7 +7,7 @@ import { USER_FA, USER_FB, USER_TW } from '../constApi';
 import { request } from '../request';
 import { mapView } from './utils';
 
-export const apiGeListUsers_FA = async (params: IUserListParams) => {
+export const apiGeListUsers = async (params: IUserListParams) => {
   let sortord = params.sortOrder;
   if (sortord === 'ascend') {
     sortord = 'asc';
@@ -36,7 +36,7 @@ export const apiGeListUsers_FA = async (params: IUserListParams) => {
 };
 
 // Seeding
-export const apiGeListSeedingUsers_FA = async (params: IUserListParams) => {
+export const apiGeListSeedingUsers = async (params: IUserListParams) => {
   let sortord = params.sortOrder;
   if (sortord === 'ascend') {
     sortord = 'asc';
@@ -44,7 +44,7 @@ export const apiGeListSeedingUsers_FA = async (params: IUserListParams) => {
   if (sortord === 'descend' || sortord === undefined) {
     sortord = 'desc';
   }
-  const url = `/users/fa/seeding`;
+  const url = `/users/seeding`;
   let data = new FormData();
   data.append('pageNumber', String(Number(params.pageNumber) - 1));
   data.append('pageSize', params.pageSize);
@@ -62,7 +62,7 @@ export const apiGeListSeedingUsers_FA = async (params: IUserListParams) => {
     },
   };
 };
-export const apiCreateSeedingUser_FA = async (
+export const apiCreateSeedingUser = async (
   params: IUserSeedingCreateParams
 ) => {
   const res = (await request<IUserListResponse>(
@@ -78,64 +78,6 @@ export const apiCreateSeedingUser_FA = async (
   };
 };
 
-export const apiDeleteSeedingUser_FA = async (id: string) => {
-  return await request<any>('post', `/users/fa/seeding/delete?userId=${id}`);
-};
-
-// Facebook API
-export const apiGeListUsers_FB = async (params: IUserListParams) => {
-  let sortord = params.sortOrder;
-  if (sortord === 'ascend') {
-    sortord = 'asc';
-  }
-  if (sortord === 'descend' || sortord === undefined) {
-    sortord = 'desc';
-  }
-  const url = `${USER_FB.GETLIST}/paging`;
-  let data = new FormData();
-  data.append('pageNumber', String(Number(params.pageNumber) - 1));
-  data.append('pageSize', params.pageSize);
-  data.append('sort', params.sort || '');
-  data.append('sortOrder', sortord);
-  data.append('search', params.search || '');
-  const res = (await request<IUserListResponse>(
-    'post',
-    url,
-    data
-  )) as IUserListResponse;
-  return {
-    results: {
-      data: mapView(res.data),
-      total: res.total,
-    },
-  };
-};
-
-// Twitter API
-export const apiGeListUsers_TW = async (params: IUserListParams) => {
-  let sortord = params.sortOrder;
-  if (sortord === 'ascend') {
-    sortord = 'asc';
-  }
-  if (sortord === 'descend' || sortord === undefined) {
-    sortord = 'desc';
-  }
-  const url = `${USER_TW.GETLIST}/paging`;
-  let data = new FormData();
-  data.append('pageNumber', String(Number(params.pageNumber) - 1));
-  data.append('pageSize', params.pageSize);
-  data.append('sort', params.sort || '');
-  data.append('sortOrder', sortord);
-  data.append('search', params.search || '');
-  const res = (await request<IUserListResponse>(
-    'post',
-    url,
-    data
-  )) as IUserListResponse;
-  return {
-    results: {
-      data: mapView(res.data),
-      total: res.total,
-    },
-  };
+export const apiDeleteSeedingUser = async (id: string) => {
+  return await request<any>('post', `/users/seeding/delete?userId=${id}`);
 };

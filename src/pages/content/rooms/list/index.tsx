@@ -1,21 +1,11 @@
 //@ts-ignore
-import XlsExport from 'xlsexport';
-import { Button, Divider, Form, Popconfirm, Space, Tag } from 'antd';
+import { Form } from 'antd';
 import { FC, useState } from 'react';
 import FeaturedIcon from '@/assets/icons/correct.png';
 import NotFeaturedIcon from '@/assets/icons/remove.png';
 import MyPage, { MyPageTableOptions } from '@/components/business/page';
 import { useLocale } from '@/locales';
-import {
-  DeleteOutlined,
-  DownloadOutlined,
-  FormOutlined,
-} from '@ant-design/icons';
 
-import SearchUser from '../components/search';
-import { formatDate } from '@/utils/formatDate';
-import { apiGeListUsers } from '@/api/users/api';
-import TruncateText from '../components/truncate-text';
 import { apiGeListRooms } from '@/api/rooms/api';
 import { convertTimestampToFormattedDate } from './utils';
 const ListRooms: FC = () => {
@@ -44,9 +34,9 @@ const ListRooms: FC = () => {
       align: 'left',
     },
     {
-      title: 'Mã nhóm',
-      dataIndex: 'roomID',
-      key: 'roomID',
+      title: 'Id',
+      dataIndex: 'groupId',
+      key: 'groupId',
       width: 80,
       align: 'left',
     },
@@ -72,79 +62,9 @@ const ListRooms: FC = () => {
       align: 'left',
     },
     {
-      title: 'Trạng thái',
-      dataIndex: 'status',
-      key: 'status',
-      width: 50,
-      align: 'left',
-    },
-    {
-      title: 'Ưu tiên',
-      dataIndex: 'privacy',
-      key: 'privacy',
-      width: 50,
-      align: 'left',
-    },
-    {
-      title: 'Visibility',
-      dataIndex: 'visibility',
-      key: 'visibility',
-      width: 50,
-      align: 'left',
-    },
-    {
-      title: 'Role',
-      dataIndex: 'role',
-      key: 'role',
-      width: 50,
-      align: 'left',
-    },
-    {
-      title: 'Approved',
-      dataIndex: 'approved',
-      key: 'approved',
-      width: 50,
-      align: 'left',
-      render: item => {
-        if (item) {
-          return <img src={FeaturedIcon} alt="image" />;
-        } else {
-          return <img src={NotFeaturedIcon} alt="image" />;
-        }
-      },
-    },
-    {
-      title: 'Blocked',
-      dataIndex: 'blocked',
-      key: 'blocked',
-      width: 50,
-      align: 'left',
-      render: item => {
-        if (item) {
-          return <img src={FeaturedIcon} alt="image" />;
-        } else {
-          return <img src={NotFeaturedIcon} alt="image" />;
-        }
-      },
-    },
-    {
-      title: 'Verified',
-      dataIndex: 'verified',
-      key: 'verified',
-      width: 50,
-      align: 'left',
-      render: item => {
-        if (item) {
-          return <img src={FeaturedIcon} alt="image" />;
-        } else {
-          return <img src={NotFeaturedIcon} alt="image" />;
-        }
-      },
-    },
-    {
       title: 'Ngày tạo',
-      dataIndex: 'createdDate',
-      key: 'createdDate',
+      dataIndex: 'createdAt',
+      key: 'createdAt',
       width: 150,
       align: 'left',
       render: (item, record) => (

@@ -35,5 +35,5 @@ export const apiGeListComments = async (params: IGetListCommentParams) => {
 };
 
 export const apiGetCommentById = async (id: string) => {
-  return await request<any>('get', `/comment/detail/${id}`);
+  return await request<any>('get', `/comments/detail/${id}`);
 };

@@ -1,5 +1,5 @@
 //@ts-ignore
-import { Form, Space } from 'antd';
+import { Form, Space, Tooltip } from 'antd';
 import { FC, useState } from 'react';
 import FeaturedIcon from '@/assets/icons/correct.png';
 import NotFeaturedIcon from '@/assets/icons/remove.png';
@@ -11,15 +11,18 @@ import { apiGeListComments } from '@/api/comments/api';
 import { convertTimestampToFormattedDate } from '@/pages/fireant/rooms/list/utils';
 import SearchUser from '../components/search';
 import { EyeOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
 const ListComments: FC = () => {
   const { t } = useLocale();
   const [foceUpdate, setFoceUpdate] = useState(false);
   const [idComment, setIdComment] = useState<any>(null);
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
+  const navigate = useNavigate();
   const handleUpdate = (id: string) => {
-    setIdComment(id);
-    showDrawer();
+    // setIdComment(id);
+    // showDrawer();
+    navigate(`/comments/view/${id}`, { replace: true });
   };
   const showDrawer = () => {
     setOpen(true);
@@ -37,9 +40,9 @@ const ListComments: FC = () => {
       width: 50,
     },
     {
-      title: 'Post Id',
-      dataIndex: 'postID',
-      key: 'postID',
+      title: 'Id',
+      dataIndex: 'commentId',
+      key: 'postId',
       width: 80,
       align: 'left',
     },
@@ -120,37 +123,9 @@ const ListComments: FC = () => {
       sorter: true,
     },
     {
-      title: 'Top',
-      dataIndex: 'isTop',
-      key: 'isTop',
-      width: 120,
-      align: 'left',
-      render: item => {
-        if (item) {
-          return <img src={FeaturedIcon} alt="image" />;
-        } else {
-          return <img src={NotFeaturedIcon} alt="image" />;
-        }
-      },
-    },
-    {
-      title: 'Chuyên gia',
-      dataIndex: 'isExpertIdea',
-      key: 'isExpertIdea',
-      width: 120,
-      align: 'center',
-      render: item => {
-        if (item) {
-          return <img src={FeaturedIcon} alt="image" />;
-        } else {
-          return <img src={NotFeaturedIcon} alt="image" />;
-        }
-      },
-    },
-    {
       title: 'Ngày tạo',
-      dataIndex: 'date',
-      key: 'date',
+      dataIndex: 'createdAt',
+      key: 'createdAt',
       width: 150,
       align: 'left',
       render: (item, record) => (
@@ -165,10 +140,12 @@ const ListComments: FC = () => {
       align: 'center',
       render: (_, record) => (
         <Space size="middle">
-          <EyeOutlined
-            style={{ fontSize: '14px', color: '#0960bd' }}
-            onClick={() => handleUpdate(String(record.postID))}
-          />
+          <Tooltip title={'View'}>
+            <EyeOutlined
+              style={{ fontSize: '14px', color: '#0960bd' }}
+              onClick={() => handleUpdate(String(record.commentId))}
+            />
+          </Tooltip>
         </Space>
       ),
     },

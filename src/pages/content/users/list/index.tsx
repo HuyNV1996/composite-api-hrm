@@ -1,6 +1,6 @@
 //@ts-ignore
 import XlsExport from 'xlsexport';
-import { Button, Divider, Form, Popconfirm, Space, Tag } from 'antd';
+import { Button, Divider, Form, Popconfirm, Space, Tag, Tooltip } from 'antd';
 import { FC, useState } from 'react';
 import FeaturedIcon from '@/assets/icons/correct.png';
 import NotFeaturedIcon from '@/assets/icons/remove.png';
@@ -111,55 +111,6 @@ const ListUsers: FC = () => {
       align: 'center',
     },
     {
-      title: 'Facebook',
-      dataIndex: 'name',
-      key: 'name',
-      width: 150,
-      align: 'left',
-    },
-    {
-      title: 'Chuyên gia',
-      dataIndex: 'isExpert',
-      key: 'isExpert',
-      width: 100,
-      align: 'center',
-      render: item => {
-        if (item) {
-          return <img src={FeaturedIcon} alt="image" />;
-        } else {
-          return <img src={NotFeaturedIcon} alt="image" />;
-        }
-      },
-    },
-    {
-      title: 'Giáo viên',
-      dataIndex: 'isTeacher',
-      key: 'isTeacher',
-      width: 100,
-      align: 'center',
-      render: item => {
-        if (item) {
-          return <img src={FeaturedIcon} alt="image" />;
-        } else {
-          return <img src={NotFeaturedIcon} alt="image" />;
-        }
-      },
-    },
-    {
-      title: 'Blocked',
-      dataIndex: 'blocked',
-      key: 'blocked',
-      width: 100,
-      align: 'center',
-      render: item => {
-        if (item) {
-          return <img src={FeaturedIcon} alt="image" />;
-        } else {
-          return <img src={NotFeaturedIcon} alt="image" />;
-        }
-      },
-    },
-    {
       title: 'Bài viết',
       dataIndex: 'totalPosts',
       key: 'totalPosts',
@@ -197,14 +148,18 @@ const ListUsers: FC = () => {
       align: 'center',
       render: (_, record) => (
         <Space size="middle">
-          <CommentOutlined
-            style={{ fontSize: '14px', color: '#0960bd' }}
-            onClick={() => handleSend(String(record.id))}
-          />
-          <AppstoreAddOutlined
-            style={{ fontSize: '14px', color: '#0960bd' }}
-            onClick={() => handleAdd(String(record.id))}
-          />
+          <Tooltip title={'Gửi tin nhắn'}>
+            <CommentOutlined
+              style={{ fontSize: '14px', color: '#0960bd' }}
+              onClick={() => handleSend(String(record.id))}
+            />
+          </Tooltip>
+          <Tooltip title={'Thêm vào chiến dịch'}>
+            <AppstoreAddOutlined
+              style={{ fontSize: '14px', color: '#0960bd' }}
+              onClick={() => handleAdd(String(record.id))}
+            />
+          </Tooltip>
         </Space>
       ),
     },

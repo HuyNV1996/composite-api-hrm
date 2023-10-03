@@ -8,6 +8,7 @@ import LayoutPage from '@/pages/layout';
 
 import Register from '@/pages/register';
 import UserSeeding from '@/pages/common/users_seeding/list';
+import PostSeeding from '@/pages/common/posts_seeding/list';
 import WrapperRouteComponent from './config';
 import CampaignPage_CM from '@/pages/common/campaign/list';
 import CampaignCreate_CM from '@/pages/common/campaign/handle/create';
@@ -15,7 +16,9 @@ import ListRooms from '@/pages/content/rooms/list';
 import ListUsers from '@/pages/content/users/list';
 import ListPosts from '@/pages/content/posts/list';
 import ListComments from '@/pages/content/comments/list';
-
+import PostViewPage from '@/pages/content/posts/components/crerate';
+import CommentViewPage from '@/pages/content/comments/components/crerate';
+import PostSendPage from '@/pages/content/posts/components/create_send';
 const NotFound = lazy(
   () => import(/* webpackChunkName: "404'"*/ '@/pages/404')
 );
@@ -115,11 +118,38 @@ export const routeList: RouteObject[] = [
         ),
       },
       {
+        path: 'posts-seeding',
+        element: (
+          <WrapperRouteComponent
+            element={<PostSeeding />}
+            titleId="title.posts"
+          />
+        ),
+      },
+      {
         path: 'posts',
         element: (
           <WrapperRouteComponent
             element={<ListPosts />}
             titleId="title.posts"
+          />
+        ),
+      },
+      {
+        path: '/posts/view/:id',
+        element: (
+          <WrapperRouteComponent
+            element={<PostViewPage />}
+            titleId="title.posts"
+          />
+        ),
+      },
+      {
+        path: '/comments/view/:id',
+        element: (
+          <WrapperRouteComponent
+            element={<CommentViewPage />}
+            titleId="title.comments"
           />
         ),
       },
@@ -165,6 +195,15 @@ export const routeList: RouteObject[] = [
           <WrapperRouteComponent
             element={<CampaignCreate_CM />}
             titleId="title.campaign"
+          />
+        ),
+      },
+      {
+        path: '/posts/send/:id',
+        element: (
+          <WrapperRouteComponent
+            element={<PostSendPage />}
+            titleId="title.posts"
           />
         ),
       },

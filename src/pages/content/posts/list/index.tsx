@@ -1,6 +1,6 @@
 //@ts-ignore
 import XlsExport from 'xlsexport';
-import { Button, Divider, Form, Popconfirm, Space, Tag } from 'antd';
+import { Button, Divider, Form, Popconfirm, Space, Tag, Tooltip } from 'antd';
 import { FC, useState } from 'react';
 import FeaturedIcon from '@/assets/icons/correct.png';
 import NotFeaturedIcon from '@/assets/icons/remove.png';
@@ -11,6 +11,7 @@ import {
   DownloadOutlined,
   EyeOutlined,
   FormOutlined,
+  SendOutlined,
 } from '@ant-design/icons';
 
 import SearchUser from '../components/search';
@@ -20,6 +21,7 @@ import TruncateText from '../components/truncate-text';
 import { apiGeListPosts } from '@/api/posts/api';
 import { convertTimestampToFormattedDate } from '@/pages/fireant/rooms/list/utils';
 import FormCreate from '../components/form_create';
+import { useNavigate } from 'react-router-dom';
 
 const ListPosts: FC = () => {
   const { t } = useLocale();
@@ -27,7 +29,8 @@ const ListPosts: FC = () => {
   const [open, setOpen] = useState(false);
   const [idPost, setIdPost] = useState<any>(null);
   const [form] = Form.useForm();
-
+  const [formSend] = Form.useForm();
+  const navigate = useNavigate();
   const showDrawer = () => {
     setOpen(true);
   };
@@ -37,8 +40,12 @@ const ListPosts: FC = () => {
     setTimeout(() => setIdPost(null), 1000);
   };
   const handleUpdate = (id: string) => {
-    setIdPost(id);
-    showDrawer();
+    // setIdPost(id);
+    // showDrawer();
+    navigate(`/posts/view/${id}`, { replace: true });
+  };
+  const handleSendPost = (id: string) => {
+    navigate(`/posts/send/${id}`, { replace: true });
   };
   const tableColums: MyPageTableOptions<any> = [
     {
@@ -50,8 +57,8 @@ const ListPosts: FC = () => {
     },
     {
       title: 'Post Id',
-      dataIndex: 'postID',
-      key: 'postID',
+      dataIndex: 'postId',
+      key: 'postId',
       width: 80,
       align: 'left',
     },
@@ -148,37 +155,9 @@ const ListPosts: FC = () => {
       sorter: true,
     },
     {
-      title: 'Top',
-      dataIndex: 'isTop',
-      key: 'isTop',
-      width: 120,
-      align: 'center',
-      render: item => {
-        if (item) {
-          return <img src={FeaturedIcon} alt="image" />;
-        } else {
-          return <img src={NotFeaturedIcon} alt="image" />;
-        }
-      },
-    },
-    {
-      title: 'Chuyên gia',
-      dataIndex: 'isExpertIdea',
-      key: 'isExpertIdea',
-      width: 120,
-      align: 'center',
-      render: item => {
-        if (item) {
-          return <img src={FeaturedIcon} alt="image" />;
-        } else {
-          return <img src={NotFeaturedIcon} alt="image" />;
-        }
-      },
-    },
-    {
       title: 'Ngày tạo',
-      dataIndex: 'date',
-      key: 'date',
+      dataIndex: 'createdAt',
+      key: 'createdAt',
       width: 150,
       align: 'left',
       render: (item, record) => (
@@ -193,10 +172,20 @@ const ListPosts: FC = () => {
       align: 'center',
       render: (_, record) => (
         <Space size="middle">
-          <EyeOutlined
-            style={{ fontSize: '14px', color: '#0960bd' }}
-            onClick={() => handleUpdate(String(record.postID))}
-          />
+          <Tooltip title={'Hiển thị bài viết'}>
+            <EyeOutlined
+              style={{ fontSize: '14px', color: '#0960bd' }}
+              onClick={() => handleUpdate(String(record.postId))}
+            />
+          </Tooltip>
+          <Divider type="vertical" />
+          <Tooltip title={'Tạo bài viết seeding'}>
+            <SendOutlined
+              style={{ fontSize: '14px', color: '#0960bd' }}
+              onClick={() => handleSendPost(String(record.postId))}
+            />
+          </Tooltip>
+
         </Space>
       ),
     },

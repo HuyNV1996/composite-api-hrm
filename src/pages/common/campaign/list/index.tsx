@@ -8,6 +8,7 @@ import {
   Space,
   Switch,
   Tag,
+  Tooltip,
   message,
 } from 'antd';
 import { FC, useEffect, useState } from 'react';
@@ -195,19 +196,23 @@ const ListUsers: FC = () => {
       align: 'center',
       render: (_, record) => (
         <Space size="middle">
-          <FormOutlined
-            style={{ fontSize: '14px', color: '#0960bd' }}
-            onClick={() => handleUpdate(String(record.id))}
-          />
+          <Tooltip title={'Sửa chiến dịch'}>
+            <FormOutlined
+              style={{ fontSize: '14px', color: '#0960bd' }}
+              onClick={() => handleUpdate(String(record.id))}
+            />
+          </Tooltip>
           <Divider type="vertical" />
-          <Popconfirm
-            placement="left"
-            title="Bạn có chắc chắn muốn xoá?"
-            onConfirm={() => handleDelete(String(record.id))}
-            okText="Có"
-            cancelText="Không">
-            <DeleteOutlined style={{ fontSize: '16px', color: '#ed6f6f' }} />
-          </Popconfirm>
+          <Tooltip title={'Xóa'}>
+            <Popconfirm
+              placement="left"
+              title="Bạn có chắc chắn muốn xoá?"
+              onConfirm={() => handleDelete(String(record.id))}
+              okText="Có"
+              cancelText="Không">
+              <DeleteOutlined style={{ fontSize: '16px', color: '#ed6f6f' }} />
+            </Popconfirm>
+          </Tooltip>
         </Space>
       ),
     },

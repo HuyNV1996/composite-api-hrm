@@ -45,3 +45,51 @@ export interface IGetListPostResponse {
     site: string,
     content: string,
   }
+
+  export interface IGetPostByIdResponse {
+    status: number
+    message: string
+    code: number
+    data: IGetPostByIdData
+    total: number
+    page: number
+  }
+  
+  export interface IGetPostByIdData {
+  postId: string
+  site: string
+  userId: string
+  user: IGetPostByIdUser
+  groupId: any
+  group: any
+  title: string
+  description: string
+  sentiment: number
+  content: any
+  originalContent: any
+  link: any
+  linkTitle: any
+  linkDescription: any
+  totalLikes: number
+  totalComments: any
+  totalShares: number
+  createdAt: number
+  }
+  
+  export interface IGetPostByIdUser {
+    id: string
+    username: any
+    password: any
+    token: any
+    name: string
+    bio: any
+    email: any
+    address: any
+    totalPosts: number
+    totalLikes: number
+    followers: number
+    following: number
+    userLucky: any
+    site: string
+  }
+  

@@ -23,6 +23,8 @@ import {
 import TruncateText from '../components/truncate-text';
 import FormSend from '../handle/form_send';
 import FormCreate from '../handle/form_create';
+import { apiGeListSeedingPosts } from '@/api/posts/api';
+import { convertTimestampToFormattedDate } from '../../campaign/list/utils';
 const ListUsers: FC = () => {
   const { t } = useLocale();
   const [foceUpdate, setFoceUpdate] = useState(false);
@@ -64,146 +66,46 @@ const ListUsers: FC = () => {
       width: 50,
       align: 'center',
     },
+    // {
+    //   title: 'Id',
+    //   dataIndex: 'postId',
+    //   key: 'postId',
+    //   width: 150,
+    //   align: 'left',
+    // },
     {
-      title: 'Họ và tên',
-      dataIndex: 'name',
-      key: 'name',
-      width: 150,
+      title: 'Site',
+      dataIndex: 'site',
+      key: 'site',
+      width: 100,
       align: 'left',
     },
     {
-      title: 'Username',
-      dataIndex: 'username',
-      key: 'username',
-      width: 150,
-      align: 'left',
-    },
-    {
-      title: 'Mật khẩu',
-      dataIndex: 'password',
-      key: 'password',
-      width: 80,
-      align: 'center',
-    },
-    {
-      title: 'Tiểu sử (Bio)',
-      dataIndex: 'bio',
-      key: 'bio',
-      width: 300,
+      title: 'Nội dung',
+      dataIndex: 'content',
+      key: 'content',
+      width: 280,
       align: 'left',
       render: (item, record) =>
         item && <TruncateText maxLength={180} text={item} />,
     },
     {
-      title: 'Email',
-      dataIndex: 'email',
-      key: 'email',
+      title: 'Link ảnh',
+      dataIndex: 'linkImage',
+      key: 'linkImage',
+      width: 280,
+      align: 'center',
+      render: (item, record) =>
+        item && <img src={item} alt='link ảnh'/>
+    },
+    {
+      title: 'Ngày tạo',
+      dataIndex: 'createdAt',
+      key: 'createdAt',
       width: 150,
       align: 'left',
-    },
-    {
-      title: 'Địa chỉ',
-      dataIndex: 'address',
-      key: 'address',
-      width: 250,
-      align: 'center',
-    },
-    {
-      title: 'Facebook',
-      dataIndex: 'name',
-      key: 'name',
-      width: 150,
-      align: 'left',
-    },
-    {
-      title: 'Chuyên gia',
-      dataIndex: 'isExpert',
-      key: 'isExpert',
-      width: 100,
-      align: 'center',
-      render: item => {
-        if (item) {
-          return <img src={FeaturedIcon} alt="image" />;
-        } else {
-          return <img src={NotFeaturedIcon} alt="image" />;
-        }
-      },
-    },
-    {
-      title: 'Giáo viên',
-      dataIndex: 'isTeacher',
-      key: 'isTeacher',
-      width: 100,
-      align: 'center',
-      render: item => {
-        if (item) {
-          return <img src={FeaturedIcon} alt="image" />;
-        } else {
-          return <img src={NotFeaturedIcon} alt="image" />;
-        }
-      },
-    },
-    {
-      title: 'Blocked',
-      dataIndex: 'blocked',
-      key: 'blocked',
-      width: 100,
-      align: 'center',
-      render: item => {
-        if (item) {
-          return <img src={FeaturedIcon} alt="image" />;
-        } else {
-          return <img src={NotFeaturedIcon} alt="image" />;
-        }
-      },
-    },
-    {
-      title: 'Bài viết',
-      dataIndex: 'totalPosts',
-      key: 'totalPosts',
-      width: 100,
-      align: 'center',
-    },
-    {
-      title: 'Thích',
-      dataIndex: 'totalLikes',
-      key: 'totalLikes',
-      width: 150,
-      align: 'center',
-      sorter: true,
-    },
-    {
-      title: 'Người theo dõi',
-      dataIndex: 'followers',
-      key: 'followers',
-      width: 150,
-      align: 'center',
-      sorter: true,
-    },
-    {
-      title: 'Đang theo dõi',
-      dataIndex: 'following',
-      key: 'following',
-      width: 150,
-      align: 'center',
-    },
-    {
-      title: 'Hành động',
-      key: 'action',
-      fixed: 'right',
-      width: 120,
-      align: 'center',
-      render: (_, record) => (
-        <Space size="middle">
-          <Popconfirm
-            placement="left"
-            title="Bạn có chắc chắn muốn xoá?"
-            onConfirm={() => handleDelete(String(record.id))}
-            okText="Có"
-            cancelText="Không">
-            <DeleteOutlined style={{ fontSize: '16px', color: '#ed6f6f' }} />
-          </Popconfirm>
-        </Space>
+      render: (item, record) => (
+        <span>{item && convertTimestampToFormattedDate(Number(item))}</span>
       ),
     },
   ];
@@ -211,16 +113,9 @@ const ListUsers: FC = () => {
   return (
     <>
       <MyPage
-        pageApi={apiGeListSeedingUsers}
-        title={'Danh sách người dùng seeding'}
-        // searchRender={<SearchUser />}
+        pageApi={apiGeListSeedingPosts}
+        title={'Danh bài viết seeding'}
         forceUpdate={foceUpdate}
-        setDataExport={setDataExport}
-        slot={
-          <Button type="primary" onClick={handleCreate}>
-            {t({ id: 'create' })}
-          </Button>
-        }
         tableOptions={tableColums}
       />
       <FormCreate

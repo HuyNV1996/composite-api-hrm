@@ -32,6 +32,16 @@ const mockMenuList: MenuList = [
         icon: 'system',
         path: '/users-seeding',
       },
+      {
+        code: 'post-seeding',
+        label: {
+          zh_CN: 'Posts seeding',
+          en_US: 'Posts seeding',
+          vi_VN: 'Posts seeding',
+        },
+        icon: 'system',
+        path: '/posts-seeding',
+      },
     ],
   },
   {
@@ -41,7 +51,7 @@ const mockMenuList: MenuList = [
       en_US: 'Nội dung',
       zh_CN: 'Nội dung',
     },
-    icon: 'fireant',
+    icon: 'content',
     path: '',
     children: [
       {

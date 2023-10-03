@@ -2,11 +2,12 @@ import MyForm from '@/components/core/form';
 import { loaiCuaHangOptions } from '@/const/options';
 import { apiGeListCampaign } from '@/api/campaigns/api';
 import { useEffect, useState } from 'react';
-const SelectCompaign = ({ ...props }) => {
-  const [listCamp, setListCamp] = useState([{ label: '', value: '' }]);
-  const _apiGeListCampaign = async () => {
+import { apiGeListRooms } from '@/api/rooms/api';
+const SelectGroup = ({ ...props }) => {
+  const [listRoom, setListRoom] = useState([{ label: '', value: '' }]);
+  const _apiGeListRooms= async () => {
     try {
-      const res = (await apiGeListCampaign({
+      const res = (await apiGeListRooms({
         pageNumber: 1,
         pageSize: 1000,
       })) as any;
@@ -14,7 +15,7 @@ const SelectCompaign = ({ ...props }) => {
         (item: { name: string }) => item.name
       );
       const ids: string[] = res.results.data.map(
-        (item: { id: string }) => item.id
+        (item: { groupId: string }) => item.groupId
       );
 
       const objectNames = names.map((name, index) => ({
@@ -22,17 +23,14 @@ const SelectCompaign = ({ ...props }) => {
         value: ids[index],
       }));
 
-      setListCamp(objectNames);
-      if (res) {
-        console.log(res);
-      }
+      setListRoom(objectNames);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    _apiGeListCampaign();
+    _apiGeListRooms();
   }, []);
   return (
     <>
@@ -40,14 +38,14 @@ const SelectCompaign = ({ ...props }) => {
         innerProps={{
           placeholder: 'Vui lòng chọn',
         }}
-        options={listCamp}
-        label="Tên chiến dịch"
+        options={listRoom}
+        label="Nhóm"
         {...props}
-        name="id_campaign"
+        name="groupId"
         type="select"
       />
     </>
   );
 };
 
-export default SelectCompaign;
+export default SelectGroup;

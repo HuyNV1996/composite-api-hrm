@@ -1,6 +1,5 @@
 //@ts-ignore
-import XlsExport from 'xlsexport';
-import { Button, Divider, Form, Popconfirm, Space, Tag, message } from 'antd';
+import { Button, Divider, Form, Popconfirm, Space, Tooltip, message } from 'antd';
 import { FC, useState } from 'react';
 import FeaturedIcon from '@/assets/icons/correct.png';
 import NotFeaturedIcon from '@/assets/icons/remove.png';
@@ -8,17 +7,12 @@ import MyPage, { MyPageTableOptions } from '@/components/business/page';
 import { useLocale } from '@/locales';
 import {
   DeleteOutlined,
-  DownloadOutlined,
-  FormOutlined,
   SendOutlined,
 } from '@ant-design/icons';
 
-import SearchUser from '../components/search';
-import { formatDate } from '@/utils/formatDate';
 import {
   apiDeleteSeedingUser,
   apiGeListSeedingUsers,
-  apiGeListUsers,
 } from '@/api/users/api';
 import TruncateText from '../components/truncate-text';
 import FormSend from '../handle/form_send';
@@ -27,13 +21,23 @@ const ListUsers: FC = () => {
   const { t } = useLocale();
   const [foceUpdate, setFoceUpdate] = useState(false);
   const [open, setOpen] = useState(false);
+  const [openPost, setOpenPost] = useState(false);
   const [dataExport, setDataExport] = useState([]);
   const [form] = Form.useForm();
+  const [formPost] = Form.useForm();
   const [idUser, setIdUsers] = useState<any>(null);
   const showDrawer = () => {
     setOpen(true);
   };
 
+  const showDrawerPost = () => {
+    formPost.resetFields();
+    setOpenPost(true);
+  };
+  const onClosePost = () => {
+    setOpenPost(false);
+    setTimeout(() => setIdUsers(null), 1000);
+  };
   const onClose = () => {
     setOpen(false);
     setTimeout(() => setIdUsers(null), 1000);
@@ -56,6 +60,11 @@ const ListUsers: FC = () => {
       console.log(error);
     }
   };
+  const handleSendPost = (id: string) => {
+    formPost.resetFields();
+    setIdUsers(id);
+    showDrawerPost();
+  };
   const tableColums: MyPageTableOptions<any> = [
     {
       title: 'STT',
@@ -63,6 +72,13 @@ const ListUsers: FC = () => {
       key: 'no',
       width: 50,
       align: 'center',
+    },
+    {
+      title: 'Id',
+      dataIndex: 'id',
+      key: 'id',
+      width: 150,
+      align: 'left',
     },
     {
       title: 'Họ và tên',
@@ -116,48 +132,6 @@ const ListUsers: FC = () => {
       align: 'left',
     },
     {
-      title: 'Chuyên gia',
-      dataIndex: 'isExpert',
-      key: 'isExpert',
-      width: 100,
-      align: 'center',
-      render: item => {
-        if (item) {
-          return <img src={FeaturedIcon} alt="image" />;
-        } else {
-          return <img src={NotFeaturedIcon} alt="image" />;
-        }
-      },
-    },
-    {
-      title: 'Giáo viên',
-      dataIndex: 'isTeacher',
-      key: 'isTeacher',
-      width: 100,
-      align: 'center',
-      render: item => {
-        if (item) {
-          return <img src={FeaturedIcon} alt="image" />;
-        } else {
-          return <img src={NotFeaturedIcon} alt="image" />;
-        }
-      },
-    },
-    {
-      title: 'Blocked',
-      dataIndex: 'blocked',
-      key: 'blocked',
-      width: 100,
-      align: 'center',
-      render: item => {
-        if (item) {
-          return <img src={FeaturedIcon} alt="image" />;
-        } else {
-          return <img src={NotFeaturedIcon} alt="image" />;
-        }
-      },
-    },
-    {
       title: 'Bài viết',
       dataIndex: 'totalPosts',
       key: 'totalPosts',
@@ -195,14 +169,23 @@ const ListUsers: FC = () => {
       align: 'center',
       render: (_, record) => (
         <Space size="middle">
-          <Popconfirm
-            placement="left"
-            title="Bạn có chắc chắn muốn xoá?"
-            onConfirm={() => handleDelete(String(record.id))}
-            okText="Có"
-            cancelText="Không">
-            <DeleteOutlined style={{ fontSize: '16px', color: '#ed6f6f' }} />
-          </Popconfirm>
+          <Tooltip title={'Xóa'}>
+            <Popconfirm
+              placement="left"
+              title="Bạn có chắc chắn muốn xoá?"
+              onConfirm={() => handleDelete(String(record.id))}
+              okText="Có"
+              cancelText="Không">
+              <DeleteOutlined style={{ fontSize: '16px', color: '#ed6f6f' }} />
+            </Popconfirm>
+          </Tooltip>
+          <Divider type="vertical" />
+          <Tooltip title={'Tạo bài viết seeding'}>
+            <SendOutlined
+              style={{ fontSize: '14px', color: '#0960bd' }}
+              onClick={() => handleSendPost(String(record.id))}
+            />
+          </Tooltip>
         </Space>
       ),
     },
@@ -231,6 +214,15 @@ const ListUsers: FC = () => {
         open={open}
         showDrawer={showDrawer}
         onClose={onClose}
+      />
+      <FormSend
+        form={formPost}
+        setFoceUpdate={setFoceUpdate}
+        foceUpdate={foceUpdate}
+        idUser={idUser}
+        open={openPost}
+        showDrawer={showDrawerPost}
+        onClose={onClosePost}
       />
     </>
   );

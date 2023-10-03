@@ -176,7 +176,7 @@ const ListUsers: FC = () => {
       title: 'Active',
       dataIndex: 'active',
       key: 'active',
-      width: 50,
+      width: 70,
       fixed: 'right',
       align: 'center',
       render: (item, record) => {

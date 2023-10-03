@@ -20,10 +20,12 @@ import PostsListPage_TW from '@/pages/twitter/posts/list';
 import CommentsListPage_TW from '@/pages/twitter/comments/list';
 
 import Register from '@/pages/register';
-import UserSeeding from '@/pages/common/users_seeding/list'
+import UserSeeding from '@/pages/common/users_seeding/list';
 import WrapperRouteComponent from './config';
-import CampaignPage_CM from '@/pages/common/campaign/list'
-import CampaignCreate_CM from '@/pages/common/campaign/handle/create'
+import CampaignPage_CM from '@/pages/common/campaign/list';
+import CampaignCreate_CM from '@/pages/common/campaign/handle/create';
+import PostSeeding from '@/pages/common/posts_seeding/list';
+import ListUsers from '@/pages/common/users_seeding/list';
 
 const NotFound = lazy(
   () => import(/* webpackChunkName: "404'"*/ '@/pages/404')
@@ -146,6 +148,15 @@ export const routeList: RouteObject[] = [
         element: (
           <WrapperRouteComponent
             element={<PostsListPage_FA />}
+            titleId="title.posts"
+          />
+        ),
+      },
+      {
+        path: 'posts_seeding',
+        element: (
+          <WrapperRouteComponent
+            element={<PostSeeding />}
             titleId="title.posts"
           />
         ),

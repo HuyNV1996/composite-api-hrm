@@ -13,9 +13,10 @@ import { Dispatch, FC, SetStateAction, useState } from 'react';
 
 import MyForm from '@/components/core/form';
 import { useLocale } from '@/locales';
-import { IFormCreateUser } from './types';
+import { IFormCreatePostSeeding } from './types';
 import { apiCreateSeedingUser_FA } from '@/api/users/api';
 import SelectSocial from '@/pages/components/selects/SelectSocial';
+import { apiCreateSeedingPost } from '@/api/posts/api';
 interface Props {
   onClose?: () => void;
   showDrawer?: () => void;
@@ -39,24 +40,11 @@ const FormCreate: FC<Props> = ({
   const [isExpert, setIsExpert] = useState(false);
   const [isBlocked, setIsBlocked] = useState(false);
   const [isTeacher, setIsTeacher] = useState(false);
-  const initalValueForm: IFormCreateUser = {
-    id: '',
-    username: '',
-    password: '',
-    name: '',
-    bio: '',
-    email: '',
-    address: '',
-    facebookLink: '',
-    isExpert: false,
-    isTeacher: false,
-    blocked: false,
-    totalPosts: 0,
-    totalLikes: 0,
-    followers: 0,
-    following: 0,
-    userLucky: true,
-    site:''
+  const initalValueForm: IFormCreatePostSeeding = {
+    userId: '',
+    groupId: '',
+    site: '',
+    content: '',
   };
   const onFinish = async () => {
     await form?.validateFields();
@@ -68,10 +56,10 @@ const FormCreate: FC<Props> = ({
       isTeacher: isTeacher,
     };
     setLoading(true);
-    console.log('renddd')
-    const res = await apiCreateSeedingUser_FA(data);
+    console.log('renddd');
+    const res = await apiCreateSeedingPost(data);
     if (res) {
-      message.info('Tạo user thành công!');
+      message.info('Tạo post thành công!');
       setLoading(false);
       setFoceUpdate && setFoceUpdate(!foceUpdate);
       onClose && onClose();
@@ -101,7 +89,7 @@ const FormCreate: FC<Props> = ({
           </div>
         }>
         <Spin spinning={loading}>
-          <MyForm<IFormCreateUser>
+          <MyForm<IFormCreatePostSeeding>
             onFinish={onFinish}
             initialValues={initalValueForm}
             form={form}
@@ -111,9 +99,6 @@ const FormCreate: FC<Props> = ({
             <Row gutter={24}>
               <Col span={24}>
                 <Row gutter={24}>
-                <Col span={12}>
-                    <SelectSocial />
-                  </Col>
                   <Col span={12}>
                     <MyForm.Item
                       innerProps={{
@@ -122,10 +107,10 @@ const FormCreate: FC<Props> = ({
                           { msg: 'User Id' }
                         ),
                       }}
-                      label={'Id'}
+                      label={'User ID'}
                       required
-                      name="id"
-                      type="input"
+                      name="userId"
+                      type="input-textarea"
                     />
                   </Col>
                   <Col span={12}>
@@ -133,13 +118,13 @@ const FormCreate: FC<Props> = ({
                       innerProps={{
                         placeholder: t(
                           { id: 'placeholder_input' },
-                          { msg: 'Username' }
+                          { msg: 'Group ID' }
                         ),
                       }}
-                      label={'Tên đăng nhập'}
+                      label={'Group ID'}
                       required
-                      name="username"
-                      type="input"
+                      name="groupId"
+                      type="input-textarea"
                     />
                   </Col>
                   <Col span={12}>
@@ -147,13 +132,13 @@ const FormCreate: FC<Props> = ({
                       innerProps={{
                         placeholder: t(
                           { id: 'placeholder_input' },
-                          { msg: 'mật khẩu' }
+                          { msg: 'site' }
                         ),
                       }}
-                      label={'password'}
+                      label={'Site'}
                       required
-                      name="password"
-                      type="input"
+                      name="site"
+                      type="input-textarea"
                     />
                   </Col>
                   <Col span={12}>
@@ -161,190 +146,14 @@ const FormCreate: FC<Props> = ({
                       innerProps={{
                         placeholder: t(
                           { id: 'placeholder_input' },
-                          { msg: 'tên hiển thị' }
+                          { msg: 'content' }
                         ),
                       }}
-                      label={'Tên hiển thị'}
+                      label={'Noi dung'}
                       required
-                      name="name"
-                      type="input"
+                      name="content"
+                      type="input-textarea"
                     />
-                  </Col>
-                  <Col span={12}>
-                    <MyForm.Item
-                      innerProps={{
-                        placeholder: t(
-                          { id: 'placeholder_input' },
-                          { msg: 'tiểu sử' }
-                        ),
-                      }}
-                      label={'Bio'}
-                      required
-                      name="bio"
-                      type="input"
-                    />
-                  </Col>
-                  <Col span={12}>
-                    <MyForm.Item
-                      innerProps={{
-                        placeholder: t(
-                          { id: 'placeholder_input' },
-                          { msg: 'tiểu sử' }
-                        ),
-                      }}
-                      label={'Email'}
-                      required
-                      name="email"
-                      type="input"
-                    />
-                  </Col>
-                  <Col span={12}>
-                    <MyForm.Item
-                      innerProps={{
-                        placeholder: t(
-                          { id: 'placeholder_input' },
-                          { msg: 'địa chỉ' }
-                        ),
-                      }}
-                      label={'Địa chỉ'}
-                      required
-                      name="address"
-                      type="input"
-                    />
-                  </Col>
-                  <Col span={12}>
-                    <MyForm.Item
-                      innerProps={{
-                        placeholder: t(
-                          { id: 'placeholder_input' },
-                          { msg: 'facebook' }
-                        ),
-                      }}
-                      label={'Facebook'}
-                      name="facebookLink"
-                      type="input"
-                    />
-                  </Col>
-                  <Col span={12}>
-                    <Form.Item
-                      name="isExpert"
-                      initialValue={true}
-                      rules={[
-                        {
-                          required: true,
-                          message: 'Vui lòng nhập isExpert!',
-                        },
-                      ]}>
-                      <Checkbox
-                        defaultChecked={false}
-                        value={isExpert}
-                        onChange={e => setIsExpert(e.target.checked)}>
-                        isExpert
-                      </Checkbox>
-                    </Form.Item>
-                  </Col>
-                  <Col span={12}>
-                    <Form.Item
-                      name="isTeacher"
-                      rules={[
-                        {
-                          required: true,
-                          message: 'Vui lòng nhập isTeacher!',
-                        },
-                      ]}>
-                      <Checkbox
-                        defaultChecked={false}
-                        value={isTeacher}
-                        onChange={e => setIsTeacher(e.target.checked)}>
-                        isTeacher
-                      </Checkbox>
-                    </Form.Item>
-                  </Col>
-                  <Col span={12}>
-                    <Form.Item
-                      name="blocked"
-                      rules={[
-                        {
-                          required: true,
-                          message: 'Vui lòng nhập blocked!',
-                        },
-                      ]}>
-                      <Checkbox
-                        defaultChecked={false}
-                        value={isBlocked}
-                        onChange={e => setIsBlocked(e.target.checked)}>
-                        blocked
-                      </Checkbox>
-                    </Form.Item>
-                  </Col>
-                  <Col span={12}>
-                    <MyForm.Item
-                      innerProps={{
-                        placeholder: t(
-                          { id: 'placeholder_input' },
-                          { msg: 'totalPosts' }
-                        ),
-                        defaultValue: 0,
-                      }}
-                      label={'totalPosts'}
-                      name="totalPosts"
-                      type="input-number"
-                    />
-                  </Col>
-                  <Col span={12}>
-                    <MyForm.Item
-                      innerProps={{
-                        placeholder: t(
-                          { id: 'placeholder_input' },
-                          { msg: 'totalLikes' }
-                        ),
-                        defaultValue: 0,
-                      }}
-                      label={'totalLikes'}
-                      name="totalLikes"
-                      type="input-number"
-                    />
-                  </Col>
-                  <Col span={12}>
-                    <MyForm.Item
-                      innerProps={{
-                        placeholder: t(
-                          { id: 'placeholder_input' },
-                          { msg: 'followers' }
-                        ),
-                      }}
-                      initialValue={0}
-                      label={'followers'}
-                      name="followers"
-                      type="input-number"
-                    />
-                  </Col>
-                  <Col span={12}>
-                    <MyForm.Item
-                      innerProps={{
-                        placeholder: t(
-                          { id: 'placeholder_input' },
-                          { msg: 'following' }
-                        ),
-                      }}
-                      label={'following'}
-                      name="following"
-                      type="input-number"
-                    />
-                  </Col>
-                  <Col span={12}>
-                    <Form.Item
-                      name="userLucky"
-                      rules={[
-                        {
-                          required: true,
-                          message: 'Vui lòng nhập userLucky!',
-                        },
-                      ]}>
-                      <Checkbox defaultChecked disabled>
-                        userLucky
-                      </Checkbox>
-                    </Form.Item>
                   </Col>
                 </Row>
               </Col>

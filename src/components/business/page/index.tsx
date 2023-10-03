@@ -190,8 +190,8 @@ const BasePage = <S extends SearchApi>(
         )}
         <div className="aside-main">
           {searchRender && (
-            <>
-              <MySearch
+            <Card size="small" style={{ marginBottom: 16 }}>
+                <MySearch
                 loading={loading}
                 open ={showFilterDrawer}
                 onClose={onCloseFilter}
@@ -201,7 +201,7 @@ const BasePage = <S extends SearchApi>(
                 labelAlign="right">
                 {searchRender}
               </MySearch>
-            </>
+            </Card>
           )}
           {radioCardsData && (
             <MyRadioCards
@@ -211,7 +211,7 @@ const BasePage = <S extends SearchApi>(
           )}
           {tableOptions && (
             <div className="table">
-              <Card size="small" title={title} extra={<>{slot} {searchRender && <Button onClick={() => setShowFilterDrawer(true)}><FilterOutlined />Filter</Button>}</>}>
+              <Card size="small" title={title} extra={slot}>
                 <MyTable
                   loading={loading}
                   rowKey={'id'}

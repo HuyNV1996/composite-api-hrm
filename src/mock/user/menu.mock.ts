@@ -52,7 +52,7 @@ const mockMenuList: MenuList = [
           vi_VN: 'Danh sách users',
         },
         icon: 'system',
-        path: '/users_fa',
+        path: '/users',
       },
       {
         code: 'post',
@@ -62,7 +62,7 @@ const mockMenuList: MenuList = [
           vi_VN: 'Danh sách post',
         },
         icon: 'system',
-        path: '/posts_fa',
+        path: '/posts',
       },
       {
         code: 'comments',
@@ -72,17 +72,17 @@ const mockMenuList: MenuList = [
           vi_VN: 'Danh sách comments',
         },
         icon: 'system',
-        path: '/comments_fa',
+        path: '/comments',
       },
       {
-        code: 'rooms_fa',
+        code: 'rooms',
         label: {
           zh_CN: 'Danh sách nhóm',
           en_US: 'Danh sách nhóm',
           vi_VN: 'Danh sách nhóm',
         },
         icon: 'system',
-        path: '/rooms_fa',
+        path: '/rooms',
       },
     ],
   },

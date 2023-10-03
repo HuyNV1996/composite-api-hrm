@@ -3,7 +3,7 @@ import {
   IUserListResponse,
   IUserSeedingCreateParams,
 } from '@/interface/users/types';
-import { USER_FA, USER_FB, USER_TW } from '../constApi';
+import { USER } from '../constApi';
 import { request } from '../request';
 import { mapView } from './utils';
 
@@ -15,7 +15,7 @@ export const apiGeListUsers = async (params: IUserListParams) => {
   if (sortord === 'descend' || sortord === undefined) {
     sortord = 'desc';
   }
-  const url = `${USER_FA.GETLIST}/paging`;
+  const url = `${USER.GETLIST}/paging`;
   let data = new FormData();
   data.append('pageNumber', String(Number(params.pageNumber) - 1));
   data.append('pageSize', params.pageSize);
@@ -44,7 +44,7 @@ export const apiGeListSeedingUsers = async (params: IUserListParams) => {
   if (sortord === 'descend' || sortord === undefined) {
     sortord = 'desc';
   }
-  const url = `/users/seeding`;
+  const url = `/users/seeding/paging`;
   let data = new FormData();
   data.append('pageNumber', String(Number(params.pageNumber) - 1));
   data.append('pageSize', params.pageSize);

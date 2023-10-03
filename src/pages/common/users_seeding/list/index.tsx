@@ -16,9 +16,9 @@ import {
 import SearchUser from '../components/search';
 import { formatDate } from '@/utils/formatDate';
 import {
-  apiDeleteSeedingUser_FA,
-  apiGeListSeedingUsers_FA,
-  apiGeListUsers_FA,
+  apiDeleteSeedingUser,
+  apiGeListSeedingUsers,
+  apiGeListUsers,
 } from '@/api/users/api';
 import TruncateText from '../components/truncate-text';
 import FormSend from '../handle/form_send';
@@ -49,7 +49,7 @@ const ListUsers: FC = () => {
   };
   const handleDelete = async (id: string) => {
     try {
-      const res = await apiDeleteSeedingUser_FA(id);
+      const res = await apiDeleteSeedingUser(id);
       if (res) message.success(t({ id: 'success' }));
       setFoceUpdate(!foceUpdate);
     } catch (error) {
@@ -211,7 +211,7 @@ const ListUsers: FC = () => {
   return (
     <>
       <MyPage
-        pageApi={apiGeListSeedingUsers_FA}
+        pageApi={apiGeListSeedingUsers}
         title={'Danh sách người dùng seeding'}
         // searchRender={<SearchUser />}
         forceUpdate={foceUpdate}

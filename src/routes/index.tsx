@@ -6,24 +6,15 @@ import Dashboard from '@/pages/dashboard';
 import LoginPage from '@/pages/login';
 import LayoutPage from '@/pages/layout';
 
-import UserListPage_FA from '@/pages/fireant/users/list';
-import PostsListPage_FA from '@/pages/fireant/posts/list';
-import RoomsListPage_FA from '@/pages/fireant/rooms/list';
-import CommentsListPage_FA from '@/pages/fireant/comments/list';
-
-import UserListPage_FB from '@/pages/facebook/users/list';
-import PostsListPage_FB from '@/pages/facebook/posts/list';
-import CommentsListPage_FB from '@/pages/facebook/comments/list';
-
-import UserListPage_TW from '@/pages/twitter/users/list';
-import PostsListPage_TW from '@/pages/twitter/posts/list';
-import CommentsListPage_TW from '@/pages/twitter/comments/list';
-
 import Register from '@/pages/register';
-import UserSeeding from '@/pages/common/users_seeding/list'
+import UserSeeding from '@/pages/common/users_seeding/list';
 import WrapperRouteComponent from './config';
-import CampaignPage_CM from '@/pages/common/campaign/list'
-import CampaignCreate_CM from '@/pages/common/campaign/handle/create'
+import CampaignPage_CM from '@/pages/common/campaign/list';
+import CampaignCreate_CM from '@/pages/common/campaign/handle/create';
+import ListRooms from '@/pages/content/rooms/list';
+import ListUsers from '@/pages/content/users/list';
+import ListPosts from '@/pages/content/posts/list';
+import ListComments from '@/pages/content/comments/list';
 
 const NotFound = lazy(
   () => import(/* webpackChunkName: "404'"*/ '@/pages/404')
@@ -94,7 +85,7 @@ export const routeList: RouteObject[] = [
     children: [
       {
         path: '',
-        element: <Navigate to="users_fa" />,
+        element: <Navigate to="users" />,
       },
       {
         path: 'dashboard',
@@ -106,28 +97,10 @@ export const routeList: RouteObject[] = [
         ),
       },
       {
-        path: 'users_fa',
+        path: 'users',
         element: (
           <WrapperRouteComponent
-            element={<UserListPage_FA />}
-            titleId="title.users"
-          />
-        ),
-      },
-      {
-        path: 'users_fb',
-        element: (
-          <WrapperRouteComponent
-            element={<UserListPage_FB />}
-            titleId="title.users"
-          />
-        ),
-      },
-      {
-        path: 'users_tw',
-        element: (
-          <WrapperRouteComponent
-            element={<UserListPage_TW />}
+            element={<ListUsers />}
             titleId="title.users"
           />
         ),
@@ -142,64 +115,28 @@ export const routeList: RouteObject[] = [
         ),
       },
       {
-        path: 'posts_fa',
+        path: 'posts',
         element: (
           <WrapperRouteComponent
-            element={<PostsListPage_FA />}
+            element={<ListPosts />}
             titleId="title.posts"
           />
         ),
       },
       {
-        path: 'posts_fb',
+        path: 'rooms',
         element: (
           <WrapperRouteComponent
-            element={<PostsListPage_FB />}
-            titleId="title.posts"
-          />
-        ),
-      },
-      {
-        path: 'posts_tw',
-        element: (
-          <WrapperRouteComponent
-            element={<PostsListPage_TW />}
-            titleId="title.posts"
-          />
-        ),
-      },
-      {
-        path: 'rooms_fa',
-        element: (
-          <WrapperRouteComponent
-            element={<RoomsListPage_FA />}
+            element={<ListRooms />}
             titleId="title.rooms"
           />
         ),
       },
       {
-        path: 'comments_fa',
+        path: 'comments',
         element: (
           <WrapperRouteComponent
-            element={<CommentsListPage_FA />}
-            titleId="title.comments"
-          />
-        ),
-      },
-      {
-        path: 'comments_fb',
-        element: (
-          <WrapperRouteComponent
-            element={<CommentsListPage_FB />}
-            titleId="title.comments"
-          />
-        ),
-      },
-      {
-        path: 'comments_tw',
-        element: (
-          <WrapperRouteComponent
-            element={<CommentsListPage_TW />}
+            element={<ListComments />}
             titleId="title.comments"
           />
         ),

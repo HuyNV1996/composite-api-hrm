@@ -14,7 +14,7 @@ import { Dispatch, FC, SetStateAction, useState } from 'react';
 import MyForm from '@/components/core/form';
 import { useLocale } from '@/locales';
 import { IFormCreateUser } from './types';
-import { apiCreateSeedingUser_FA } from '@/api/users/api';
+import { apiCreateSeedingUser } from '@/api/users/api';
 import SelectSocial from '@/pages/components/selects/SelectSocial';
 interface Props {
   onClose?: () => void;
@@ -56,7 +56,7 @@ const FormCreate: FC<Props> = ({
     followers: 0,
     following: 0,
     userLucky: true,
-    site:''
+    site: '',
   };
   const onFinish = async () => {
     await form?.validateFields();
@@ -68,8 +68,8 @@ const FormCreate: FC<Props> = ({
       isTeacher: isTeacher,
     };
     setLoading(true);
-    console.log('renddd')
-    const res = await apiCreateSeedingUser_FA(data);
+    console.log('renddd');
+    const res = await apiCreateSeedingUser(data);
     if (res) {
       message.info('Tạo user thành công!');
       setLoading(false);
@@ -111,7 +111,7 @@ const FormCreate: FC<Props> = ({
             <Row gutter={24}>
               <Col span={24}>
                 <Row gutter={24}>
-                <Col span={12}>
+                  <Col span={12}>
                     <SelectSocial />
                   </Col>
                   <Col span={12}>

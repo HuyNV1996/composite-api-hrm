@@ -4,7 +4,6 @@ import MyForm from '@/components/core/form';
 import { useLocale } from '@/locales';
 import { IFormCreateCampaign, IRule } from './types';
 import { apiCreateCampaign, apiUpdateCampaign } from '@/api/campaigns/api';
-import { apiGetPostById_FA } from '@/api/posts/api';
 import { apiGetCommentById } from '@/api/comments/api';
 interface Props {
   onClose?: () => void;

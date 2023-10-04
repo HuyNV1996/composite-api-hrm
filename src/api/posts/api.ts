@@ -5,6 +5,7 @@ import {
   ICreateSeedingPostPrams,
   IGetListPostParams,
   IGetListPostResponse,
+  ISeedingPostCreateResponse,
 } from '@/interface/posts/types';
 
 export const apiGeListPosts = async (params: IGetListPostParams) => {
@@ -42,12 +43,47 @@ export const apiGetPostById = async (id: string) => {
 // Post Seeding
 export const apiCreateSeedingPost = async (params: ICreateSeedingPostPrams) => {
   const body = {
-    userId: params.userId,
+    userId: params.userID,
     groupId: params.groupId,
     site: params.site,
     content: params.content,
   };
+  console.log(body);
+
   return await request<any>('post', '/post/seeding/create', body);
+};
+
+export const apiGetPostSeedingById = async (id: string) => {
+  return await request<any>('get', `/post/seeding/detail/${id}`);
+};
+
+export const apiDeletePostSeeding = async (id: string) => {
+  return await request<any>('delete', `/post/seeding/delete/${id}`);
+};
+
+// export const apiUpdatePostSeeding = async (params: ICreateSeedingPostPrams) => {
+//   const body = {
+//     userId: params.userId,
+//     groupId: params.groupId,
+//     site: params.site,
+//     content: params.content,
+//   };
+//   return await request<any>('post', '/post/seeding/update', body);
+// };
+
+export const apiUpdatePostSeeding = async (params: ICreateSeedingPostPrams) => {
+  const body = {
+    postId: params.postId,
+    userId: params.userID,
+    groupId: params.groupId,
+    site: params.site,
+    content: params.content,
+  };
+  return (await request<ISeedingPostCreateResponse>(
+    'put',
+    `/post/seeding/update`,
+    body
+  )) as ISeedingPostCreateResponse;
 };
 
 export const apiGeListSeedingPosts = async (params: IGetListPostParams) => {

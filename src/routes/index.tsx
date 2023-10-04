@@ -12,6 +12,8 @@ import PostSeeding from '@/pages/common/posts_seeding/list';
 import WrapperRouteComponent from './config';
 import CampaignPage_CM from '@/pages/common/campaign/list';
 import CampaignCreate_CM from '@/pages/common/campaign/handle/create';
+import PostCreate_CM from '@/pages/common/posts_seeding/handle/create';
+
 import ListRooms from '@/pages/content/rooms/list';
 import ListUsers from '@/pages/content/users/list';
 import ListPosts from '@/pages/content/posts/list';
@@ -19,6 +21,7 @@ import ListComments from '@/pages/content/comments/list';
 import PostViewPage from '@/pages/content/posts/components/crerate';
 import CommentViewPage from '@/pages/content/comments/components/crerate';
 import PostSendPage from '@/pages/content/posts/components/create_send';
+import FormView from '@/pages/common/posts_seeding/handle/form_view';
 const NotFound = lazy(
   () => import(/* webpackChunkName: "404'"*/ '@/pages/404')
 );
@@ -124,6 +127,30 @@ export const routeList: RouteObject[] = [
             element={<PostSeeding />}
             titleId="title.posts"
           />
+        ),
+      },
+      {
+        path: 'post/seeding/create',
+        element: (
+          <WrapperRouteComponent
+            element={<PostCreate_CM />}
+            titleId="title.campaign"
+          />
+        ),
+      },
+      {
+        path: 'post/seeding/update/:id',
+        element: (
+          <WrapperRouteComponent
+            element={<PostCreate_CM />}
+            titleId="title.campaign"
+          />
+        ),
+      },
+      {
+        path: '/post/seeding/detail/:id',
+        element: (
+          <WrapperRouteComponent element={<FormView />} titleId="title.posts" />
         ),
       },
       {

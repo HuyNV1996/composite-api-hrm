@@ -77,13 +77,14 @@ const FormView: FC<Props> = ({
         bodyStyle={{ paddingBottom: 0 }}
         footer={
           <div style={{ display: 'flex', justifyContent: 'end' }}>
-            <Button onClick={onClose}>Hủy bỏ</Button>
+            <Button onClick={onClose}>Đóng</Button>
           </div>
         }>
         <Spin spinning={loading}>
           <MyForm<IFormCreatePost>
             initialValues={initalValueForm}
             form={form}
+            disabled
             labelCol={{ span: 24 }}
             style={{ margin: 'auto' }}
             layout="vertical">
@@ -98,37 +99,25 @@ const FormView: FC<Props> = ({
                       innerProps={{
                         placeholder: t(
                           { id: 'placeholder_input' },
-                          { msg: 'nội dung' }
-                        ),
-                      }}
-                      label={'Nội dung'}
-                      name="content"
-                      type="input-textarea"
-                    />
-                  </Col>
-                  <Col span={12}>
-                    <MyForm.Item
-                      innerProps={{
-                        placeholder: t(
-                          { id: 'placeholder_input' },
                           { msg: 'link ảnh' }
                         ),
                       }}
                       label={'Link ảnh'}
                       name="linkImage"
-                      type="input-textarea"
+                      type="input"
                     />
                   </Col>
-                  <Col span={12}>
+                  <Col span={24}>
                     <MyForm.Item
                       innerProps={{
                         placeholder: t(
                           { id: 'placeholder_input' },
-                          { msg: 'Ngày tạo' }
+                          { msg: 'nội dung' }
                         ),
+                        rows: 4,
                       }}
-                      label={'Ngày tạo'}
-                      name="createdAt"
+                      label={'Nội dung'}
+                      name="content"
                       type="input-textarea"
                     />
                   </Col>

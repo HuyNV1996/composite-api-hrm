@@ -95,13 +95,6 @@ const ListUsers: FC = () => {
       align: 'left',
     },
     {
-      title: 'Mật khẩu',
-      dataIndex: 'password',
-      key: 'password',
-      width: 80,
-      align: 'center',
-    },
-    {
       title: 'Tiểu sử (Bio)',
       dataIndex: 'bio',
       key: 'bio',
@@ -111,10 +104,17 @@ const ListUsers: FC = () => {
         item && <TruncateText maxLength={180} text={item} />,
     },
     {
+      title: 'Access token',
+      dataIndex: 'token',
+      key: 'token',
+      width: 150,
+      align: 'left',
+    },
+    {
       title: 'Email',
       dataIndex: 'email',
       key: 'email',
-      width: 150,
+      width: 250,
       align: 'left',
     },
     {
@@ -123,13 +123,6 @@ const ListUsers: FC = () => {
       key: 'address',
       width: 250,
       align: 'center',
-    },
-    {
-      title: 'Facebook',
-      dataIndex: 'name',
-      key: 'name',
-      width: 150,
-      align: 'left',
     },
     {
       title: 'Bài viết',

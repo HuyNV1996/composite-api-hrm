@@ -4,6 +4,7 @@ export interface IGetListCommentParams{
     sort: string;
     sortOrder: string;
     search: string;
+    site: string;
 }
 
 export interface IGetListCommentResponse {

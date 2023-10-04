@@ -1,5 +1,6 @@
 import MyPage from '@/components/business/page';
 import { useLocale } from '@/locales';
+import SelectSocial from '@/pages/components/selects/SelectSocial';
 import { Col } from 'antd';
 
 const { Item: SearchItem } = MyPage.MySearch;
@@ -8,7 +9,7 @@ const SearchUser = () => {
 
   return (
     <>
-      <Col span={24}>
+      <Col span={7}>
         <SearchItem
           label={'Filter'}
           name="search"
@@ -20,6 +21,9 @@ const SearchUser = () => {
             ),
           }}
         />
+      </Col>
+      <Col span={7}>
+        <SelectSocial />
       </Col>
     </>
   );

@@ -4,6 +4,7 @@ export interface IGetListPostParams {
   sort: string;
   sortOrder: string;
   search: string;
+  site: string;
 }
 
 export interface IGetListPostResponse {

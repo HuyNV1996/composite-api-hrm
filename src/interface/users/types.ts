@@ -31,6 +31,7 @@ export interface IUserListParams{
     sort: string;
     sortOrder: string;
     search: string;
+    site: string;
 }
 export interface IDecoded {
     id: string;
@@ -44,6 +45,7 @@ export interface IDecoded {
     name: string
     bio: string
     email: string
+    token: string
     address: string
     facebookLink: string
     isExpert: boolean

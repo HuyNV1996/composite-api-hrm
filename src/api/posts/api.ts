@@ -23,6 +23,7 @@ export const apiGeListPosts = async (params: IGetListPostParams) => {
   data.append('sort', params.sort || 'asc');
   data.append('sortOrder', sortord);
   data.append('search', params.search || '');
+  data.append('site', params.site || '');
   const res = (await request<IGetListPostResponse>(
     'post',
     url,

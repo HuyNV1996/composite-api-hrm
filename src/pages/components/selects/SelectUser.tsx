@@ -10,7 +10,8 @@ const SelectUsers = ({ ...props }) => {
         pageSize: '1000',
         sort: '',
         sortOrder: 'desc',
-        search: ''
+        search: '',
+        site:''
       })) as any;
       const names: string[] = res.results.data.map(
         (item: { name: string }) => item.name

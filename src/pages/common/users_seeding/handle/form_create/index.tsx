@@ -112,7 +112,7 @@ const FormCreate: FC<Props> = ({
               <Col span={24}>
                 <Row gutter={24}>
                   <Col span={12}>
-                    <SelectSocial />
+                    <SelectSocial required />
                   </Col>
                   <Col span={12}>
                     <MyForm.Item
@@ -153,6 +153,20 @@ const FormCreate: FC<Props> = ({
                       label={'password'}
                       required
                       name="password"
+                      type="input"
+                    />
+                  </Col>
+                  <Col span={12}>
+                    <MyForm.Item
+                      innerProps={{
+                        placeholder: t(
+                          { id: 'placeholder_input' },
+                          { msg: 'token' }
+                        ),
+                      }}
+                      label={'token'}
+                      required
+                      name="token"
                       type="input"
                     />
                   </Col>
@@ -211,71 +225,6 @@ const FormCreate: FC<Props> = ({
                       name="address"
                       type="input"
                     />
-                  </Col>
-                  <Col span={12}>
-                    <MyForm.Item
-                      innerProps={{
-                        placeholder: t(
-                          { id: 'placeholder_input' },
-                          { msg: 'facebook' }
-                        ),
-                      }}
-                      label={'Facebook'}
-                      name="facebookLink"
-                      type="input"
-                    />
-                  </Col>
-                  <Col span={12}>
-                    <Form.Item
-                      name="isExpert"
-                      initialValue={true}
-                      rules={[
-                        {
-                          required: true,
-                          message: 'Vui lòng nhập isExpert!',
-                        },
-                      ]}>
-                      <Checkbox
-                        defaultChecked={false}
-                        value={isExpert}
-                        onChange={e => setIsExpert(e.target.checked)}>
-                        isExpert
-                      </Checkbox>
-                    </Form.Item>
-                  </Col>
-                  <Col span={12}>
-                    <Form.Item
-                      name="isTeacher"
-                      rules={[
-                        {
-                          required: true,
-                          message: 'Vui lòng nhập isTeacher!',
-                        },
-                      ]}>
-                      <Checkbox
-                        defaultChecked={false}
-                        value={isTeacher}
-                        onChange={e => setIsTeacher(e.target.checked)}>
-                        isTeacher
-                      </Checkbox>
-                    </Form.Item>
-                  </Col>
-                  <Col span={12}>
-                    <Form.Item
-                      name="blocked"
-                      rules={[
-                        {
-                          required: true,
-                          message: 'Vui lòng nhập blocked!',
-                        },
-                      ]}>
-                      <Checkbox
-                        defaultChecked={false}
-                        value={isBlocked}
-                        onChange={e => setIsBlocked(e.target.checked)}>
-                        blocked
-                      </Checkbox>
-                    </Form.Item>
                   </Col>
                   <Col span={12}>
                     <MyForm.Item

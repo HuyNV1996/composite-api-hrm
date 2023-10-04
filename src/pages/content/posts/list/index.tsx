@@ -68,6 +68,7 @@ const ListPosts: FC = () => {
       key: 'site',
       width: 80,
       align: 'left',
+      sorter: true
     },
     {
       title: 'Tiêu đề',
@@ -139,9 +140,9 @@ const ListPosts: FC = () => {
       sorter: true,
     },
     {
-      title: 'Phản hồi',
-      dataIndex: 'totalReplies',
-      key: 'totalReplies',
+      title: 'Bình luận',
+      dataIndex: 'totalComments',
+      key: 'totalComments',
       width: 120,
       align: 'center',
       sorter: true,

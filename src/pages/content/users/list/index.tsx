@@ -79,6 +79,7 @@ const ListUsers: FC = () => {
       key: 'site',
       width: 80,
       align: 'left',
+      sorter: true
     },
     {
       title: 'Username',

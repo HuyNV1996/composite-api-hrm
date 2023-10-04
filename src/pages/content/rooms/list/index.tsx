@@ -46,6 +46,7 @@ const ListRooms: FC = () => {
       key: 'site',
       width: 80,
       align: 'left',
+      // sorter: true
     },
     {
       title: 'Tên nhóm',

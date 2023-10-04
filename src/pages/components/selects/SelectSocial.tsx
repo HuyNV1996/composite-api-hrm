@@ -12,7 +12,6 @@ const SelectSocial = ({ ...props }) => {
         label="Site"
         {...props}
         name="site"
-        required
         type="select"
       />
     </>

@@ -52,6 +52,7 @@ const ListComments: FC = () => {
       key: 'site',
       width: 80,
       align: 'left',
+      sorter: true
     },
     {
       title: 'Bình luận tốt',

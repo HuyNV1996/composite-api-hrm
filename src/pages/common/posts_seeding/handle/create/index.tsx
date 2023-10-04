@@ -31,53 +31,40 @@ import React, {
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { IFormCreateCampaign, IRule } from '../form_create/types';
 import SelectSocial from '@/pages/components/selects/SelectSocial';
+import {
+  apiCreateSeedingPost,
+  apiGetPostSeedingById,
+  apiUpdatePostSeeding,
+} from '@/api/posts/api';
+import SelectGroup from '@/pages/components/selects/SelectGroup';
+import SelectUsers from '@/pages/components/selects/SelectUser';
 const inddex = () => {
   const navigate = useNavigate();
   const { Text } = Typography;
   const { t } = useLocale();
   const [loading, setLoading] = useState(false);
-  const [isActive, setIsActive] = useState(false);
   const [form] = Form.useForm();
   const { id } = useParams();
   const initalValueForm: IFormCreateCampaign = {
     site: '',
-    name: '',
-    description: '',
-    active: false,
-    ruleName: '',
-    ruleOperator: '',
-    ruleValue: '',
+    content: '',
+    linkImage: '',
+    createdAt: '',
   };
   const goBack = () => {
-    navigate('/campaign');
+    navigate('/posts-seeding');
   };
   const onFinish = async () => {
     await form?.validateFields();
     var data = await form?.getFieldsValue();
-    const rule: IRule = {
-      name: data.ruleName,
-      operator: data.ruleOperator,
-      value: data.ruleValue,
-    };
-    console.log(isActive);
-    data = id
-      ? {
-          ...data,
-          id: id,
-          active: isActive,
-          rule: rule,
-        }
-      : {
-          ...data,
-          active: isActive,
-          rule: rule,
-        };
+    console.log(data);
+
     setLoading(true);
     const res = id
-      ? await apiUpdateCampaign(data)
-      : await apiCreateCampaign(data);
+      ? await apiUpdatePostSeeding(data)
+      : await apiCreateSeedingPost(data);
     if (res) {
-      message.info('Tạo chiến thành công!');
+      message.info('Tạo post seeding thành công!');
       setLoading(false);
       goBack();
     } else {
@@ -85,28 +72,24 @@ const inddex = () => {
     }
   };
 
-  const _apiCampaignById = async (idCampaign: String) => {
-    if (!idCampaign) {
+  const _apiPostSeedingById = async (id: string) => {
+    if (!id) {
       return;
     }
 
     try {
       setLoading(true);
-      const res = (await apiCampaignById(idCampaign)) as any;
-      console.log(res);
+      const res = (await apiGetPostSeedingById(id)) as any;
+      console.log(res.data.user.name);
 
       if (res) {
         form &&
           form.setFieldsValue({
             site: res.data.site,
-            name: res.data.name,
+            content: res.data.content,
             groupId: res.data.groupId,
-            active: res.data.active,
-            ruleName: res.data.rule?.name,
-            ruleOperator: res.data.rule?.operator,
-            ruleValue: res.data.rule?.value,
+            userID: res.data.user.name,
           });
-        setIsActive(res.data.active);
       }
     } catch (error) {
       console.log(error);
@@ -116,8 +99,7 @@ const inddex = () => {
   };
 
   useEffect(() => {
-    console.log(id);
-    _apiCampaignById(id!);
+    _apiPostSeedingById(id!);
   }, [id]);
   return (
     <>
@@ -154,64 +136,20 @@ const inddex = () => {
                       innerProps={{
                         placeholder: t(
                           { id: 'placeholder_input' },
-                          { msg: 'name' }
+                          { msg: 'content' }
                         ),
                       }}
-                      label={'Tên chiến dịch'}
+                      label={'Nội dung'}
                       required
-                      name="name"
+                      name="content"
                       type="input"
                     />
                   </Col>
                   <Col span={12}>
-                    <MyForm.Item
-                      innerProps={{
-                        placeholder: t(
-                          { id: 'placeholder_input' },
-                          { msg: 'mô tả' }
-                        ),
-                      }}
-                      label={'Mô tả'}
-                      name="description"
-                      type="input-textarea"
-                    />
+                    <SelectGroup required />
                   </Col>
                   <Col span={12}>
-                    <SelectRuleName required />
-                  </Col>
-                  <Col span={12}>
-                    <SelectRuleOperator required />
-                  </Col>
-                  <Col span={12}>
-                    <MyForm.Item
-                      innerProps={{
-                        placeholder: t(
-                          { id: 'placeholder_input' },
-                          { msg: 'rule value' }
-                        ),
-                      }}
-                      label={'Rule value'}
-                      required
-                      name="ruleValue"
-                      type="input-number"
-                    />
-                  </Col>
-                  <Col span={12}>
-                    <Form.Item
-                      name="active"
-                      initialValue={isActive}
-                      rules={[
-                        {
-                          required: true,
-                          message: 'Vui lòng nhập trạng thái!',
-                        },
-                      ]}>
-                      <Checkbox
-                        checked={isActive}
-                        onChange={e => setIsActive(e.target.checked)}>
-                        Active
-                      </Checkbox>
-                    </Form.Item>
+                    <SelectUsers required />
                   </Col>
                 </Row>
               </Col>

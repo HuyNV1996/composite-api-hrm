@@ -1,6 +1,15 @@
 //@ts-ignore
 import XlsExport from 'xlsexport';
-import { Button, Divider, Form, Popconfirm, Space, Tag, message } from 'antd';
+import {
+  Button,
+  Divider,
+  Form,
+  Popconfirm,
+  Space,
+  Tag,
+  Tooltip,
+  message,
+} from 'antd';
 import { FC, useState } from 'react';
 import FeaturedIcon from '@/assets/icons/correct.png';
 import NotFeaturedIcon from '@/assets/icons/remove.png';
@@ -9,6 +18,7 @@ import { useLocale } from '@/locales';
 import {
   DeleteOutlined,
   DownloadOutlined,
+  EyeOutlined,
   FormOutlined,
   SendOutlined,
 } from '@ant-design/icons';
@@ -21,43 +31,65 @@ import {
   apiGeListUsers,
 } from '@/api/users/api';
 import TruncateText from '../components/truncate-text';
-import FormSend from '../handle/form_send';
 import FormCreate from '../handle/form_create';
-import { apiGeListSeedingPosts } from '@/api/posts/api';
+import { apiDeletePostSeeding, apiGeListSeedingPosts } from '@/api/posts/api';
 import { convertTimestampToFormattedDate } from '../../campaign/list/utils';
+import { useNavigate } from 'react-router-dom';
+import FormView from '../handle/form_view';
 const ListUsers: FC = () => {
   const { t } = useLocale();
   const [foceUpdate, setFoceUpdate] = useState(false);
   const [open, setOpen] = useState(false);
+  const [openView, setOpenView] = useState(false);
   const [dataExport, setDataExport] = useState([]);
   const [form] = Form.useForm();
-  const [idUser, setIdUsers] = useState<any>(null);
+  const [formView] = Form.useForm();
+  const [postID, setPostID] = useState<any>(null);
+  const navigate = useNavigate();
   const showDrawer = () => {
     setOpen(true);
   };
+  const showDrawerView = () => {
+    setOpenView(true);
+  };
 
   const onClose = () => {
-    setOpen(false);
-    setTimeout(() => setIdUsers(null), 1000);
-  };
-  const handleUpdate = (id: string) => {
-    setIdUsers(id);
-    showDrawer();
-  };
-
-  const handleCreate = async () => {
-    await form.resetFields();
-    showDrawer();
+    if (open === true) {
+      setOpen(false);
+    } else if (openView === true) {
+      setOpenView(false);
+    }
+    setTimeout(() => setPostID(null), 1000);
   };
   const handleDelete = async (id: string) => {
     try {
-      const res = await apiDeleteSeedingUser(id);
+      console.log(id);
+
+      const res = await apiDeletePostSeeding(id);
       if (res) message.success(t({ id: 'success' }));
       setFoceUpdate(!foceUpdate);
     } catch (error) {
       console.log(error);
     }
   };
+  const handleUpdate = (id: string) => {
+    // setIdCampaign(id);
+    // showDrawer();
+    navigate(`/post/seeding/update/${id}`, { replace: true });
+  };
+
+  const handleCreate = async () => {
+    // await form.resetFields();
+    // showDrawer();
+    navigate('/post/seeding/create', { replace: true });
+  };
+
+  const handleView = (postID: string) => {
+    formView.resetFields();
+    setPostID(postID);
+    showDrawerView();
+  };
+
   const tableColums: MyPageTableOptions<any> = [
     {
       title: 'STT',
@@ -95,8 +127,7 @@ const ListUsers: FC = () => {
       key: 'linkImage',
       width: 280,
       align: 'center',
-      render: (item, record) =>
-        item && <img src={item} alt='link ảnh'/>
+      render: (item, record) => item && <img src={item} alt="link ảnh" />,
     },
     {
       title: 'Ngày tạo',
@@ -108,6 +139,41 @@ const ListUsers: FC = () => {
         <span>{item && convertTimestampToFormattedDate(Number(item))}</span>
       ),
     },
+    {
+      title: 'Hành động',
+      key: 'action',
+      fixed: 'right',
+      width: 120,
+      align: 'center',
+      render: (_, record) => (
+        <Space size="middle">
+          <Tooltip title={'Hiển thị bài viết'}>
+            <EyeOutlined
+              style={{ fontSize: '14px', color: '#0960bd' }}
+              onClick={() => handleView(String(record.postId))}
+            />
+          </Tooltip>
+          <Divider type="vertical" />
+          <Tooltip title={'Sửa chiến dịch'}>
+            <FormOutlined
+              style={{ fontSize: '14px', color: '#0960bd' }}
+              onClick={() => handleUpdate(String(record.postId))}
+            />
+          </Tooltip>
+          <Divider type="vertical" />
+          <Tooltip title={'Xóa'}>
+            <Popconfirm
+              placement="left"
+              title="Bạn có chắc chắn muốn xoá?"
+              onConfirm={() => handleDelete(String(record.postId))}
+              okText="Có"
+              cancelText="Không">
+              <DeleteOutlined style={{ fontSize: '16px', color: '#ed6f6f' }} />
+            </Popconfirm>
+          </Tooltip>
+        </Space>
+      ),
+    },
   ];
 
   return (
@@ -117,14 +183,28 @@ const ListUsers: FC = () => {
         title={'Danh bài viết seeding'}
         forceUpdate={foceUpdate}
         tableOptions={tableColums}
+        slot={
+          <Button type="primary" onClick={handleCreate}>
+            {t({ id: 'create' })}
+          </Button>
+        }
       />
       <FormCreate
         form={form}
         setFoceUpdate={setFoceUpdate}
         foceUpdate={foceUpdate}
-        idUser={idUser}
+        idUser={postID}
         open={open}
         showDrawer={showDrawer}
+        onClose={onClose}
+      />
+      <FormView
+        form={formView}
+        setFoceUpdate={setFoceUpdate}
+        foceUpdate={foceUpdate}
+        postID={postID}
+        open={openView}
+        showDrawer={showDrawerView}
         onClose={onClose}
       />
     </>

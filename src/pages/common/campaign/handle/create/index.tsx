@@ -147,7 +147,7 @@ const inddex = () => {
               <Col span={24}>
                 <Row gutter={24}>
                   <Col span={12}>
-                    <SelectSocial />
+                    <SelectSocial required />
                   </Col>
                   <Col span={12}>
                     <MyForm.Item

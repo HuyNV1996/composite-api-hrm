@@ -4,6 +4,7 @@ export const enUS_title = {
   'title.users': 'Danh sách người dùng',
   'title.users-seeding': 'User Seeding',
   'title.posts': 'Danh sách bài viết',
+  'title.seeding-posts': 'Đăng bài seeding',
   'title.comments': 'Danh sách bình luận',
   'title.campaign': 'Chiến dịch tin nhắn',
   'title.register': 'Đăng ký',

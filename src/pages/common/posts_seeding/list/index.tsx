@@ -122,6 +122,14 @@ const ListUsers: FC = () => {
         item && <TruncateText maxLength={180} text={item} />,
     },
     {
+      title: 'Trạng thái',
+      dataIndex: 'status',
+      key: 'status',
+      width: 100,
+      align: 'left',
+      render: (item,record) => item === 1?  'Đã đăng':'Đang chờ đăng'
+    },
+    {
       title: 'Link ảnh',
       dataIndex: 'linkImage',
       key: 'linkImage',

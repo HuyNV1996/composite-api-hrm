@@ -125,7 +125,7 @@ export const routeList: RouteObject[] = [
         element: (
           <WrapperRouteComponent
             element={<PostSeeding />}
-            titleId="title.posts"
+            titleId="title.seeding-posts"
           />
         ),
       },
@@ -134,7 +134,7 @@ export const routeList: RouteObject[] = [
         element: (
           <WrapperRouteComponent
             element={<PostCreate_CM />}
-            titleId="title.campaign"
+            titleId="title.posts"
           />
         ),
       },

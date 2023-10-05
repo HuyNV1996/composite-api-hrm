@@ -109,6 +109,8 @@ const ListUsers: FC = () => {
       key: 'token',
       width: 150,
       align: 'left',
+      render: (item, record) =>
+        item && <TruncateText maxLength={80} text={item} />,
     },
     {
       title: 'Email',

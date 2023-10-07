@@ -12,7 +12,7 @@ import {
   import MyForm from '@/components/core/form';
   import { useLocale } from '@/locales';
 import { apiSendMessage } from '@/api/messages/api';
-import { IFormMessage } from '@/interface/message/api';
+import { IFormMessage, IMessageAccount, IMessageItem, IMessageParams } from '@/interface/message/api';
   interface Props {
     onClose?: () => void;
     showDrawer?: () => void;
@@ -36,12 +36,23 @@ import { IFormMessage } from '@/interface/message/api';
     const onFinish = async () => {
       await form?.validateFields();
       const data = await form?.getFieldsValue();
+      const account:IMessageAccount = {
+        username: import.meta.env.VITE_USER_ACC!,
+        password: import.meta.env.VITE_USER_PASS!
+      }
+      const item: IMessageItem = {
+        user_id: idUser!,
+        message: data.message,
+        num_trials: 3
+      }
+      const body:IMessageParams = {
+        account: account,
+        item: item
+      }
       try{
         setLoading(true)
-        const res = await apiSendMessage({
-          user_id: idUser!,
-          message: data.message
-        })
+        
+        const res = await apiSendMessage(body)
         if(res.status === 'OK'){
           message.info('Gửi tin nhắn thành công!');
           setLoading(false);

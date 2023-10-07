@@ -31,6 +31,8 @@ import React, {
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { IFormCreateCampaign, IRule } from '../form_create/types';
 import SelectSocial from '@/pages/components/selects/SelectSocial';
+import UploadImage from '@/components/business/upload-file';
+
 const inddex = () => {
   const navigate = useNavigate();
   const { Text } = Typography;
@@ -39,6 +41,10 @@ const inddex = () => {
   const [isActive, setIsActive] = useState(false);
   const [form] = Form.useForm();
   const { id } = useParams();
+  const [previewImage, setPreviewImage] = useState('');
+  const [previewTitle, setPreviewTitle] = useState<string>('');
+  const [previewOpen, setPreviewOpen] = useState(false);
+  const [imageUrl, setImageUrl] = useState<string>('');
   const initalValueForm: IFormCreateCampaign = {
     site: '',
     name: '',
@@ -119,6 +125,14 @@ const inddex = () => {
     console.log(id);
     _apiCampaignById(id!);
   }, [id]);
+
+  const onChangeUpload = (value: any) => {
+    console.log(value);
+    // setBannerUrl(value);
+  };
+  const handleCancelPreview = () => {
+    setPreviewOpen(false);
+  };
   return (
     <>
       <Card className="title-create" style={{ flex: 'none' }}>
@@ -141,15 +155,14 @@ const inddex = () => {
             initialValues={initalValueForm}
             form={form}
             labelCol={{ span: 24 }}
-            style={{ maxWidth: 600 }}
             layout="vertical">
             <Row gutter={24}>
               <Col span={24}>
                 <Row gutter={24}>
-                  <Col span={12}>
+                  <Col span={6}>
                     <SelectSocial required />
                   </Col>
-                  <Col span={12}>
+                  <Col span={6}>
                     <MyForm.Item
                       innerProps={{
                         placeholder: t(
@@ -163,26 +176,13 @@ const inddex = () => {
                       type="input"
                     />
                   </Col>
-                  <Col span={12}>
-                    <MyForm.Item
-                      innerProps={{
-                        placeholder: t(
-                          { id: 'placeholder_input' },
-                          { msg: 'mô tả' }
-                        ),
-                      }}
-                      label={'Mô tả'}
-                      name="description"
-                      type="input-textarea"
-                    />
-                  </Col>
-                  <Col span={12}>
+                  <Col span={6}>
                     <SelectRuleName required />
                   </Col>
-                  <Col span={12}>
+                  <Col span={6}>
                     <SelectRuleOperator required />
                   </Col>
-                  <Col span={12}>
+                  <Col span={6}>
                     <MyForm.Item
                       innerProps={{
                         placeholder: t(
@@ -196,7 +196,7 @@ const inddex = () => {
                       type="input-number"
                     />
                   </Col>
-                  <Col span={12}>
+                  <Col span={24}>
                     <Form.Item
                       name="active"
                       initialValue={isActive}
@@ -212,6 +212,52 @@ const inddex = () => {
                         Active
                       </Checkbox>
                     </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <MyForm.Item
+                      innerProps={{
+                        placeholder: t(
+                          { id: 'placeholder_input' },
+                          { msg: 'mô tả' }
+                        ),
+                      }}
+                      label={'Mô tả'}
+                      name="description"
+                      type="input-textarea"
+                    />
+                  </Col>
+                  <Col span={12}>
+                    <Form.Item
+                      label={'Gửi ảnh'}
+                      name="image"
+                      rules={[
+                        { required: true, message: 'Vui lòng tải ảnh lên!' },
+                      ]}>
+                      <UploadImage
+                        onChange={onChangeUpload}
+                        setPreviewImage={setPreviewImage}
+                        setPreviewTitle={setPreviewTitle}
+                        setPreviewOpen={setPreviewOpen}
+                        initialValue={imageUrl}
+                        isReturnFile = {false}
+                        fileType="chat_image"
+                      />
+                    </Form.Item>
+                  </Col>
+                  <Col span={24}>
+                    <MyForm.Item
+                      innerProps={{
+                        placeholder: t(
+                          { id: 'placeholder_input' },
+                          { msg: 'nội dung' }
+                        ),
+                        rows: 8
+                      }}
+                      label={'Nội dung'}
+                      required
+                      name="content"
+                      type="input-textarea"
+                    />
                   </Col>
                 </Row>
               </Col>

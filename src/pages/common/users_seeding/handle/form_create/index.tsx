@@ -193,7 +193,6 @@ const FormCreate: FC<Props> = ({
                         ),
                       }}
                       label={'Bio'}
-                      required
                       name="bio"
                       type="input"
                     />
@@ -207,7 +206,6 @@ const FormCreate: FC<Props> = ({
                         ),
                       }}
                       label={'Email'}
-                      required
                       name="email"
                       type="input"
                     />
@@ -221,7 +219,6 @@ const FormCreate: FC<Props> = ({
                         ),
                       }}
                       label={'Địa chỉ'}
-                      required
                       name="address"
                       type="input"
                     />

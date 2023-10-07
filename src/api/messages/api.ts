@@ -8,5 +8,5 @@ export const apiSendMessage = async (params: IMessageParams) =>
     num_trials: 3
   }
   const url = `/sent-message`
-  return await request<any>('post', url,body, true);
+  return await request<any>('post', url,params, true);
 }

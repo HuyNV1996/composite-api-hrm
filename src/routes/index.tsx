@@ -11,8 +11,8 @@ import UserSeeding from '@/pages/common/users_seeding/list';
 import PostSeeding from '@/pages/common/posts_seeding/list';
 import WrapperRouteComponent from './config';
 import CampaignPage_CM from '@/pages/common/campaign/list';
-import CampaignCreate_CM from '@/pages/common/campaign/handle/create';
-import PostCreate_CM from '@/pages/common/posts_seeding/handle/create';
+import CampaignCreate_CM from '@/pages/common/campaign/handle/page_create';
+import PostCreate_CM from '@/pages/common/posts_seeding/handle/page_create';
 
 import ListRooms from '@/pages/content/rooms/list';
 import ListUsers from '@/pages/content/users/list';

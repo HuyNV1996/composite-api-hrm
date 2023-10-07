@@ -123,33 +123,34 @@ const inddex = () => {
             initialValues={initalValueForm}
             form={form}
             labelCol={{ span: 24 }}
-            style={{ maxWidth: 600 }}
+            // style={{ maxWidth: 600 }}
             layout="vertical">
             <Row gutter={24}>
               <Col span={24}>
                 <Row gutter={24}>
-                  <Col span={12}>
+                  <Col span={8}>
                     <SelectSocial required/>
                   </Col>
-                  <Col span={12}>
+                  <Col span={8}>
+                    <SelectGroup />
+                  </Col>
+                  <Col span={8}>
+                    <SelectUsers />
+                  </Col>
+                  <Col span={24}>
                     <MyForm.Item
                       innerProps={{
                         placeholder: t(
                           { id: 'placeholder_input' },
-                          { msg: 'content' }
+                          { msg: 'nội dung' }
                         ),
+                        rows: 8
                       }}
                       label={'Nội dung'}
                       required
                       name="content"
-                      type="input"
+                      type="input-textarea"
                     />
-                  </Col>
-                  <Col span={12}>
-                    <SelectGroup />
-                  </Col>
-                  <Col span={12}>
-                    <SelectUsers required />
                   </Col>
                 </Row>
               </Col>

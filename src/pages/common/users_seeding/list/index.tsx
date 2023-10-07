@@ -120,9 +120,9 @@ const ListUsers: FC = () => {
       align: 'left',
     },
     {
-      title: 'Địa chỉ',
-      dataIndex: 'address',
-      key: 'address',
+      title: 'Site',
+      dataIndex: 'site',
+      key: 'site',
       width: 250,
       align: 'center',
     },

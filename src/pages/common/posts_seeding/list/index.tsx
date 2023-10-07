@@ -113,6 +113,14 @@ const ListUsers: FC = () => {
       align: 'left',
     },
     {
+      title: 'Tác giả',
+      dataIndex: 'user',
+      key: 'user',
+      width: 100,
+      align: 'left',
+      render: (item,record) => <>{item.name}</>
+    },
+    {
       title: 'Nội dung',
       dataIndex: 'content',
       key: 'content',

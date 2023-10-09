@@ -22,6 +22,7 @@ export interface IFormCreateCampaign {
   content: string;
   linkImage: string;
   createdAt: string;
+  tag: string[]
 }
 export interface IRule {
   site: string;

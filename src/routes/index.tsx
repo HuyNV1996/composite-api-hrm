@@ -21,7 +21,7 @@ import ListComments from '@/pages/content/comments/list';
 import PostViewPage from '@/pages/content/posts/components/crerate';
 import CommentViewPage from '@/pages/content/comments/components/crerate';
 import PostSendPage from '@/pages/content/posts/components/create_send';
-import FormView from '@/pages/common/posts_seeding/handle/form_view';
+import PageView from '@/pages/common/posts_seeding/handle/page_view';
 const NotFound = lazy(
   () => import(/* webpackChunkName: "404'"*/ '@/pages/404')
 );
@@ -150,7 +150,7 @@ export const routeList: RouteObject[] = [
       {
         path: '/post/seeding/detail/:id',
         element: (
-          <WrapperRouteComponent element={<FormView />} titleId="title.posts" />
+          <WrapperRouteComponent element={<PageView />} titleId="title.posts" />
         ),
       },
       {

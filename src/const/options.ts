@@ -31,8 +31,8 @@ export const ruleName = [
     value: 'totalPosts',
   },
   {
-    label: 'followings',
-    value: 'followings',
+    label: 'following',
+    value: 'following',
   },
   {
     label: 'followers',

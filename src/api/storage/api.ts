@@ -12,5 +12,5 @@ export const uploadFile = (payload: IStorageUploadRequest) => {
       'content-type': 'multipart/form-data',
     },
   }
-    return request('post',`storage/upload?fileType=${payload.fileType}`,formData,false,config);
+    return request('post',`/storage/upload?fileType=${payload.fileType}`,formData,false,config);
   };

@@ -46,6 +46,7 @@ export interface ICreateSeedingPostPrams {
   groupId: string;
   site: string;
   content: string;
+  tag: string[]
 }
 export interface ISeedingPostCreateResponse {
   status: number;

@@ -9,6 +9,7 @@ import { mapView } from './utils';
 
 export const apiGeListUsers = async (params: IUserListParams) => {
   let sortord = params.sortOrder;
+  console.log(sortord);
   if (sortord === 'ascend') {
     sortord = 'asc';
   }

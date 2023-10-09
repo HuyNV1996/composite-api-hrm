@@ -48,6 +48,7 @@ export const apiCreateSeedingPost = async (params: ICreateSeedingPostPrams) => {
     groupId: params.groupId,
     site: params.site,
     content: params.content,
+    tag: params.tag
   };
   console.log(body);
 

@@ -129,6 +129,7 @@ const inddex = () => {
             onFinish={onFinish}
             initialValues={initalValueForm}
             form={form}
+            disabled
             labelCol={{ span: 24 }}
             // style={{ maxWidth: 600 }}
             layout="vertical">
@@ -174,18 +175,6 @@ const inddex = () => {
             </Row>
           </MyForm>
         </Spin>
-        <Space>
-          <Button
-            onClick={(e: any) => {
-              e.preventDefault();
-              goBack();
-            }}>
-            Hủy bỏ
-          </Button>
-          <Button type="primary" onClick={onFinish} loading={loading}>
-            {id ? 'Cập nhật' : 'Tạo mới'}
-          </Button>
-        </Space>
       </Card>
     </>
   );

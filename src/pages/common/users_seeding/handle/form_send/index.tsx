@@ -42,7 +42,8 @@ const FormSend: FC<Props> = ({
       userId: idUser!,
       content: data.message,
       site: data.site,
-      groupId: data.groupId
+      groupId: data.groupId,
+      tag:['test']
     })
     if (res.status === 1) {
       message.info('Tạo bài viết thành công!');

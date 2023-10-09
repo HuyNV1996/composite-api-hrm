@@ -37,7 +37,8 @@ const inddex = () => {
       userId: data.userID,
       content: data.description,
       site: data.site,
-      groupId: data.groupId
+      groupId: data.groupId,
+      tag: data.tag
     }
     setLoading(true);
     const res = await apiCreateSeedingPost(body)

@@ -117,6 +117,7 @@ const ListUsers: FC = () => {
       key: 'totalPosts',
       width: 100,
       align: 'center',
+      sorter: true
     },
     {
       title: 'Thích',
@@ -140,6 +141,7 @@ const ListUsers: FC = () => {
       key: 'following',
       width: 150,
       align: 'center',
+      sorter: true
     },
     {
       title: 'Hành động',

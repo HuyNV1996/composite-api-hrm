@@ -230,9 +230,10 @@ const inddex = () => {
                     <Form.Item
                       label={'Gửi ảnh'}
                       name="image"
-                      rules={[
-                        { required: true, message: 'Vui lòng tải ảnh lên!' },
-                      ]}>
+                      // rules={[
+                      //   { required: true, message: 'Vui lòng tải ảnh lên!' },
+                      // ]}
+                      >
                       <UploadImage
                         onChange={onChangeUpload}
                         setPreviewImage={setPreviewImage}
@@ -254,7 +255,7 @@ const inddex = () => {
                         rows: 8
                       }}
                       label={'Nội dung'}
-                      required
+                      // required
                       name="content"
                       type="input-textarea"
                     />

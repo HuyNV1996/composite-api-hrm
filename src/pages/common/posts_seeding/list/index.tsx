@@ -85,9 +85,10 @@ const ListUsers: FC = () => {
   };
 
   const handleView = (postID: string) => {
-    formView.resetFields();
-    setPostID(postID);
-    showDrawerView();
+    // formView.resetFields();
+    // setPostID(postID);
+    // showDrawerView();
+    navigate(`/post/seeding/detail/${postID}`, { replace: true });
   };
 
   const tableColums: MyPageTableOptions<any> = [
@@ -114,8 +115,8 @@ const ListUsers: FC = () => {
     },
     {
       title: 'Tác giả',
-      dataIndex: 'user',
-      key: 'user',
+      dataIndex: 'userEntity',
+      key: 'userEntity',
       width: 100,
       align: 'left',
       render: (item,record) => <>{item.name}</>
@@ -136,6 +137,23 @@ const ListUsers: FC = () => {
       width: 100,
       align: 'left',
       render: (item,record) => item === 1?  'Đã đăng':'Đang chờ đăng'
+    },
+    {
+      title: 'Tags',
+      dataIndex: 'tag',
+      key: 'tag',
+      width: 100,
+      align: 'left',
+      render: (items, record) => (
+        items.map((item: any, index: number) => {
+          return (
+            <Tag color="green" key={index}>
+              {item}
+            </Tag>
+          )
+        }
+        )
+      )
     },
     {
       title: 'Link ảnh',

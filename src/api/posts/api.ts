@@ -1,6 +1,6 @@
 import { POST } from '../constApi';
 import { request } from '../request';
-import { mapView } from './utils';
+import { mapView, mapViewImage } from './utils';
 import {
   ICreateSeedingPostPrams,
   IGetListPostParams,
@@ -44,14 +44,18 @@ export const apiGetPostById = async (id: string) => {
 
 // Post Seeding
 export const apiCreateSeedingPost = async (params: ICreateSeedingPostPrams) => {
+  // console.log(params);
+  const img =[]
+  img.push(params.image!.url.replace('http://103.199.16.127:9996/','')) 
   const body = {
     userId: params.userID,
     groupId: params.groupId,
     site: params.site,
     content: params.content,
-    tag: params.tag
+    tag: params.tag,
+    images: img
   };
-  console.log(body);
+  
 
   return await request<any>('post', '/post/seeding/create', body);
 };
@@ -64,19 +68,9 @@ export const apiDeletePostSeeding = async (id: string) => {
   return await request<any>('delete', `/post/seeding/delete/${id}`);
 };
 
-// export const apiUpdatePostSeeding = async (params: ICreateSeedingPostPrams) => {
-//   const body = {
-//     userId: params.userId,
-//     groupId: params.groupId,
-//     site: params.site,
-//     content: params.content,
-//   };
-//   return await request<any>('post', '/post/seeding/update', body);
-// };
-
-export const apiUpdatePostSeeding = async (params: ICreateSeedingPostPrams) => {
+export const apiUpdatePostSeeding = async (params: ICreateSeedingPostPrams,id: string) => {
   const body = {
-    postId: params.postId,
+    postId: id,
     userId: params.userID,
     groupId: params.groupId,
     site: params.site,

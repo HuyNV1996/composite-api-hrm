@@ -39,6 +39,7 @@ import {
 import SelectGroup from '@/pages/components/selects/SelectGroup';
 import SelectUsers from '@/pages/components/selects/SelectUser';
 import TagComponent from '../../components/tags';
+import UploadImage from '@/components/business/upload-file';
 const inddex = () => {
   const navigate = useNavigate();
   const { Text } = Typography;
@@ -47,6 +48,10 @@ const inddex = () => {
   const [form] = Form.useForm();
   const { id } = useParams();
   const [tagsValue, setTagsValue] = useState<string[]>([]);
+  const [previewImage, setPreviewImage] = useState('');
+  const [previewTitle, setPreviewTitle] = useState<string>('');
+  const [previewOpen, setPreviewOpen] = useState(false);
+  const [imageUrl, setImageUrl] = useState<string>('');
   const initalValueForm: IFormCreateCampaign = {
     site: '',
     content: '',
@@ -63,7 +68,7 @@ const inddex = () => {
     console.log(data);
     setLoading(true);
     const res = id
-      ? await apiUpdatePostSeeding(data)
+      ? await apiUpdatePostSeeding(data,id)
       : await apiCreateSeedingPost(data);
     if (res) {
       message.info('Tạo post seeding thành công!');
@@ -82,8 +87,7 @@ const inddex = () => {
     try {
       setLoading(true);
       const res = (await apiGetPostSeedingById(id)) as any;
-      console.log(res.data);
-
+      setImageUrl('http://103.199.16.127:9996/'+ res.data.images[0])
       if (res) {
         form &&
           form.setFieldsValue({
@@ -107,6 +111,10 @@ const inddex = () => {
   
   const onChangeTags = (value: any) => {
     // console.log(value)
+  };
+  const onChangeUpload = (value: any) => {
+    // console.log(value);
+    // setBannerUrl(value);
   };
   return (
     <>
@@ -168,6 +176,26 @@ const inddex = () => {
                       name="content"
                       type="input-textarea"
                     />
+                  </Col>
+                  <Col span={24}>
+                    <Form.Item
+                      label={'Gửi ảnh'}
+                      name="image"
+                      // rules={[
+                      //   { required: true, message: 'Vui lòng tải ảnh lên!' },
+                      // ]}
+                      >
+                      <UploadImage
+                        onChange={onChangeUpload}
+                        setPreviewImage={setPreviewImage}
+                        setPreviewTitle={setPreviewTitle}
+                        setPreviewOpen={setPreviewOpen}
+                        initialValue={imageUrl}
+                        isReturnFile = {false}
+                        fileType="post_image" 
+                        // isMultipleFile 
+                      />
+                    </Form.Item>
                   </Col>
                 </Row>
               </Col>

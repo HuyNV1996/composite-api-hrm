@@ -119,7 +119,7 @@ const ListUsers: FC = () => {
       key: 'userEntity',
       width: 100,
       align: 'left',
-      render: (item,record) => <>{item.name}</>
+      render: (item,record) => <>{item?.name}</>
     },
     {
       title: 'Nội dung',
@@ -184,14 +184,14 @@ const ListUsers: FC = () => {
           <Tooltip title={'Hiển thị bài viết'}>
             <EyeOutlined
               style={{ fontSize: '14px', color: '#0960bd' }}
-              onClick={() => handleView(String(record.postId))}
+              onClick={() => handleView(String(record?.postId))}
             />
           </Tooltip>
           <Divider type="vertical" />
           <Tooltip title={'Sửa chiến dịch'}>
             <FormOutlined
               style={{ fontSize: '14px', color: '#0960bd' }}
-              onClick={() => handleUpdate(String(record.postId))}
+              onClick={() => handleUpdate(String(record?.postId))}
             />
           </Tooltip>
           <Divider type="vertical" />
@@ -199,7 +199,7 @@ const ListUsers: FC = () => {
             <Popconfirm
               placement="left"
               title="Bạn có chắc chắn muốn xoá?"
-              onConfirm={() => handleDelete(String(record.postId))}
+              onConfirm={() => handleDelete(String(record?.postId))}
               okText="Có"
               cancelText="Không">
               <DeleteOutlined style={{ fontSize: '16px', color: '#ed6f6f' }} />

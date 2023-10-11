@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig, Method } from 'axios';
-import { message as $message } from 'antd';
+import { message as $message, message } from 'antd';
 import { setGlobalState } from '@/stores/global.store';
 import store from '@/stores';
 import jwtDecode from 'jwt-decode';
@@ -56,7 +56,11 @@ axiosInstance.interceptors.response.use(
       setGlobalState({
         loading: false,
       })
-    );
+    );if (error?.response?.status === 401) {
+      history.replace('/login');
+      localStorage.clear()
+      $message.error('Unauthor. User logout!');
+    }
     // if needs to navigate to login page when request exception
     // history.replace('/login');
     let errorMessage = '';
@@ -67,7 +71,7 @@ axiosInstance.interceptors.response.use(
       errorMessage = error?.message;
     }
     error.message && $message.error(error.response?.data?.message);
-    throw new Error(error.response?.data?.message);
+    message.error(error.response?.data?.error)
     // return {
     //   status: error.status,
     //   message: error.response.data.message,

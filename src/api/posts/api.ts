@@ -5,6 +5,7 @@ import {
   ICreateSeedingPostPrams,
   IGetListPostParams,
   IGetListPostResponse,
+  ILikeSeedingPostRequest,
   ISeedingPostCreateResponse,
 } from '@/interface/posts/types';
 
@@ -110,4 +111,9 @@ export const apiGeListSeedingPosts = async (params: IGetListPostParams) => {
       total: res.total,
     },
   };
+};
+
+export const apiLikeSeedingPost = async (params: ILikeSeedingPostRequest) => {
+  const url = `/post/seeding/like?site=${params.site}&postId=${params.postId}`
+  return await request<any>('post', url);
 };

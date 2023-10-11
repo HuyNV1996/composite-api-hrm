@@ -65,18 +65,20 @@ const inddex = () => {
       operator: data.ruleOperator,
       value: data.ruleValue,
     };
-    console.log(isActive);
+    // console.log(isActive);
     data = id
       ? {
           ...data,
           id: id,
           active: isActive,
           rule: rule,
+          image: data?.image?.url
         }
       : {
           ...data,
           active: isActive,
           rule: rule,
+          image: data?.image?.url
         };
     setLoading(true);
     const res = id

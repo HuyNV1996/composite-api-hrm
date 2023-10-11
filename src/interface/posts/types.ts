@@ -101,3 +101,8 @@ export interface IGetPostByIdUser {
   userLucky: any;
   site: string;
 }
+
+export interface ILikeSeedingPostRequest{
+  site: string;
+  postId: string;
+}

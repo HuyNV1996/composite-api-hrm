@@ -73,7 +73,7 @@ export interface IGetPostByIdData {
   postId: string;
   site: string;
   userId: string;
-  user: IGetPostByIdUser;
+  userEntity: IGetPostByIdUser;
   groupId: any;
   group: any;
   title: string;

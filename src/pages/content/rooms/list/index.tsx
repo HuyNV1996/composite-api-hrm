@@ -39,6 +39,7 @@ const ListRooms: FC = () => {
       key: 'groupId',
       width: 80,
       align: 'left',
+      sorter: (a, b) => a.groupId - b.groupId,
     },
     {
       title: 'Site',
@@ -46,7 +47,7 @@ const ListRooms: FC = () => {
       key: 'site',
       width: 80,
       align: 'left',
-      // sorter: true
+      sorter: (a, b) => a.site - b.site,
     },
     {
       title: 'Tên nhóm',
@@ -54,6 +55,7 @@ const ListRooms: FC = () => {
       key: 'name',
       width: 100,
       align: 'left',
+      sorter: (a, b) => a.name - b.name,
     },
     {
       title: 'Mô tả',
@@ -61,6 +63,7 @@ const ListRooms: FC = () => {
       key: 'description',
       width: 180,
       align: 'left',
+      sorter: (a, b) => a.description - b.description,
     },
     {
       title: 'Ngày tạo',
@@ -68,6 +71,7 @@ const ListRooms: FC = () => {
       key: 'createdAt',
       width: 150,
       align: 'left',
+      sorter: (a, b) => a.createdAt - b.createdAt,
       render: (item, record) => (
         <span>{item && convertTimestampToFormattedDate(Number(item))}</span>
       ),

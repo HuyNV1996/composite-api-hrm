@@ -79,6 +79,7 @@ const ListUsers: FC = () => {
       key: 'id',
       width: 150,
       align: 'left',
+      sorter: (a, b) => a.id - b.id,
     },
     {
       title: 'Họ và tên',
@@ -86,6 +87,7 @@ const ListUsers: FC = () => {
       key: 'name',
       width: 150,
       align: 'left',
+      sorter: (a, b) => a.name - b.name,
     },
     {
       title: 'Username',
@@ -93,6 +95,7 @@ const ListUsers: FC = () => {
       key: 'username',
       width: 150,
       align: 'left',
+      sorter: (a, b) => a.username - b.username,
     },
     {
       title: 'Tiểu sử (Bio)',
@@ -100,6 +103,7 @@ const ListUsers: FC = () => {
       key: 'bio',
       width: 300,
       align: 'left',
+      sorter: (a, b) => a.bio - b.bio,
       render: (item, record) =>
         item && <TruncateText maxLength={180} text={item} />,
     },
@@ -118,6 +122,7 @@ const ListUsers: FC = () => {
       key: 'email',
       width: 250,
       align: 'left',
+      sorter: (a, b) => a.email - b.email,
     },
     {
       title: 'Site',
@@ -125,6 +130,7 @@ const ListUsers: FC = () => {
       key: 'site',
       width: 250,
       align: 'center',
+      sorter: (a, b) => a.site - b.site,
     },
     {
       title: 'Bài viết',
@@ -132,6 +138,7 @@ const ListUsers: FC = () => {
       key: 'totalPosts',
       width: 100,
       align: 'center',
+      sorter: (a, b) => a.totalPosts - b.totalPosts,
     },
     {
       title: 'Thích',

@@ -15,9 +15,9 @@ const mockMenuList: MenuList = [
       {
         code: 'campaign',
         label: {
-          zh_CN: 'Chiến dịch tin nhắn',
-          en_US: 'Chiến dịch tin nhắn',
-          vi_VN: 'Chiến dịch tin nhắn',
+          zh_CN: 'Tạo chiến dịch',
+          en_US: 'Tạo chiến dịch',
+          vi_VN: 'Tạo chiến dịch',
         },
         icon: 'system',
         path: '/campaign',
@@ -93,6 +93,28 @@ const mockMenuList: MenuList = [
         },
         icon: 'system',
         path: '/rooms',
+      },
+    ],
+  },
+  {
+    code: 'report',
+    label: {
+      vi_VN: 'Báo cáo, phân tích',
+      en_US: 'Báo cáo, phân tích',
+      zh_CN: 'Báo cáo, phân tích',
+    },
+    icon: 'report',
+    path: '',
+    children: [
+      {
+        code: 'stockCode',
+        label: {
+          zh_CN: 'Mã cổ phiếu',
+          en_US: 'Mã cổ phiếu',
+          vi_VN: 'Mã cổ phiếu',
+        },
+        icon: 'system',
+        path: '/stockcode',
       },
     ],
   },

@@ -18,10 +18,11 @@ import ListRooms from '@/pages/content/rooms/list';
 import ListUsers from '@/pages/content/users/list';
 import ListPosts from '@/pages/content/posts/list';
 import ListComments from '@/pages/content/comments/list';
-import PostViewPage from '@/pages/content/posts/components/crerate';
+import PostViewPage from '@/pages/content/posts/components/page_view';
 import CommentViewPage from '@/pages/content/comments/components/crerate';
 import PostSendPage from '@/pages/content/posts/components/create_send';
 import PageView from '@/pages/common/posts_seeding/handle/page_view';
+import StockCode from '@/pages/report/stock_code/list';
 const NotFound = lazy(
   () => import(/* webpackChunkName: "404'"*/ '@/pages/404')
 );
@@ -168,6 +169,15 @@ export const routeList: RouteObject[] = [
           <WrapperRouteComponent
             element={<PostViewPage />}
             titleId="title.posts"
+          />
+        ),
+      },
+      {
+        path: 'stockcode',
+        element: (
+          <WrapperRouteComponent
+            element={<StockCode />}
+            titleId="title.stockCode"
           />
         ),
       },

@@ -4,6 +4,7 @@ import {
   LOAI_MAN_HINH,
   LOAI_TRANG_THAI,
   SOCIAL,
+  TYPECAMPAIGN,
 } from './consts';
 
 export const ruleOperator = [
@@ -18,6 +19,10 @@ export const ruleOperator = [
   {
     label: '=',
     value: '=',
+  },
+  {
+    label: 'contains',
+    value: 'contains',
   },
 ];
 
@@ -37,6 +42,10 @@ export const ruleName = [
   {
     label: 'followers',
     value: 'followers',
+  },
+  {
+    label: 'content',
+    value: 'content',
   },
 ];
 export const loaiCuaHangOptions = [
@@ -101,7 +110,26 @@ export const socialOptions = [
     value: SOCIAL.FACEBOOK
   },
   {
-    label: 'Twitter',
-    value: SOCIAL.TWITTER
+    label: 'Iwealthclub',
+    value: SOCIAL.IWEALTHCLUB
+  }
+]
+
+export const typeCampaignOptions = [
+  {
+    label: 'Seeding tin nhắn',
+    value: TYPECAMPAIGN.SEEDING_CHAT
+  },
+  {
+    label: 'Seeding bài viết',
+    value: TYPECAMPAIGN.SEEDING_POST
+  },
+  {
+    label: 'Seeding like bài viết',
+    value: TYPECAMPAIGN.SEEDING_LIKE_POST
+  },
+  {
+    label: 'Seeding like bình luận',
+    value: TYPECAMPAIGN.SEEDING_LIKE_COMMENT
   }
 ]

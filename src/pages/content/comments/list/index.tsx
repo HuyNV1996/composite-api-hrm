@@ -8,7 +8,7 @@ import { useLocale } from '@/locales';
 import FormCreate from '../components/form_create';
 import TruncateText from '../components/truncate-text';
 import { apiGeListComments } from '@/api/comments/api';
-import { convertTimestampToFormattedDate } from '@/pages/fireant/rooms/list/utils';
+import { convertTimestampToFormattedDate } from '@/utils/timeStampToDate';
 import SearchUser from '../components/search';
 import { EyeOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
@@ -45,6 +45,7 @@ const ListComments: FC = () => {
       key: 'postId',
       width: 80,
       align: 'left',
+      sorter: (a, b) => a.commentId - b.commentId,
     },
     {
       title: 'Site',
@@ -52,7 +53,7 @@ const ListComments: FC = () => {
       key: 'site',
       width: 80,
       align: 'left',
-      sorter: true
+      sorter: true,
     },
     {
       title: 'Bình luận tốt',
@@ -75,6 +76,7 @@ const ListComments: FC = () => {
       key: 'originalContent',
       width: 220,
       align: 'left',
+      sorter: (a, b) => a.originalContent - b.originalContent,
       render: (item, record) =>
         item && <TruncateText maxLength={180} text={item} />,
     },
@@ -84,6 +86,7 @@ const ListComments: FC = () => {
       key: 'linkTitle',
       width: 120,
       align: 'left',
+      sorter: (a, b) => a.linkTitle - b.linkTitle,
     },
     {
       title: 'Link mô tả',
@@ -91,6 +94,7 @@ const ListComments: FC = () => {
       key: 'linkDescription',
       width: 120,
       align: 'left',
+      sorter: (a, b) => a.linkDescription - b.linkDescription,
     },
     {
       title: 'Trả lời bài viết',
@@ -98,6 +102,7 @@ const ListComments: FC = () => {
       key: 'replyToPostID',
       width: 120,
       align: 'left',
+      sorter: (a, b) => a.replyToPostID - b.replyToPostID,
     },
     {
       title: 'Thích',
@@ -129,6 +134,7 @@ const ListComments: FC = () => {
       key: 'createdAt',
       width: 150,
       align: 'left',
+      sorter: (a, b) => a.createdAt - b.createdAt,
       render: (item, record) => (
         <span>{item && convertTimestampToFormattedDate(Number(item))}</span>
       ),

@@ -59,22 +59,22 @@ const inddex = () => {
     try {
       setLoading(true);
       const res = (await apiGetPostById(id)) as IGetPostByIdResponse;
-      const { user } = res.data;
+      const { userEntity } = res.data;
       if (res) {
         form &&
           form.setFieldsValue({
             ...res.data,
-            userId: user.id,
-            userName: user.name,
-            password: user.password,
-            token: user.token,
-            userBio: user.bio,
-            email: user.email,
-            address: user.address,
-            userPosts: user.totalPosts,
-            userLikes: user.totalLikes,
-            userfollowers: user.followers,
-            userFllowing: user.following,
+            userId: userEntity?.id,
+            userName: userEntity?.name,
+            password: userEntity?.password,
+            token: userEntity?.token,
+            userBio: userEntity?.bio,
+            email: userEntity?.email,
+            address: userEntity?.address,
+            userPosts: userEntity?.totalPosts,
+            userLikes: userEntity?.totalLikes,
+            userfollowers: userEntity?.followers,
+            userFllowing: userEntity?.following,
           });
       }
     } catch (error) {
@@ -141,7 +141,7 @@ const inddex = () => {
                         }}
                         label={'Nội dung'}
                         required
-                        name="description"
+                        name="originalContent"
                         type="input-textarea"
                       />
                     </Col>
@@ -184,7 +184,7 @@ const inddex = () => {
                 <Card title='Thông tin bài đăng'>
                   <Row gutter={24}>
                     <Col span={24}>
-                      <SelectUsers required />
+                      <SelectUsers />
                     </Col>
                   </Row>
                 </Card>

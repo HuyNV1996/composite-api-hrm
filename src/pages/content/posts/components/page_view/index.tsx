@@ -57,6 +57,7 @@ const inddex = () => {
                         userLikes: userEntity?.totalLikes,
                         userfollowers: userEntity?.followers,
                         userFllowing: userEntity?.following,
+                        // originalContent: res.data.originalContent
                     });
             }
         } catch (error) {

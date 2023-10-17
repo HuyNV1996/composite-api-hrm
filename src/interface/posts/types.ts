@@ -46,7 +46,8 @@ export interface ICreateSeedingPostPrams {
   groupId: string;
   site: string;
   content: string;
-  tag: string[];
+  tag?: string[];
+  keywords?: string[];
   image?: IImage;
 }
 export interface IImage{

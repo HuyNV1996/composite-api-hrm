@@ -46,13 +46,14 @@ export const apiGetPostById = async (id: string) => {
 export const apiCreateSeedingPost = async (params: ICreateSeedingPostPrams) => {
   // console.log(params);
   const img =[]
-  img.push(params.image!.url.replace('http://103.199.16.127:9996/','')) 
+  img.push(params?.image?.url.replace('http://103.199.16.127:9996/','')) 
   const body = {
     userId: params.userID,
     groupId: params.groupId,
     site: params.site,
     content: params.content,
     tag: params.tag,
+    keywords: params.keywords,
     images: img
   };
   
@@ -75,6 +76,8 @@ export const apiUpdatePostSeeding = async (params: ICreateSeedingPostPrams,id: s
     groupId: params.groupId,
     site: params.site,
     content: params.content,
+    keywords: params.keywords,
+    tag: params.tag,
   };
   return (await request<ISeedingPostCreateResponse>(
     'put',

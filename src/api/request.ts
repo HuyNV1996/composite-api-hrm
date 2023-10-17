@@ -56,7 +56,8 @@ axiosInstance.interceptors.response.use(
       setGlobalState({
         loading: false,
       })
-    );if (error?.response?.status === 401) {
+    );
+    if (error?.response?.status === 401) {
       history.replace('/login');
       localStorage.clear()
       $message.error('Unauthor. User logout!');

@@ -152,7 +152,23 @@ const ListUsers: FC = () => {
       render: (items, record) =>
         items.map((item: any, index: number) => {
           return (
-            <Tag color="green" key={index}>
+            item && <Tag color="green" key={index}>
+              {item}
+            </Tag>
+          );
+        }),
+    },
+    {
+      title: 'Keywords',
+      dataIndex: 'keywords',
+      key: 'keywords',
+      width: 100,
+      align: 'left',
+      sorter: (a, b) => a.tag - b.tag,
+      render: (items, record) =>
+        items.map((item: any, index: number) => {
+          return (
+            item && <Tag color="green" key={index}>
               {item}
             </Tag>
           );

@@ -18,6 +18,7 @@
     "mockjs": "^1.1.0",
     "query-string": "^7.0.1",
     "react": "^17.0.0",
+    "react-cron-generator": "^2.0.10",
     "react-css-theme-switcher": "^0.3.0",
     "react-dom": "^17.0.0",
     "react-intl": "^5.23.0",

@@ -121,7 +121,7 @@ export const request = <T = any>(
 ): MyResponse<T> | T => {
   const prefix = '/api/v1';
   if(domain){
-    url = 'http://103.199.16.127:8888' + url;
+    url = 'https://lucky.gapsoftware.asia/' + url;
   }
   else{
     url = import.meta.env.VITE_BASE_URL + prefix + url;

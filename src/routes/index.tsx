@@ -22,6 +22,7 @@ import PostViewPage from '@/pages/content/posts/components/crerate';
 import CommentViewPage from '@/pages/content/comments/components/crerate';
 import PostSendPage from '@/pages/content/posts/components/create_send';
 import PageView from '@/pages/common/posts_seeding/handle/page_view';
+import SchedulePage from '@/pages/common/schedule/list'
 const NotFound = lazy(
   () => import(/* webpackChunkName: "404'"*/ '@/pages/404')
 );
@@ -186,6 +187,15 @@ export const routeList: RouteObject[] = [
           <WrapperRouteComponent
             element={<ListRooms />}
             titleId="title.rooms"
+          />
+        ),
+      },
+      {
+        path: 'schedule',
+        element: (
+          <WrapperRouteComponent
+            element={<SchedulePage />}
+            titleId="title.schedule"
           />
         ),
       },

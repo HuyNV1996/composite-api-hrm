@@ -87,7 +87,7 @@ const inddex = () => {
     try {
       setLoading(true);
       const res = (await apiGetPostSeedingById(id)) as any;
-      setImageUrl('http://103.199.16.127:9996/'+ res.data.images[0])
+      setImageUrl('https://lucky.gapsoftware.asia/'+ res.data.images[0])
       if (res) {
         form &&
           form.setFieldsValue({

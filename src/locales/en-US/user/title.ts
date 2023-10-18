@@ -25,4 +25,5 @@ export const enUS_title = {
   'title.user_profile': 'User profile',
   'title.transaction': 'Transaction',
   'title.customers': 'Customers',
+  'title.schedule': 'Schedule',
 };

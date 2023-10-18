@@ -25,4 +25,5 @@ export const enUS_title = {
   'title.user_profile': 'Thông tin người dùng',
   'title.transaction': 'Giao dịch',
   'title.customers': 'Khách hàng',
+  'title.schedule': 'Schedule',
 };

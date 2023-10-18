@@ -42,6 +42,16 @@ const mockMenuList: MenuList = [
         icon: 'system',
         path: '/posts-seeding',
       },
+      {
+        code: 'schedule',
+        label: {
+          zh_CN: 'Schedule',
+          en_US: 'Schedule',
+          vi_VN: 'Schedule',
+        },
+        icon: 'schedule',
+        path: '/schedule',
+      },
     ],
   },
   {

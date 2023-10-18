@@ -11,7 +11,6 @@ import RenderRouter from './routes';
 import { useDispatch, useSelector } from 'react-redux';
 import { history, HistoryRouter } from '@/routes/history';
 import { setGlobalState } from './stores/global.store';
-
 const isDev = import.meta.env.MODE === 'development';
 
 const themes = {

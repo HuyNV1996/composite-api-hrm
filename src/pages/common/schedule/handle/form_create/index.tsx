@@ -14,7 +14,7 @@ import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import MyForm from '@/components/core/form';
 import { useLocale } from '@/locales';
 import { IFormScheduleRequest } from '@/api/schedule/types';
-// import CronJob from '@'
+import CronJob from '../../components/cronjob'
 import { createSchedule, getScheduleById, updateSchedule } from '@/api/schedule/api';
 interface Props {
   onClose?: () => void;
@@ -37,6 +37,7 @@ const FormCreate: FC<Props> = ({
   const { t } = useLocale();
   const [loading, setLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
+  const [cronJobValue,setCronjobvalue] = useState('')
   const initalValueForm: IFormScheduleRequest = {
     name: '',
     active: false,
@@ -46,6 +47,7 @@ const FormCreate: FC<Props> = ({
   const onFinish = async () => {
     await form?.validateFields();
     var data = await form?.getFieldsValue();
+    // console.log(data)
     data = {
       ...data,
       active:isActive
@@ -129,7 +131,7 @@ const FormCreate: FC<Props> = ({
                       type="input"
                     />
                   </Col>
-                  <Col span={24}>
+                  {/* <Col span={24}>
                     <MyForm.Item
                       innerProps={{
                         placeholder: t(
@@ -142,9 +144,18 @@ const FormCreate: FC<Props> = ({
                       name="crontab"
                       type="input"
                     />
-                  </Col>
+                  </Col> */}
                   <Col span={24}>
-                    CronJob
+                    <Form.Item
+                    name="crontab"
+                    required
+                    label= 'Cron expression'
+                    >
+                      <CronJob
+                        value={cronJobValue}
+                        onChange={(value: string) => {}}
+                      />
+                    </Form.Item>
                   </Col>
                   <Col span={24}>
                     <MyForm.Item

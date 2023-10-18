@@ -48,6 +48,7 @@ const inddex = () => {
   const [form] = Form.useForm();
   const { id } = useParams();
   const [tagsValue, setTagsValue] = useState<string[]>([]);
+  const [keywordsValue, setKeywordsValue] = useState<string[]>([]);
   const initalValueForm: IFormCreateCampaign = {
     site: '',
     content: '',
@@ -94,8 +95,9 @@ const inddex = () => {
             site: res.data.site,
             content: res.data.content,
             groupId: res.data.groupId,
-            userID: res.data.userEntity.name,
-            tag: res.data.tag
+            userID: res.data.userEntity?.name,
+            tag: res.data.tag,
+            keywords: res.data.keywords
           });
       }
     } catch (error) {
@@ -110,6 +112,9 @@ const inddex = () => {
   }, [id]);
   
   const onChangeTags = (value: any) => {
+    // console.log(value)
+  };
+  const onChangeKeywors = (value: any) => {
     // console.log(value)
   };
   const onChangeUpload = (value: any) => {
@@ -160,6 +165,16 @@ const inddex = () => {
                         onChange={onChangeTags}
                         viewMode={id != null}
                         value={tagsValue}
+                      />
+                    </Form.Item>
+                  </Col>
+                  {/* Keywords */}
+                  <Col span={24}>
+                    <Form.Item label={'Keywords'} required name="keywords">
+                      <TagComponent
+                        onChange={onChangeKeywors}
+                        viewMode={id != null}
+                        value={keywordsValue}
                       />
                     </Form.Item>
                   </Col>

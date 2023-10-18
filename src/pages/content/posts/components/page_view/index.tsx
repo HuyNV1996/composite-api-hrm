@@ -31,39 +31,6 @@ const inddex = () => {
     const goBack = () => {
         navigate('/posts');
     }
-    // const onFinish = async () => {
-    //     await form?.validateFields();
-    //     var data = await form?.getFieldsValue();
-    //     const rule: IRule = {
-    //         name: data.ruleName,
-    //         operator: data.ruleOperator,
-    //         value: data.ruleValue,
-    //     };
-    //     console.log(isActive);
-    //     data = id
-    //         ? {
-    //             ...data,
-    //             id: id,
-    //             active: isActive,
-    //             rule: rule,
-    //         }
-    //         : {
-    //             ...data,
-    //             active: isActive,
-    //             rule: rule,
-    //         };
-    //     setLoading(true);
-    //     const res = id
-    //         ? await apiUpdateCampaign(data)
-    //         : await apiCreateCampaign(data);
-    //     if (res) {
-    //         message.info('Tạo chiến thành công!');
-    //         setLoading(false);
-    //         goBack();
-    //     } else {
-    //         setLoading(false);
-    //     }
-    // };
 
     const _apiPostById = async (id: string) => {
         if (!id) {
@@ -73,22 +40,24 @@ const inddex = () => {
         try {
             setLoading(true);
             const res = (await apiGetPostById(id)) as IGetPostByIdResponse;
-            const { user, postId, site } = res.data;
+            const { userEntity } = res.data;
+            console.log(res.data);
             if (res) {
                 form &&
                     form.setFieldsValue({
                         ...res.data,
-                        userId: user.id,
-                        userName: user.name,
-                        password: user.password,
-                        token: user.token,
-                        userBio: user.bio,
-                        email: user.email,
-                        address: user.address,
-                        userPosts: user.totalPosts,
-                        userLikes: user.totalLikes,
-                        userfollowers: user.followers,
-                        userFllowing: user.following,
+                        userId: userEntity?.id,
+                        userName: userEntity?.name,
+                        password: userEntity?.password,
+                        token: userEntity?.token,
+                        userBio: userEntity?.bio,
+                        email: userEntity?.email,
+                        address: userEntity?.address,
+                        userPosts: userEntity?.totalPosts,
+                        userLikes: userEntity?.totalLikes,
+                        userfollowers: userEntity?.followers,
+                        userFllowing: userEntity?.following,
+                        // originalContent: res.data.originalContent
                     });
             }
         } catch (error) {
@@ -129,7 +98,7 @@ const inddex = () => {
                         layout="vertical">
                         <Row gutter={24}>
                             <Col span={16}>
-                                <Card title='Bài viết'>
+                                <Card title='Site'>
                                     <Row gutter={24}>
                                         <Col span={12}>
                                             <MyForm.Item
@@ -143,7 +112,7 @@ const inddex = () => {
                                             <MyForm.Item
                                                 label={'Nhóm'}
                                                 required
-                                                name="group"
+                                                name="groupId"
                                                 type="input"
                                             />
                                         </Col>
@@ -170,7 +139,7 @@ const inddex = () => {
                                                 }}
                                                 label={'Nội dung'}
                                                 required
-                                                name="description"
+                                                name="originalContent"
                                                 type="input-textarea"
                                             />
                                         </Col>

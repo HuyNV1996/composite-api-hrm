@@ -32,6 +32,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { IFormCreateCampaign, IRule } from '../form_create/types';
 import SelectSocial from '@/pages/components/selects/SelectSocial';
 import UploadImage from '@/components/business/upload-file';
+import SelectTypeCampaign from '@/pages/components/selects/SelectTypeCampaign';
 
 const inddex = () => {
   const navigate = useNavigate();
@@ -113,6 +114,7 @@ const inddex = () => {
             ruleName: res.data.rule?.name,
             ruleOperator: res.data.rule?.operator,
             ruleValue: res.data.rule?.value,
+            type: res.data.type
           });
         setIsActive(res.data.active);
       }
@@ -179,6 +181,9 @@ const inddex = () => {
                     />
                   </Col>
                   <Col span={6}>
+                    <SelectTypeCampaign required />
+                  </Col>
+                  <Col span={6}>
                     <SelectRuleName required />
                   </Col>
                   <Col span={6}>
@@ -195,7 +200,7 @@ const inddex = () => {
                       label={'Rule value'}
                       required
                       name="ruleValue"
-                      type="input-number"
+                      type="input"
                     />
                   </Col>
                   <Col span={24}>

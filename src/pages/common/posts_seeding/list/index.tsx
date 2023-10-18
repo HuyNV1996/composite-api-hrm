@@ -33,9 +33,9 @@ import {
 import TruncateText from '../components/truncate-text';
 import FormCreate from '../handle/form_create';
 import { apiDeletePostSeeding, apiGeListSeedingPosts } from '@/api/posts/api';
-import { convertTimestampToFormattedDate } from '../../campaign/list/utils';
 import { useNavigate } from 'react-router-dom';
 import FormView from '../handle/form_view';
+import { convertTimestampToFormattedDate } from '@/utils/timeStampToDate';
 const ListUsers: FC = () => {
   const { t } = useLocale();
   const [foceUpdate, setFoceUpdate] = useState(false);
@@ -112,6 +112,7 @@ const ListUsers: FC = () => {
       key: 'site',
       width: 100,
       align: 'left',
+      sorter: (a, b) => a.site - b.site,
     },
     {
       title: 'Tác giả',
@@ -119,7 +120,8 @@ const ListUsers: FC = () => {
       key: 'userEntity',
       width: 100,
       align: 'left',
-      render: (item,record) => <>{item?.name}</>
+      sorter: (a, b) => a.userEntity - b.userEntity,
+      render: (item, record) => <>{item?.name}</>,
     },
     {
       title: 'Nội dung',
@@ -127,6 +129,7 @@ const ListUsers: FC = () => {
       key: 'content',
       width: 280,
       align: 'left',
+      sorter: (a, b) => a.content - b.content,
       render: (item, record) =>
         item && <TruncateText maxLength={180} text={item} />,
     },
@@ -136,7 +139,8 @@ const ListUsers: FC = () => {
       key: 'status',
       width: 100,
       align: 'left',
-      render: (item,record) => item === 1?  'Đã đăng':'Đang chờ đăng'
+      sorter: (a, b) => a.status - b.status,
+      render: (item, record) => (item === 1 ? 'Đã đăng' : 'Đang chờ đăng'),
     },
     {
       title: 'Tags',
@@ -144,16 +148,31 @@ const ListUsers: FC = () => {
       key: 'tag',
       width: 100,
       align: 'left',
-      render: (items, record) => (
+      sorter: (a, b) => a.tag - b.tag,
+      render: (items, record) =>
         items.map((item: any, index: number) => {
           return (
-            <Tag color="green" key={index}>
+            item && <Tag color="green" key={index}>
               {item}
             </Tag>
-          )
-        }
-        )
-      )
+          );
+        }),
+    },
+    {
+      title: 'Keywords',
+      dataIndex: 'keywords',
+      key: 'keywords',
+      width: 100,
+      align: 'left',
+      sorter: (a, b) => a.tag - b.tag,
+      render: (items, record) =>
+        items.map((item: any, index: number) => {
+          return (
+            item && <Tag color="green" key={index}>
+              {item}
+            </Tag>
+          );
+        }),
     },
     {
       title: 'Link ảnh',
@@ -161,6 +180,7 @@ const ListUsers: FC = () => {
       key: 'linkImage',
       width: 280,
       align: 'center',
+      sorter: (a, b) => a.linkImage - b.linkImage,
       render: (item, record) => item && <img src={item} alt="link ảnh" />,
     },
     {
@@ -169,6 +189,7 @@ const ListUsers: FC = () => {
       key: 'createdAt',
       width: 150,
       align: 'left',
+      sorter: (a, b) => a.createdAt - b.createdAt,
       render: (item, record) => (
         <span>{item && convertTimestampToFormattedDate(Number(item))}</span>
       ),

@@ -19,7 +19,7 @@ import { formatDate } from '@/utils/formatDate';
 import { apiGeListUsers } from '@/api/users/api';
 import TruncateText from '../components/truncate-text';
 import { apiGeListPosts } from '@/api/posts/api';
-import { convertTimestampToFormattedDate } from '@/pages/fireant/rooms/list/utils';
+import { convertTimestampToFormattedDate } from '@/utils/timeStampToDate';
 import FormCreate from '../components/form_create';
 import { useNavigate } from 'react-router-dom';
 
@@ -61,14 +61,15 @@ const ListPosts: FC = () => {
       key: 'postId',
       width: 80,
       align: 'left',
+      sorter: (a, b) => a.postId - b.postId,
     },
     {
       title: 'Site',
       dataIndex: 'site',
       key: 'site',
-      width: 80,
+      width: 120,
       align: 'left',
-      sorter: true
+      sorter: true,
     },
     {
       title: 'Tiêu đề',
@@ -76,37 +77,39 @@ const ListPosts: FC = () => {
       key: 'title',
       width: 220,
       align: 'left',
+      sorter: (a, b) => a.title - b.title,
     },
-    {
-      title: 'Mô tả',
-      dataIndex: 'description',
-      key: 'description',
-      width: 220,
-      align: 'left',
-      render: (item, record) =>
-        item && <TruncateText maxLength={180} text={item} />,
-    },
-    {
-      title: 'Tin tốt',
-      dataIndex: 'sentiment',
-      key: 'sentiment',
-      width: 120,
-      align: 'center',
-      sorter: true,
-      render: item => {
-        if (item) {
-          return <img src={FeaturedIcon} alt="image" />;
-        } else {
-          return <img src={NotFeaturedIcon} alt="image" />;
-        }
-      },
-    },
+    // {
+    //   title: 'Mô tả',
+    //   dataIndex: 'description',
+    //   key: 'description',
+    //   width: 220,
+    //   align: 'left',
+    //   render: (item, record) =>
+    //     item && <TruncateText maxLength={180} text={item} />,
+    // },
+    // {
+    //   title: 'Tin tốt',
+    //   dataIndex: 'sentiment',
+    //   key: 'sentiment',
+    //   width: 120,
+    //   align: 'center',
+    //   sorter: true,
+    //   render: item => {
+    //     if (item) {
+    //       return <img src={FeaturedIcon} alt="image" />;
+    //     } else {
+    //       return <img src={NotFeaturedIcon} alt="image" />;
+    //     }
+    //   },
+    // },
     {
       title: 'Nội dung',
       dataIndex: 'originalContent',
       key: 'originalContent',
       width: 220,
       align: 'left',
+      sorter: (a, b) => a.originalContent - b.originalContent,
       render: (item, record) =>
         item && <TruncateText maxLength={180} text={item} />,
     },
@@ -116,6 +119,7 @@ const ListPosts: FC = () => {
       key: 'link',
       width: 120,
       align: 'left',
+      sorter: (a, b) => a.link - b.link,
     },
     {
       title: 'Link tiêu đề',
@@ -123,6 +127,7 @@ const ListPosts: FC = () => {
       key: 'linkTitle',
       width: 120,
       align: 'left',
+      sorter: (a, b) => a.linkTitle - b.linkTitle,
     },
     {
       title: 'Link mô tả',
@@ -130,6 +135,7 @@ const ListPosts: FC = () => {
       key: 'linkDescription',
       width: 120,
       align: 'left',
+      sorter: (a, b) => a.linkDescription - b.linkDescription,
     },
     {
       title: 'Thích',
@@ -161,6 +167,7 @@ const ListPosts: FC = () => {
       key: 'createdAt',
       width: 150,
       align: 'left',
+      sorter: (a, b) => a.createdAt - b.createdAt,
       render: (item, record) => (
         <span>{item && convertTimestampToFormattedDate(Number(item))}</span>
       ),
@@ -186,7 +193,6 @@ const ListPosts: FC = () => {
               onClick={() => handleSendPost(String(record.postId))}
             />
           </Tooltip>
-
         </Space>
       ),
     },

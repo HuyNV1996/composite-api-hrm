@@ -26,4 +26,5 @@ export const enUS_title = {
   'title.transaction': 'Transaction',
   'title.customers': 'Customers',
   'title.schedule': 'Schedule',
+  'title.stockCode': 'Danh sách mã cổ phiếu',
 };

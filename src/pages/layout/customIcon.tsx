@@ -9,7 +9,7 @@ import { ReactComponent as MerchantSvg } from '@/assets/menu/merchant.svg';
 import { ReactComponent as TransactionSvg } from '@/assets/menu/transaction.svg';
 import { ReactComponent as SysvarSvg } from '@/assets/menu/sysvar.svg';
 import { ReactComponent as FireAntSvg } from '@/assets/icons/fireant.svg';
-import { BorderlessTableOutlined, FacebookFilled, FieldTimeOutlined, TwitterOutlined } from '@ant-design/icons';
+import { BorderlessTableOutlined, FacebookFilled, FieldTimeOutlined, TwitterOutlined,AreaChartOutlined } from '@ant-design/icons';
 interface CustomIconProps {
   type: string;
 }
@@ -46,6 +46,9 @@ export const CustomIcon: FC<CustomIconProps> = props => {
   }
   else if (type === 'schedule'){
     com = <FieldTimeOutlined />
+  }
+  else if(type === 'report'){
+    com = <AreaChartOutlined />
   }
    else {
     com = <GuideSvg />;

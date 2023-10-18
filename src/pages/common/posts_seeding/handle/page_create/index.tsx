@@ -48,6 +48,7 @@ const inddex = () => {
   const [form] = Form.useForm();
   const { id } = useParams();
   const [tagsValue, setTagsValue] = useState<string[]>([]);
+  const [keyWordsValue, setKeyWordsValue] = useState<string[]>([]);
   const [previewImage, setPreviewImage] = useState('');
   const [previewTitle, setPreviewTitle] = useState<string>('');
   const [previewOpen, setPreviewOpen] = useState(false);
@@ -94,8 +95,9 @@ const inddex = () => {
             site: res.data.site,
             content: res.data.content,
             groupId: res.data.groupId,
-            userID: res.data.userEntity.name,
-            tag: res.data.tag
+            userID: res.data.userEntity?.name,
+            tag: res.data.tag,
+            keywords: res.data.keywords
           });
       }
     } catch (error) {
@@ -110,6 +112,9 @@ const inddex = () => {
   }, [id]);
   
   const onChangeTags = (value: any) => {
+    // console.log(value)
+  };
+  const onChangeKeyWords = (value: any) => {
     // console.log(value)
   };
   const onChangeUpload = (value: any) => {
@@ -128,7 +133,7 @@ const inddex = () => {
             }}>
             <ArrowLeftOutlined />
           </Text>
-          <Typography>{id ? 'Cập nhật' : 'Tạo mới'} chiến dịch</Typography>
+          <Typography>{id ? 'Cập nhật' : 'Tạo mới'} bài viết</Typography>
         </Space>
       </Card>
       <Card>
@@ -154,11 +159,21 @@ const inddex = () => {
                   </Col>
                   {/* Tags */}
                   <Col span={24}>
-                    <Form.Item label={'Tags'} required name="tag">
+                    <Form.Item label={'Tags'} name="tag">
                       <TagComponent
                         onChange={onChangeTags}
                         viewMode={id != null}
                         value={tagsValue}
+                      />
+                    </Form.Item>
+                  </Col>
+                  {/* keywords */}
+                  <Col span={24}>
+                    <Form.Item label={'Keywords'} name="keywords">
+                      <TagComponent
+                        onChange={onChangeKeyWords}
+                        viewMode={id != null}
+                        value={keyWordsValue}
                       />
                     </Form.Item>
                   </Col>

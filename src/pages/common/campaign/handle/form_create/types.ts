@@ -18,5 +18,6 @@ export interface ICreateCampaignParams {
   name: string,
   description: string,
   active: false,
-  rule: IRule
+  rule: IRule,
+  type: string
 }

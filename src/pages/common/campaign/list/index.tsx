@@ -1,5 +1,4 @@
 //@ts-ignore
-import XlsExport from 'xlsexport';
 import {
   Button,
   Divider,
@@ -7,36 +6,23 @@ import {
   Popconfirm,
   Space,
   Switch,
-  Tag,
   Tooltip,
   message,
 } from 'antd';
-import { FC, useEffect, useState } from 'react';
-import FeaturedIcon from '@/assets/icons/correct.png';
-import NotFeaturedIcon from '@/assets/icons/remove.png';
+import { FC, useState } from 'react';
 import MyPage, { MyPageTableOptions } from '@/components/business/page';
 import { useLocale } from '@/locales';
-import {
-  DeleteOutlined,
-  DownloadOutlined,
-  FormOutlined,
-} from '@ant-design/icons';
+import { DeleteOutlined, FormOutlined } from '@ant-design/icons';
 
-import SearchUser from '../components/search';
-import { formatDate } from '@/utils/formatDate';
-import TruncateText from '../components/truncate-text';
-import { apiGeListRooms } from '@/api/rooms/api';
-import { convertTimestampToFormattedDate } from './utils';
 import {
   apiCampaignById,
-  apiCreateCampaign,
   apiDeleteCampaign,
   apiGeListCampaign,
   apiUpdateCampaign,
 } from '@/api/campaigns/api';
 import FormCreate from '../handle/form_create';
-import { IRule } from '../handle/form_create/types';
 import { useNavigate } from 'react-router-dom';
+import { convertTimestampToFormattedDate } from '@/utils/timeStampToDate';
 const ListUsers: FC = () => {
   const { t } = useLocale();
   const [foceUpdate, setFoceUpdate] = useState(false);
@@ -115,6 +101,7 @@ const ListUsers: FC = () => {
       key: 'id',
       width: 80,
       align: 'left',
+      sorter: (a, b) => a.id - b.id,
     },
     {
       title: 'Site',
@@ -122,13 +109,29 @@ const ListUsers: FC = () => {
       key: 'site',
       width: 100,
       align: 'left',
+      sorter: (a, b) => a.site - b.site,
     },
     {
       title: 'Tên chiến dịch',
       dataIndex: 'name',
       key: 'name',
-      width: 180,
+      width: 200,
       align: 'left',
+      sorter: (a, b) => a.name - b.name,
+    },
+    {
+      title: 'Type',
+      dataIndex: 'type',
+      key: 'type',
+      width: 150,
+      align: 'left',
+      sorter: (a, b) => a.type - b.type,
+      render: item => {
+        if (item === 1) return <p>Seeding tin nhắn</p>;
+        if (item === 2) return <p>Seeding bài viết</p>;
+        if (item === 3) return <p>Seeding like bài viết</p>;
+        if (item === 4) return <p>Seeding like bình luận</p>;
+      },
     },
     {
       title: 'Mô tả',
@@ -136,6 +139,7 @@ const ListUsers: FC = () => {
       key: 'description',
       width: 250,
       align: 'left',
+      sorter: (a, b) => a.description - b.description,
     },
 
     {
@@ -144,6 +148,7 @@ const ListUsers: FC = () => {
       key: 'totalUser',
       width: 80,
       align: 'center',
+      sorter: (a, b) => a.totalUser - b.totalUser,
     },
     {
       title: 'Đã gửi',
@@ -151,6 +156,7 @@ const ListUsers: FC = () => {
       key: 'totalSent',
       width: 50,
       align: 'center',
+      sorter: (a, b) => a.totalSent - b.totalSent,
     },
     {
       title: 'Ngày tạo',
@@ -158,6 +164,7 @@ const ListUsers: FC = () => {
       key: 'createdAt',
       width: 150,
       align: 'left',
+      sorter: (a, b) => a.createdAt - b.createdAt,
       render: (item, record) => (
         <span>{item && convertTimestampToFormattedDate(Number(item))}</span>
       ),
@@ -168,6 +175,7 @@ const ListUsers: FC = () => {
       key: 'updatedAt',
       width: 150,
       align: 'left',
+      sorter: (a, b) => a.updatedAt - b.updatedAt,
       render: (item, record) => (
         <span>{item && convertTimestampToFormattedDate(Number(item))}</span>
       ),

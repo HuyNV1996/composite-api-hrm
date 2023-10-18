@@ -4,6 +4,7 @@ import {
   ILOAI_MAN_HINH,
   ILOAI_TRANG_THAI,
   ISOCIAL,
+  ITYPECAMPAIGN,
 } from './types';
 
 export const TRANG_THAI_KET_NOI: Record<ITYPE_CONNECT, number> = {
@@ -30,6 +31,13 @@ export const LOAI_MAN_HINH: Record<ILOAI_MAN_HINH, ILOAI_MAN_HINH> = {
 
 export const SOCIAL: Record<ISOCIAL, string> = {
   FACEBOOK:'facebook',
-  TWITTER: 'twitter',
+  IWEALTHCLUB: 'iwealthclub',
   FIREANT:'fireant'
+}
+
+export const TYPECAMPAIGN: Record<ITYPECAMPAIGN, number> = {
+  SEEDING_CHAT:1,
+  SEEDING_POST:2,
+  SEEDING_LIKE_POST:3,
+  SEEDING_LIKE_COMMENT:4
 }

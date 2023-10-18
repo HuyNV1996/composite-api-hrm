@@ -46,7 +46,8 @@ export interface ICreateSeedingPostPrams {
   groupId: string;
   site: string;
   content: string;
-  tag: string[];
+  tag?: string[];
+  keywords?: string[];
   image?: IImage;
 }
 export interface IImage{
@@ -73,7 +74,7 @@ export interface IGetPostByIdData {
   postId: string;
   site: string;
   userId: string;
-  user: IGetPostByIdUser;
+  userEntity: IGetPostByIdUser;
   groupId: any;
   group: any;
   title: string;

@@ -41,7 +41,7 @@ const inddex = () => {
             setLoading(true);
             const res = (await apiGetPostById(id)) as IGetPostByIdResponse;
             const { userEntity } = res.data;
-            console.log(res.data);
+            // console.log(res.data);
             if (res) {
                 form &&
                     form.setFieldsValue({
@@ -68,11 +68,11 @@ const inddex = () => {
     };
 
     useEffect(() => {
-        console.log(id)
+        // console.log(id)
         _apiPostById(id!);
     }, [id]);
     return (
-        <>
+        <div>
             <Card className='title-create' style={{ flex: 'none' }}>
                 <Space>
                     <Text
@@ -97,7 +97,7 @@ const inddex = () => {
                         disabled
                         layout="vertical">
                         <Row gutter={24}>
-                            <Col span={16}>
+                            <Col span={16} xs={24} md={16} lg={16}>
                                 <Card title='Site'>
                                     <Row gutter={24}>
                                         <Col span={12}>
@@ -135,7 +135,7 @@ const inddex = () => {
                                         <Col span={24}>
                                             <MyForm.Item
                                                 innerProps={{
-                                                    rows: 4,
+                                                    rows: 10,
                                                 }}
                                                 label={'Nội dung'}
                                                 required
@@ -143,17 +143,6 @@ const inddex = () => {
                                                 type="input-textarea"
                                             />
                                         </Col>
-                                        {/* <Col span={12}>
-                                            <MyForm.Item
-                                                innerProps={{
-                                                    rows: 4,
-                                                }}
-                                                label={'Nội dung'}
-                                                required
-                                                name="content"
-                                                type="input-textarea"
-                                            />
-                                        </Col> */}
                                         <Col span={8}>
                                             <MyForm.Item
                                                 label={'Số lượng like'}
@@ -181,7 +170,7 @@ const inddex = () => {
                                     </Row>
                                 </Card>
                             </Col>
-                            <Col span={8}>
+                            <Col span={8} xs={24} md={8} lg={8}>
                                 <Card title='Tác giả'>
                                     <Row gutter={24}>
                                         <Col span={12}>
@@ -271,7 +260,7 @@ const inddex = () => {
                     </MyForm>
                 </Spin>
             </Card>
-        </>
+        </div>
     )
 }
 

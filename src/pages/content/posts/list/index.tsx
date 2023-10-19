@@ -7,6 +7,7 @@ import NotFeaturedIcon from '@/assets/icons/remove.png';
 import MyPage, { MyPageTableOptions } from '@/components/business/page';
 import { useLocale } from '@/locales';
 import {
+  BlockOutlined,
   DeleteOutlined,
   DownloadOutlined,
   EyeOutlined,
@@ -118,8 +119,12 @@ const ListPosts: FC = () => {
       dataIndex: 'link',
       key: 'link',
       width: 120,
-      align: 'left',
+      align: 'center',
       sorter: (a, b) => a.link - b.link,
+      render: (item) => <Tooltip title={item}>
+        {item && <a href={item}> <BlockOutlined /></a>}
+      </Tooltip>
+
     },
     {
       title: 'Link tiêu đề',
@@ -128,6 +133,9 @@ const ListPosts: FC = () => {
       width: 120,
       align: 'left',
       sorter: (a, b) => a.linkTitle - b.linkTitle,
+      render: (item) => <Tooltip title={item}>
+        {item && <a href={item}> <BlockOutlined /></a>}
+      </Tooltip>
     },
     {
       title: 'Link mô tả',
@@ -136,6 +144,9 @@ const ListPosts: FC = () => {
       width: 120,
       align: 'left',
       sorter: (a, b) => a.linkDescription - b.linkDescription,
+      render: (item) => <Tooltip title={item}>
+        {item && <a href={item}> <BlockOutlined /></a>}
+      </Tooltip>
     },
     {
       title: 'Thích',

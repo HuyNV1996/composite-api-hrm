@@ -138,7 +138,7 @@ const inddex = () => {
     setPreviewOpen(false);
   };
   return (
-    <>
+    <div>
       <Card className="title-create" style={{ flex: 'none' }}>
         <Space>
           <Text
@@ -163,10 +163,10 @@ const inddex = () => {
             <Row gutter={24}>
               <Col span={24}>
                 <Row gutter={24}>
-                  <Col span={6}>
+                  <Col span={6} xs={24} md={16} lg={6}>
                     <SelectSocial required />
                   </Col>
-                  <Col span={6}>
+                  <Col span={6} xs={24} md={16} lg={6}>
                     <MyForm.Item
                       innerProps={{
                         placeholder: t(
@@ -180,16 +180,16 @@ const inddex = () => {
                       type="input"
                     />
                   </Col>
-                  <Col span={6}>
+                  <Col span={6} xs={24} md={16} lg={6}>
                     <SelectTypeCampaign required />
                   </Col>
-                  <Col span={6}>
+                  <Col span={6} xs={24} md={16} lg={6}>
                     <SelectRuleName required />
                   </Col>
-                  <Col span={6}>
+                  <Col span={6} xs={24} md={16} lg={6}>
                     <SelectRuleOperator required />
                   </Col>
-                  <Col span={6}>
+                  <Col span={6} xs={24} md={16} lg={6}>
                     <MyForm.Item
                       innerProps={{
                         placeholder: t(
@@ -203,7 +203,7 @@ const inddex = () => {
                       type="input"
                     />
                   </Col>
-                  <Col span={24}>
+                  <Col span={6} xs={24} md={16} lg={6}>
                     <Form.Item
                       name="active"
                       initialValue={isActive}
@@ -220,7 +220,7 @@ const inddex = () => {
                       </Checkbox>
                     </Form.Item>
                   </Col>
-                  <Col span={12}>
+                  <Col span={6} xs={24} md={16} lg={6}>
                     <MyForm.Item
                       innerProps={{
                         placeholder: t(
@@ -233,7 +233,7 @@ const inddex = () => {
                       type="input-textarea"
                     />
                   </Col>
-                  <Col span={12}>
+                  <Col span={6} xs={24} md={16} lg={6}>
                     <Form.Item
                       label={'Gửi ảnh'}
                       name="image"
@@ -252,7 +252,7 @@ const inddex = () => {
                       />
                     </Form.Item>
                   </Col>
-                  <Col span={24}>
+                  <Col span={6} xs={24} md={16} lg={6}>
                     <MyForm.Item
                       innerProps={{
                         placeholder: t(
@@ -285,7 +285,7 @@ const inddex = () => {
           </Button>
         </Space>
       </Card>
-    </>
+    </div>
   );
 };
 

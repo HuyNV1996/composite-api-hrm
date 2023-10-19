@@ -82,7 +82,7 @@ const BasePage = <S extends SearchApi>(
     labelWidth,
   } = props;
   const [pageData, setPageData] = useStates<PageData<ParseDataType<S>>>({
-    pageSize: 20,
+    pageSize: 100,
     pageNum: 1,
     total: 0,
     data: [],

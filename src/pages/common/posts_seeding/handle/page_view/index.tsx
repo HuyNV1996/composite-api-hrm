@@ -122,7 +122,7 @@ const inddex = () => {
     // setBannerUrl(value);
   };
   return (
-    <>
+    <div>
       <Card className="title-create" style={{ flex: 'none' }}>
         <Space>
           <Text
@@ -219,7 +219,7 @@ const inddex = () => {
           </MyForm>
         </Spin>
       </Card>
-    </>
+    </div>
   );
 };
 

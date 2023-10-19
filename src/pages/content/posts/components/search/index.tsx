@@ -9,7 +9,7 @@ const SearchUser = () => {
 
   return (
     <>
-      <Col span={7}>
+      <Col span={7} xs={24} md={16} lg={7}>
         <SearchItem
           label={'Filter'}
           name="search"
@@ -22,7 +22,7 @@ const SearchUser = () => {
           }}
         />
       </Col>
-      <Col span={7}>
+      <Col span={7} xs={24} md={16} lg={7}>
         <SelectSocial />
       </Col>
     </>

@@ -122,7 +122,7 @@ const inddex = () => {
     // setBannerUrl(value);
   };
   return (
-    <>
+    <div>
       <Card className="title-create" style={{ flex: 'none' }}>
         <Space>
           <Text
@@ -148,13 +148,13 @@ const inddex = () => {
             <Row gutter={24}>
               <Col span={24}>
                 <Row gutter={24}>
-                  <Col span={8}>
+                  <Col  span={8} xs={24} md={16} lg={8}>
                     <SelectSocial required/>
                   </Col>
-                  <Col span={8}>
+                  <Col span={8} xs={24} md={16} lg={8}>
                     <SelectGroup />
                   </Col>
-                  <Col span={8}>
+                  <Col span={8} xs={24} md={16} lg={8}>
                     <SelectUsers />
                   </Col>
                   {/* Tags */}
@@ -230,7 +230,7 @@ const inddex = () => {
           </Button>
         </Space>
       </Card>
-    </>
+    </div>
   );
 };
 
